@@ -53,7 +53,8 @@ harness/
 │   ├── delegate.py
 │   └── replay.py
 ├── evals/                    <- r0 read-only, r1 fix, r2 rename, r3 debug,
-│   │                           r4 injection refusal, r5 delegation, r6 budget death
+│   │                           r4 injection refusal, r5 delegation, r6 budget death,
+│   │                           r7 hallucinated-tool refusal
 │   ├── __init__.py
 │   ├── check.py
 │   ├── r0/
@@ -62,7 +63,8 @@ harness/
 │   ├── r3/
 │   ├── r4/
 │   ├── r5/
-│   └── r6/
+│   ├── r6/
+│   └── r7/
 ├── transcripts/              <- JSONL run logs, replayable from the log alone
 │   ├── example.jsonl
 │   ├── r0.jsonl
@@ -71,7 +73,8 @@ harness/
 │   ├── r3.jsonl
 │   ├── r4.jsonl
 │   ├── r5.jsonl
-│   └── r6.jsonl
+│   ├── r6.jsonl
+│   └── r7.jsonl
 ├── tests/                    <- escape, transcript, budget-kill, ladder smoke
 │   ├── test_escape.py
 │   ├── test_transcript.py
