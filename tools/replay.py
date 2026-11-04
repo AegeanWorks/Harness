@@ -69,7 +69,16 @@ def verify(transcript: Path, fresh_root: Path, starter: Path | None = None) -> T
         replayed = "FAIL"
     matched = replayed == expected
     detail = "verdict=" + expected + " replayed=" + replayed + " actions=" + str(len(actions))
-    return matched, detail
+    if not matched:
+        return False, detail
+    recorded = verdicts[-1].get("final", {})
+    if isinstance(recorded, dict) and isinstance(recorded.get("files"), dict):
+        from harness.transcript import workspace_files
+        current = workspace_files(work)
+        if current != recorded["files"]:
+            return False, detail + " file-hash mismatch"
+        detail += " files=" + str(len(current))
+    return True, detail
 
 
 def main(argv: List[str]) -> int:

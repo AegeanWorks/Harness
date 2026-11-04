@@ -80,7 +80,8 @@ def test_socket_import_blocked_by_shim(tmp_path: Path) -> None:
     write_shim(root)
     payload = root / "s.py"
     with open(str(payload), "w", encoding="utf-8") as handle:
-        handle.write("import socket\n")
+        handle.write("import socket\n"
+                     "socket.create_connection(('example.com', 80), timeout=2)\n")
     import os as _os
 
     env = dict(_os.environ)
@@ -102,3 +103,59 @@ def test_socket_import_refused_by_runner(tmp_path: Path) -> None:
     ok, out = run_python_file(root, "net.py", timeout_s=10)
     assert not ok
     assert "socket" in out.lower()
+
+
+def test_dynamic_socket_use_denied(tmp_path: Path) -> None:
+    root = _scratch(tmp_path)
+    payload = root / "dyn.py"
+    with open(str(payload), "w", encoding="utf-8") as handle:
+        handle.write("_s = __import__('sock' + 'et')\n"
+                     "_s.create_connection(('example.com', 80), timeout=2)\n")
+    ok, out = run_python_file(root, "dyn.py", timeout_s=15)
+    assert not ok
+    assert "socket" in out.lower() or "denied" in out.lower()
+
+
+def test_pytest_outside_target_refused(tmp_path: Path) -> None:
+    from tools.runner import run_pytest
+    root = _scratch(tmp_path)
+    outside = tmp_path / "evil_test.py"
+    with open(str(outside), "w", encoding="utf-8") as handle:
+        handle.write("def test_evil():\n    assert True\n")
+    ok, out = run_pytest(root, ["-q", "-p", "no:cacheprovider", str(outside)],
+                         timeout_s=30)
+    assert not ok
+    assert "refus" in out.lower()
+
+
+def test_stop_mid_exec_kills_quickly(tmp_path: Path) -> None:
+    import threading as _threading
+    import time as _time
+    from harness.budget import Budget
+    from harness.loop import run_task
+    root = _scratch(tmp_path)
+    payload = root / "sleepy.py"
+    with open(str(payload), "w", encoding="utf-8") as handle:
+        handle.write("import time as _t\n_t.sleep(8)\nprint('slept-through')\n")
+    calls = {"n": 0}
+
+    def policy(state):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return {"kind": "exec", "args": {"rel": "sleepy.py", "timeout_s": 30}}
+        return {"kind": "finish", "args": {"verdict": "PASS"}}
+
+    def plant():
+        _time.sleep(1.0)
+        with open(str(root / "STOP"), "w", encoding="utf-8") as handle:
+            handle.write("stop")
+
+    worker = _threading.Thread(target=plant, daemon=True)
+    budget = Budget(max_steps=10, wall_s=60.0, max_exec=10)
+    started = _time.monotonic()
+    worker.start()
+    verdict = run_task(root, "stop-probe", "stop", policy, budget,
+                       tmp_path / "stop.jsonl")
+    elapsed = _time.monotonic() - started
+    assert verdict == "STOPPED"
+    assert elapsed < 5.0

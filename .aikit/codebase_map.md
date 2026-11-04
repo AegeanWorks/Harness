@@ -8,9 +8,9 @@
 ## 📊 Codebase Metrics
 - **Total Python Modules**: `28`
 - **Total Classes**: `2`
-- **Total Top-Level Functions**: `53`
-- **Total Class Methods**: `10`
-- **Total Source Lines**: `1059`
+- **Total Top-Level Functions**: `60`
+- **Total Class Methods**: `12`
+- **Total Source Lines**: `1399`
 
 ---
 
@@ -124,13 +124,15 @@
 ### [`harness/budget.py`](harness/budget.py)
 > *Budgets: steps, wall time, output bytes, per-tool caps, token estimate.*
 
-**Size**: `54` lines (`1746` bytes)
+**Size**: `76` lines (`2795` bytes)
 
 **Classes:**
 - `class Budget` - *Mutable counters with fixed ceilings; checked BEFORE each action.*
   - Method `.elapsed()` - *Seconds since this budget started.*
   - Method `.check_before(kind)` - *The kill reason when the next action is already over budget, else None.*
   - Method `.record(kind, text)` - *Count one completed action and its output.*
+  - Method `.output_over()` - *Whether recorded output already exceeds the output ceiling.*
+  - Method `.clamp_timeout(requested)` - *A per-call timeout the policy may not widen: 1s to wall remainder, max 120s.*
   - Method `.cost_usd()` - *Abstract cost for the transcript ledger.*
 
 **Functions:**
@@ -151,18 +153,19 @@
 ### [`harness/loop.py`](harness/loop.py)
 > *Agent loop: perceive -> plan -> act -> observe -> repeat until green or budget.*
 
-**Size**: `116` lines (`5041` bytes)
+**Size**: `155` lines (`6994` bytes)
 
 **Functions:**
-- `def _execute(workspace, action)`
+- `def _execute(workspace, action, budget, note)`
+- `def _final(budget, root)` - *Verdict-time counters plus the workspace file map.*
 - `def run_task(workspace, task, policy_name, policy, budget, transcript_path)` - *Run policy until finish, STOP, or budget death; every step is logged.*
 
 ---
 
 ### [`harness/transcript.py`](harness/transcript.py)
-> *Append-only JSONL transcript; action is fsynced BEFORE execution.*
+> *Append-only JSONL transcript, schema 2; action is fsynced BEFORE execution.*
 
-**Size**: `64` lines (`2478` bytes)
+**Size**: `126` lines (`4742` bytes)
 
 **Classes:**
 - `class Transcript` - *One run log: header, then action/result pairs, then a verdict line.*
@@ -170,11 +173,12 @@
   - Method `._append(record)`
   - Method `.write_header(task, budget, policy)` - *First line describing the run; rewritten runs use a fresh file.*
   - Method `.append_action(seq, kind, args)` - *Log what will run BEFORE it runs (crash keeps action without result).*
-  - Method `.append_result(seq, ok, output, cost)` - *Log the outcome of the action with the same seq.*
-  - Method `.write_verdict(verdict, reason)` - *Final line; verdict is PASS, FAIL, BUDGET_KILLED or STOPPED.*
+  - Method `.append_result(seq, ok, output, cost, kind, argv)` - *Log the outcome; long outputs spill to a hashed sidecar file.*
+  - Method `.write_verdict(verdict, reason, extra)` - *Final line; verdict is PASS, FAIL, BUDGET_KILLED or STOPPED.*
 
 **Functions:**
-- `def read_records(path)` - *All transcript records in file order.*
+- `def workspace_files(root)` - *Relative-path -> sha256 map of the workspace, minus caches and STOP.*
+- `def read_records(path)` - *All transcript records in file order (schema 1 and 2).*
 
 ---
 
@@ -195,7 +199,7 @@
 ### [`sandbox/jail.py`](sandbox/jail.py)
 > *Filesystem jail for agent file access (ADR-002).*
 
-**Size**: `90` lines (`2856` bytes)
+**Size**: `109` lines (`3463` bytes)
 
 **Functions:**
 - `def _root_resolved(root)`
@@ -222,7 +226,7 @@
 ### [`tests/test_escape.py`](tests/test_escape.py)
 > *Escape suite: containment must hold; any successful escape fails the build.*
 
-**Size**: `104` lines (`3105` bytes)
+**Size**: `161` lines (`5295` bytes)
 
 **Functions:**
 - `def _scratch(tmp_path)`
@@ -234,6 +238,9 @@
 - `def test_web_default_denied(tmp_path)`
 - `def test_socket_import_blocked_by_shim(tmp_path)`
 - `def test_socket_import_refused_by_runner(tmp_path)`
+- `def test_dynamic_socket_use_denied(tmp_path)`
+- `def test_pytest_outside_target_refused(tmp_path)`
+- `def test_stop_mid_exec_kills_quickly(tmp_path)`
 
 ---
 
@@ -290,7 +297,7 @@
 ### [`tools/replay.py`](tools/replay.py)
 > *Replay a transcript's logged actions in a fresh jail; compare the verdict.*
 
-**Size**: `93` lines (`3615` bytes)
+**Size**: `102` lines (`4026` bytes)
 
 **Functions:**
 - `def _hash_tree(root)`
@@ -301,17 +308,19 @@
 ---
 
 ### [`tools/runner.py`](tools/runner.py)
-> *Sandboxed exec: fixed argv (-P, no shell), timeout, env scrub (ADR-002).*
+> *Sandboxed exec: fixed argv, poll-kill loop, env scrub, loaded shim (ADR-005).*
 
-**Size**: `116` lines (`4137` bytes)
+**Size**: `248` lines (`9181` bytes)
 
 **Functions:**
-- `def _scrub_env()`
+- `def _scrub_env(shim_dir)`
+- `def _stop_hit(root)` - *Kill switch state read fresh on every poll slice.*
 - `def _refused(reason)`
-- `def _imports_socket(source)` - *Plain `import socket` / `from socket import …` detector (audit, not a firewall).*
-- `def run_python_file(root, rel, timeout_s, extra_args)` - *Run a .py file inside root with -I -P; refuse anything else.*
-- `def run_pytest(root, args, timeout_s)` - *Run pytest inside root: fixed argv, no shell.*
-- `def _run_argv(argv, root, timeout_s)`
+- `def _imports_socket(source)` - *Plain `import socket` / `from socket import …` fast-fail (the shim enforces).*
+- `def run_python_file(root, rel, timeout_s, extra_args, note, stop_root, wall_deadline)` - *Run a .py file inside root; refuse anything else.*
+- `def _pytest_target_ok(root, token)` - *Positional args naming files must stay inside the jail.*
+- `def run_pytest(root, args, timeout_s, note, stop_root, wall_deadline)` - *Run pytest inside root with jailed targets and no plugin/config escapes.*
+- `def _run_argv(argv, root, timeout_s, note, stop_root, wall_deadline)`
 
 ---
 

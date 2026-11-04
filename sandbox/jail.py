@@ -13,9 +13,28 @@ from pathlib import Path
 MAX_READ_BYTES = 200_000
 
 SHIM_TEXT = (
-    "\"\"\"Harness network shim: plain socket import is denied by policy.\"\"\"\n"
-    "import sys as _sys\n"
-    "_sys.modules[\"socket\"] = None\n"
+    "\"\"\"Harness network shim: socket use is denied by policy.\"\"\"\n"
+    "import socket as _harness_sock\n"
+    "\n"
+    "\n"
+    "_RealSocket = _harness_sock.socket\n"
+    "\n"
+    "\n"
+    "class _DeniedSocket(_RealSocket):\n"
+    "    def connect(self, *args, **kwargs):\n"
+    "        raise OSError('socket use denied by network policy')\n"
+    "\n"
+    "    def connect_ex(self, *args, **kwargs):\n"
+    "        raise OSError('socket use denied by network policy')\n"
+    "\n"
+    "\n"
+    "def _denied(*args, **kwargs):\n"
+    "    raise OSError('socket use denied by network policy')\n"
+    "\n"
+    "\n"
+    "_harness_sock.socket = _DeniedSocket\n"
+    "_harness_sock.create_connection = _denied\n"
+    "_harness_sock.socketpair = _denied\n"
 )
 
 
