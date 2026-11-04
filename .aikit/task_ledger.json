@@ -5,23 +5,12 @@
     "last_phase": "in_progress",
     "active_phase": 4,
     "status": "in_progress",
-    "updated_at": 1793828841.1183343,
+    "updated_at": 1793829245.7436507,
     "owner": "kilo:goal",
     "started_by": "kilo:goal",
     "continuations": []
   },
   "checkpoints": [
-    {
-      "task_id": "harness-v1",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[3/4] Stage 3 implementation started: revised plan ADR-002",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793806658.7350855,
-      "timestamp_str": "2026-11-04 18:37:38",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-v1",
       "phase": "phase 3",
@@ -240,6 +229,17 @@
       "status": "in_progress",
       "timestamp": 1793828841.1183343,
       "timestamp_str": "2026-11-05 00:47:21",
+      "agent": "kilo:goal"
+    },
+    {
+      "task_id": "harness-board-v1",
+      "phase": "in_progress",
+      "phase_num": 4,
+      "description": "[6/6] UI polish per G-002: working Stop/Clear/Replay buttons, status colors, favicon; 40/40 pytest, 5/5 gates, S2/S3 after-shots updated; checklists: passed",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793829245.7436507,
+      "timestamp_str": "2026-11-05 00:54:05",
       "agent": "kilo:goal"
     }
   ]

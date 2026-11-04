@@ -8,9 +8,9 @@
 ## 📊 Codebase Metrics
 - **Total Python Modules**: `43`
 - **Total Classes**: `3`
-- **Total Top-Level Functions**: `128`
-- **Total Class Methods**: `14`
-- **Total Source Lines**: `2707`
+- **Total Top-Level Functions**: `137`
+- **Total Class Methods**: `16`
+- **Total Source Lines**: `2896`
 
 ---
 
@@ -428,13 +428,18 @@
 ---
 
 ### [`tests/test_ui_pages.py`](tests/test_ui_pages.py)
-> *Board UI: five routes 200, fixture-masked, secrets never rendered.*
+> *Board UI: five routes 200, fixture-masked, secrets never rendered, buttons work.*
 
-**Size**: `37` lines (`1486` bytes)
+**Size**: `90` lines (`3229` bytes)
 
 **Functions:**
+- `def _get(url, target)`
+- `def _post(url, target, fields)`
 - `def test_five_routes_200_and_masked()`
 - `def test_unknown_route_404()`
+- `def test_favicon_no_404()`
+- `def test_stop_and_clear_toggle_banner()`
+- `def test_replay_button_verifies_and_refuses_evil()`
 
 ---
 
@@ -512,12 +517,14 @@
 ### [`ui_server.py`](ui_server.py)
 > *Board UI: stdlib http.server, five routes, fixture-masked shots.*
 
-**Size**: `285` lines (`12249` bytes)
+**Size**: `421` lines (`18206` bytes)
 
 **Classes:**
 - `class Handler`
   - Method `.log_message(*args)`
+  - Method `._send(data, status)`
   - Method `.do_GET()`
+  - Method `.do_POST()`
 
 **Functions:**
 - `def _fixture(query)`
@@ -526,13 +533,17 @@
 - `def _key_dot(env_name)`
 - `def _nav()`
 - `def _page(title, body)`
+- `def _stop_banner()`
 - `def _setup(query)`
 - `def _run(query)`
-- `def _runs()`
+- `def _runs(query, note)`
 - `def _verdict(path)`
 - `def _tools()`
+- `def _replay_result(name)` - *Verify one transcript file; 400 on bad names, PASS/FAIL page otherwise.*
+- `def _bad(message)`
 - `def _settings()`
 - `def serve_in_background(port, seed, fixture)`
+- `def _post(url, fields)`
 - `def run_smoke(port, seed, fixture)`
 - `def main(argv)`
 

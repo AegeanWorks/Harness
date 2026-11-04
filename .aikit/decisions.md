@@ -89,6 +89,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: `start.py` + `start.cmd` create dirs, `--check` gates python/loopback/pytest/providers/secrets, serve `ui_server.py` (stdlib http.server, five routes, fixture-masked shots); `providers.json` two OpenAI-compatible entries + `providers/providers.py` validate/https-or-loopback + `providers/policy.py` failover (wait + fallback, keys env-only); `harness/loop.py` new `wait` kind, delegate text cap 4096, bg poll-slice STOP; `harness/budget.py` wait cap 20; `tools/replay.py` reuses logged pytest args; new rungs r8 failover and r9 warmup; `ui_server.py` inline-CSS single file, `ui.json` board surface [start.py, ui_server.py], `inventory.py` board routes; `.gitignore` local-only (config.local.json, .tmp_runs/, shots sidecars, .tmp_eval_*/); `shots/` before/after pairs.
 - **Consequences**: One-click ≤3 cold / 1 warm; new provider = one JSON entry; every tool row visible with Kill (STOP + poll-kill); replay verdict+hash; secrets scan clean; residuals unchanged (ctypes/WinSock, getaddrinfo DNS, MRO bypass, subprocess interpreters) audited via hashes/argv.
 
+### ADR-008: Board buttons that work (simple, aesthetic, easy to use, functional)
+- **Date**: 2026-11-04
+- **Status**: Accepted (implements user UI guidelines G-002)
+- **Context**: Stage 3 board proved every screen but its buttons were decorative (Kill did nothing, Replay verify did nothing) and the console showed a favicon 404.
+- **Decision**: POST `/stop` writes `.tmp_runs/ui.STOP` and the run page shows a red STOPPED banner with Clear (POST `/clear`); POST `/replay?file=` verifies that transcript in-process and renders PASS/FAIL inline, 400 on bad names; inline favicon (`data:,`) kills the 404; green/red status text on run rows and transcript verdicts; smoke covers all four POST paths.
+- **Consequences**: Every visible control now does something real with no new dependencies; screenshots re-captured (S2/S3 after-shots changed, S1/S4/S5 identical).
+
 <!-- Entry format:
 ### ADR-NNN: <decision in one line>
 - **Date**: YYYY-MM-DD

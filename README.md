@@ -125,7 +125,7 @@ harness/
   and `board` (`start.py`, `ui_server.py`).
 - Fast proof: `python demo.py --scripted --seed 1`; snapshot proof: `python inventory.py`.
 - Board smoke: `python ui_server.py --smoke --port 8765 --seed 1 --fixture r3`
-  (all five routes 200, fixture-masked). Shots live in `shots/`.
+  (all five routes 200, POST /stop + /clear + /replay verified, fixture-masked). Shots live in `shots/`.
 - While coding: `python aikit.py ui begin harness --surface board`, edit only the surface, `python aikit.py ui verify harness`, then `finish` (needs review) or `abort`.
 
 ## 📜 License
