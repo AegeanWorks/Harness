@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "surfaces": {
+    "cli": {
+      "paths": [
+        "demo.py",
+        "inventory.py"
+      ]
+    }
+  },
+  "protected": [
+    "tests/**"
+  ],
+  "commands": {
+    "fast": "python demo.py --scripted --seed 1",
+    "snapshot": "python inventory.py"
+  },
+  "style": {
+    "theme_paths": []
+  },
+  "limits": {
+    "max_files": 12,
+    "max_lines": 300
+  }
+}
