@@ -60,7 +60,11 @@ harness/
 │   ├── r2/
 │   └── r3/
 ├── transcripts/              <- JSONL run logs, replayable from the log alone
-│   └── example.jsonl
+│   ├── example.jsonl
+│   ├── r0.jsonl
+│   ├── r1.jsonl
+│   ├── r2.jsonl
+│   └── r3.jsonl
 ├── tests/                    <- escape, transcript, budget-kill, ladder smoke
 │   ├── test_escape.py
 │   ├── test_transcript.py
