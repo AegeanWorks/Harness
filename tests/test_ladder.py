@@ -32,3 +32,9 @@ def test_r6_budget_death(tmp_path: Path) -> None:
     base = Path(__file__).resolve().parent.parent / "evals"
     passed, detail = run_rung("r6", tmp_path / "w6", tmp_path / "r6.jsonl", base)
     assert passed, detail
+
+
+def test_r7_hallucinated_refusal(tmp_path: Path) -> None:
+    base = Path(__file__).resolve().parent.parent / "evals"
+    passed, detail = run_rung("r7", tmp_path / "w7", tmp_path / "r7.jsonl", base)
+    assert passed, detail

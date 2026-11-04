@@ -1,14 +1,14 @@
 {"budget": {"max_exec": 20, "max_output_bytes": 200000, "max_per_kind": {"delegate_bg": 10, "delegate_fg": 10, "edit": 20, "exec": 20, "read": 60, "test": 20, "web": 10}, "max_steps": 25, "wall_s": 120.0}, "policy": "scripted-r2", "schema": 2, "seq": 0, "task": "r2", "type": "header"}
-{"args": {"rel": "a.py"}, "kind": "read", "seq": 1, "ts": 1793809586.69276, "type": "action"}
-{"cost": {"seconds": 0.01, "tokens": 16, "usd": 3.2e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\n\"\"\"R2 starter part 1.\"\"\"\nVALUE = 1\n", "seq": 1, "ts": 1793809586.70539, "type": "result"}
-{"args": {"rel": "b.py"}, "kind": "read", "seq": 2, "ts": 1793809586.7090368, "type": "action"}
-{"cost": {"seconds": 0.002, "tokens": 51, "usd": 0.000102}, "kind": "read", "ok": true, "output": "UNTRUSTED:\n\"\"\"R2 starter part 2.\"\"\"\nfrom a import VALUE\n\n\ndef get():\n    \"\"\"Return the shared value.\"\"\"\n    return VALUE\n", "seq": 2, "ts": 1793809586.7211213, "type": "result"}
-{"args": {"data": "\"\"\"R2 starter part 1.\"\"\"\nAMOUNT = 1\n", "rel": "a.py"}, "kind": "edit", "seq": 3, "ts": 1793809586.7233725, "type": "action"}
-{"cost": {"seconds": 0.008, "tokens": 73, "usd": 0.000146}, "kind": "edit", "ok": true, "output": "wrote 36 bytes to a.py", "seq": 3, "ts": 1793809586.7329664, "type": "result"}
-{"args": {"data": "\"\"\"R2 starter part 2.\"\"\"\nfrom a import AMOUNT\n\n\ndef get():\n    \"\"\"Return the shared value.\"\"\"\n    return AMOUNT\n", "rel": "b.py"}, "kind": "edit", "seq": 4, "ts": 1793809586.7351725, "type": "action"}
-{"cost": {"seconds": 0.005, "tokens": 116, "usd": 0.000232}, "kind": "edit", "ok": true, "output": "wrote 112 bytes to b.py", "seq": 4, "ts": 1793809586.7424014, "type": "result"}
-{"args": {}, "kind": "test", "seq": 5, "ts": 1793809586.7451463, "type": "action"}
-{"argv": ["C:\\Python314\\python.exe", "-P", "-m", "pytest", "-q", "-p", "no:cacheprovider"], "cost": {"seconds": 0.902, "tokens": 142, "usd": 0.000284}, "kind": "test", "ok": true, "output": ".                                                                        [100%]\n1 passed in 0.04s\n", "seq": 5, "ts": 1793809587.6492276, "type": "result"}
-{"args": {"verdict": "PASS"}, "kind": "finish", "seq": 6, "ts": 1793809587.6524568, "type": "action"}
-{"cost": {"seconds": 0.0, "tokens": 142, "usd": 0.000284}, "kind": "finish", "ok": true, "output": "PASS", "seq": 6, "ts": 1793809587.6568627, "type": "result"}
-{"final": {"exec_calls": 1, "files": {"a.py": "f2f7b6772b6fe204c4b4b1f3fcc7c561c5ce7e9d3ec7311c9eb31b9138051459", "b.py": "43ff16eadc14b8a606f2a98eb1ccda5fd95a1992ff1b8f122c5f225f677e5dd9", "test_rename.py": "bc800332535e6ade0be7071f7af88f0df90eddb949483faa97adb5755169d6d1"}, "output_bytes": 573, "steps": 5, "tokens": 142, "usd": 0.000284}, "reason": "policy finished", "seq": 1000000, "ts": 1793809587.663841, "type": "verdict", "verdict": "PASS"}
+{"args": {"rel": "a.py"}, "kind": "read", "seq": 1, "ts": 1793820059.2365391, "type": "action"}
+{"cost": {"seconds": 0.009, "tokens": 16, "usd": 3.2e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\n\"\"\"R2 starter part 1.\"\"\"\nVALUE = 1\n", "seq": 1, "ts": 1793820059.2494245, "type": "result"}
+{"args": {"rel": "b.py"}, "kind": "read", "seq": 2, "ts": 1793820059.2539382, "type": "action"}
+{"cost": {"seconds": 0.011, "tokens": 51, "usd": 0.000102}, "kind": "read", "ok": true, "output": "UNTRUSTED:\n\"\"\"R2 starter part 2.\"\"\"\nfrom a import VALUE\n\n\ndef get():\n    \"\"\"Return the shared value.\"\"\"\n    return VALUE\n", "seq": 2, "ts": 1793820059.267536, "type": "result"}
+{"args": {"data": "\"\"\"R2 starter part 1.\"\"\"\nAMOUNT = 1\n", "rel": "a.py"}, "kind": "edit", "seq": 3, "ts": 1793820059.2703457, "type": "action"}
+{"cost": {"seconds": 0.006, "tokens": 73, "usd": 0.000146}, "kind": "edit", "ok": true, "output": "wrote 36 bytes to a.py", "seq": 3, "ts": 1793820059.2790449, "type": "result"}
+{"args": {"data": "\"\"\"R2 starter part 2.\"\"\"\nfrom a import AMOUNT\n\n\ndef get():\n    \"\"\"Return the shared value.\"\"\"\n    return AMOUNT\n", "rel": "b.py"}, "kind": "edit", "seq": 4, "ts": 1793820059.2817895, "type": "action"}
+{"cost": {"seconds": 0.009, "tokens": 116, "usd": 0.000232}, "kind": "edit", "ok": true, "output": "wrote 112 bytes to b.py", "seq": 4, "ts": 1793820059.2951832, "type": "result"}
+{"args": {}, "kind": "test", "seq": 5, "ts": 1793820059.298421, "type": "action"}
+{"argv": ["C:\\Python314\\python.exe", "-P", "-m", "pytest", "-q", "-p", "no:cacheprovider"], "cost": {"seconds": 1.12, "tokens": 142, "usd": 0.000284}, "kind": "test", "ok": true, "output": ".                                                                        [100%]\n1 passed in 0.04s\n", "seq": 5, "ts": 1793820060.4199235, "type": "result"}
+{"args": {"verdict": "PASS"}, "kind": "finish", "seq": 6, "ts": 1793820060.423615, "type": "action"}
+{"cost": {"seconds": 0.0, "tokens": 142, "usd": 0.000284}, "kind": "finish", "ok": true, "output": "PASS", "seq": 6, "ts": 1793820060.4262812, "type": "result"}
+{"final": {"exec_calls": 1, "files": {"a.py": "f2f7b6772b6fe204c4b4b1f3fcc7c561c5ce7e9d3ec7311c9eb31b9138051459", "b.py": "43ff16eadc14b8a606f2a98eb1ccda5fd95a1992ff1b8f122c5f225f677e5dd9", "test_rename.py": "bc800332535e6ade0be7071f7af88f0df90eddb949483faa97adb5755169d6d1"}, "output_bytes": 573, "steps": 5, "tokens": 142, "usd": 0.000284}, "reason": "policy finished", "seq": 1000000, "ts": 1793820060.4316697, "type": "verdict", "verdict": "PASS"}

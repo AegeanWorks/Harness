@@ -1,6 +1,7 @@
 """Agent loop: perceive -> plan -> act -> observe -> repeat until green or budget."""
 from __future__ import annotations
 
+import json as _json
 import time
 from pathlib import Path
 from typing import Any, Callable, Dict, Optional
@@ -84,6 +85,9 @@ def run_task(workspace: Path, task: str, policy_name: str, policy: Policy,
     state: Dict[str, Any] = {"step": 0, "last_ok": True, "last_output": "",
                              "workspace": str(root)}
     seq = 0
+    consec_fail = 0
+    last_sig: str | None = None
+    repeat_count = 0
     while True:
         if is_stop_requested(root):
             log.write_verdict("STOPPED", "kill switch", _final(budget, root))
@@ -111,6 +115,18 @@ def run_task(workspace: Path, task: str, policy_name: str, policy: Policy,
         args = action.get("args", {})
         if not isinstance(args, dict):
             args = {}
+        try:
+            sig = kind + _json.dumps(args, sort_keys=True, default=str)
+        except (TypeError, ValueError):
+            sig = kind + str(args)
+        if sig == last_sig:
+            repeat_count += 1
+        else:
+            repeat_count = 0
+            last_sig = sig
+        if repeat_count >= 2:
+            log.write_verdict("BUDGET_KILLED", "repeated action", _final(budget, root))
+            return "BUDGET_KILLED"
         reason = budget.check_before(kind)
         if reason is not None:
             log.write_verdict("BUDGET_KILLED", reason, _final(budget, root))
@@ -131,6 +147,13 @@ def run_task(workspace: Path, task: str, policy_name: str, policy: Policy,
         if isinstance(note.get("argv"), list):
             argv = [str(x) for x in note["argv"]]
         log.append_result(seq, ok, output, cost, kind=kind, argv=argv)
+        if ok:
+            consec_fail = 0
+        else:
+            consec_fail += 1
+            if consec_fail >= 2:
+                log.write_verdict("FAIL", "consecutive failures", _final(budget, root))
+                return "FAIL"
         state = {"step": seq, "last_ok": ok, "last_output": output,
                  "workspace": str(root)}
         end = str(note.get("end", "ok"))

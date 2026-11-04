@@ -1,8 +1,8 @@
 {"budget": {"max_exec": 20, "max_output_bytes": 200000, "max_per_kind": {"delegate_bg": 10, "delegate_fg": 10, "edit": 20, "exec": 20, "read": 60, "test": 20, "web": 10}, "max_steps": 25, "wall_s": 120.0}, "policy": "scripted-r5", "schema": 2, "seq": 0, "task": "r5", "type": "header"}
-{"args": {"text": "alpha"}, "kind": "delegate_fg", "seq": 1, "ts": 1793809589.8535993, "type": "action"}
-{"cost": {"seconds": 0.0, "tokens": 9, "usd": 1.8e-05}, "kind": "delegate_fg", "ok": true, "output": "chunk:alpha", "seq": 1, "ts": 1793809589.857325, "type": "result"}
-{"args": {"text": "beta"}, "kind": "delegate_bg", "seq": 2, "ts": 1793809589.861157, "type": "action"}
-{"cost": {"seconds": 0.022, "tokens": 18, "usd": 3.6e-05}, "kind": "delegate_bg", "ok": true, "output": "chunk:beta", "seq": 2, "ts": 1793809589.8880572, "type": "result"}
-{"args": {"verdict": "PASS"}, "kind": "finish", "seq": 3, "ts": 1793809589.8911936, "type": "action"}
-{"cost": {"seconds": 0.0, "tokens": 18, "usd": 3.6e-05}, "kind": "finish", "ok": true, "output": "PASS", "seq": 3, "ts": 1793809589.8941967, "type": "result"}
-{"final": {"exec_calls": 0, "files": {"notes.txt": "554de4a4b3b87cebc16bfa31f7c08df53eb3b233ea42a045be3b25a7b70defeb"}, "output_bytes": 76, "steps": 2, "tokens": 18, "usd": 3.6e-05}, "reason": "policy finished", "seq": 1000000, "ts": 1793809589.899162, "type": "verdict", "verdict": "PASS"}
+{"args": {"text": "alpha"}, "kind": "delegate_fg", "seq": 1, "ts": 1793820062.5100858, "type": "action"}
+{"cost": {"seconds": 0.0, "tokens": 9, "usd": 1.8e-05}, "kind": "delegate_fg", "ok": true, "output": "chunk:alpha", "seq": 1, "ts": 1793820062.5128686, "type": "result"}
+{"args": {"text": "beta"}, "kind": "delegate_bg", "seq": 2, "ts": 1793820062.5158691, "type": "action"}
+{"cost": {"seconds": 0.011, "tokens": 18, "usd": 3.6e-05}, "kind": "delegate_bg", "ok": true, "output": "chunk:beta", "seq": 2, "ts": 1793820062.528438, "type": "result"}
+{"args": {"verdict": "PASS"}, "kind": "finish", "seq": 3, "ts": 1793820062.5305755, "type": "action"}
+{"cost": {"seconds": 0.0, "tokens": 18, "usd": 3.6e-05}, "kind": "finish", "ok": true, "output": "PASS", "seq": 3, "ts": 1793820062.5325258, "type": "result"}
+{"final": {"exec_calls": 0, "files": {"notes.txt": "554de4a4b3b87cebc16bfa31f7c08df53eb3b233ea42a045be3b25a7b70defeb"}, "output_bytes": 76, "steps": 2, "tokens": 18, "usd": 3.6e-05}, "reason": "policy finished", "seq": 1000000, "ts": 1793820062.5368745, "type": "verdict", "verdict": "PASS"}

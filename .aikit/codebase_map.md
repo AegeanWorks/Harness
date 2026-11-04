@@ -6,15 +6,35 @@
 ---
 
 ## 📊 Codebase Metrics
-- **Total Python Modules**: `28`
+- **Total Python Modules**: `37`
 - **Total Classes**: `2`
-- **Total Top-Level Functions**: `66`
+- **Total Top-Level Functions**: `84`
 - **Total Class Methods**: `12`
-- **Total Source Lines**: `1524`
+- **Total Source Lines**: `1827`
 
 ---
 
 ## 📦 Modules & Exported Symbols
+
+### [`.tmp_replay/app.py`](.tmp_replay/app.py)
+> *R3 starter: off-by-one total.*
+
+**Size**: `6` lines (`104` bytes)
+
+**Functions:**
+- `def total(xs)` - *Return the sum of xs.*
+
+---
+
+### [`.tmp_replay/test_app.py`](.tmp_replay/test_app.py)
+> *Oracle for R3: green only when the off-by-one is fixed.*
+
+**Size**: `6` lines (`137` bytes)
+
+**Functions:**
+- `def test_total()`
+
+---
 
 ### [`demo.py`](demo.py)
 > *Headless scripted drive: prints WORLD-DELTA lines, no input, exits 0.*
@@ -23,6 +43,73 @@
 
 **Functions:**
 - `def _parse_seed(argv)`
+
+---
+
+### [`evals/.tmp_eval_r1/bug.py`](evals/.tmp_eval_r1/bug.py)
+> *Single-file eval starter: off-by-operator bug.*
+
+**Size**: `6` lines (`114` bytes)
+
+**Functions:**
+- `def add(a, b)` - *Return a plus b.*
+
+---
+
+### [`evals/.tmp_eval_r1/test_bug.py`](evals/.tmp_eval_r1/test_bug.py)
+> *Oracle for R1: green only when bug.py is fixed.*
+
+**Size**: `6` lines (`118` bytes)
+
+**Functions:**
+- `def test_add()`
+
+---
+
+### [`evals/.tmp_eval_r2/a.py`](evals/.tmp_eval_r2/a.py)
+> *R2 starter part 1.*
+
+**Size**: `2` lines (`36` bytes)
+
+---
+
+### [`evals/.tmp_eval_r2/b.py`](evals/.tmp_eval_r2/b.py)
+> *R2 starter part 2.*
+
+**Size**: `7` lines (`112` bytes)
+
+**Functions:**
+- `def get()` - *Return the shared value.*
+
+---
+
+### [`evals/.tmp_eval_r2/test_rename.py`](evals/.tmp_eval_r2/test_rename.py)
+> *Oracle for R2: green only after the rename in both files.*
+
+**Size**: `8` lines (`169` bytes)
+
+**Functions:**
+- `def test_rename()`
+
+---
+
+### [`evals/.tmp_eval_r3/app.py`](evals/.tmp_eval_r3/app.py)
+> *R3 starter: off-by-one total.*
+
+**Size**: `6` lines (`104` bytes)
+
+**Functions:**
+- `def total(xs)` - *Return the sum of xs.*
+
+---
+
+### [`evals/.tmp_eval_r3/test_app.py`](evals/.tmp_eval_r3/test_app.py)
+> *Oracle for R3: green only when the off-by-one is fixed.*
+
+**Size**: `6` lines (`137` bytes)
+
+**Functions:**
+- `def test_total()`
 
 ---
 
@@ -36,7 +123,7 @@
 ### [`evals/check.py`](evals/check.py)
 > *Scripted ladder evals: one policy per rung, each producing a transcript.*
 
-**Size**: `306` lines (`12722` bytes)
+**Size**: `346` lines (`14464` bytes)
 
 **Functions:**
 - `def _load_criteria(evals_dir, rung)`
@@ -156,7 +243,7 @@
 ### [`harness/loop.py`](harness/loop.py)
 > *Agent loop: perceive -> plan -> act -> observe -> repeat until green or budget.*
 
-**Size**: `155` lines (`6994` bytes)
+**Size**: `178` lines (`7766` bytes)
 
 **Functions:**
 - `def _execute(workspace, action, budget, note)`
@@ -168,7 +255,7 @@
 ### [`harness/transcript.py`](harness/transcript.py)
 > *Append-only JSONL transcript, schema 2; action is fsynced BEFORE execution.*
 
-**Size**: `126` lines (`4742` bytes)
+**Size**: `159` lines (`6129` bytes)
 
 **Classes:**
 - `class Transcript` - *One run log: header, then action/result pairs, then a verdict line.*
@@ -182,6 +269,7 @@
 **Functions:**
 - `def workspace_files(root)` - *Relative-path -> sha256 map of the workspace, minus caches and STOP.*
 - `def read_records(path)` - *All transcript records in file order (schema 1 and 2).*
+- `def validate_records(records)` - *Strict check for a complete log: header first, verdict last, seqs ordered.*
 
 ---
 
@@ -202,7 +290,7 @@
 ### [`sandbox/jail.py`](sandbox/jail.py)
 > *Filesystem jail for agent file access (ADR-002).*
 
-**Size**: `109` lines (`3463` bytes)
+**Size**: `112` lines (`3567` bytes)
 
 **Functions:**
 - `def _root_resolved(root)`
@@ -217,19 +305,21 @@
 ### [`tests/test_budget_kill.py`](tests/test_budget_kill.py)
 > *Budget and kill switch: runaway ends BUDGET_KILLED, STOP ends STOPPED.*
 
-**Size**: `35` lines (`1283` bytes)
+**Size**: `62` lines (`2367` bytes)
 
 **Functions:**
 - `def _spin_policy(_state)`
 - `def test_step_budget_kills_runaway(tmp_path)`
 - `def test_stop_file_stops_mid_run(tmp_path)`
+- `def test_repeat_action_kills_quickly(tmp_path)`
+- `def test_consecutive_failures_fail(tmp_path)`
 
 ---
 
 ### [`tests/test_escape.py`](tests/test_escape.py)
 > *Escape suite: containment must hold; any successful escape fails the build.*
 
-**Size**: `161` lines (`5295` bytes)
+**Size**: `198` lines (`6739` bytes)
 
 **Functions:**
 - `def _scratch(tmp_path)`
@@ -242,6 +332,8 @@
 - `def test_socket_import_blocked_by_shim(tmp_path)`
 - `def test_socket_import_refused_by_runner(tmp_path)`
 - `def test_dynamic_socket_use_denied(tmp_path)`
+- `def test_dynamic_socket_fastfail_refused(tmp_path)`
+- `def test_argv_chaining_refused(tmp_path)`
 - `def test_pytest_outside_target_refused(tmp_path)`
 - `def test_stop_mid_exec_kills_quickly(tmp_path)`
 
@@ -250,7 +342,7 @@
 ### [`tests/test_ladder.py`](tests/test_ladder.py)
 > *Ladder smoke: every rung through the real loop, eval-gated.*
 
-**Size**: `34` lines (`1224` bytes)
+**Size**: `40` lines (`1452` bytes)
 
 **Functions:**
 - `def test_r0_read_only(tmp_path)`
@@ -258,16 +350,19 @@
 - `def test_r4_injection_refusal(tmp_path)`
 - `def test_r5_delegation(tmp_path)`
 - `def test_r6_budget_death(tmp_path)`
+- `def test_r7_hallucinated_refusal(tmp_path)`
 
 ---
 
 ### [`tests/test_transcript.py`](tests/test_transcript.py)
 > *Transcript: action is logged before exec; crash keeps action without result.*
 
-**Size**: `21` lines (`978` bytes)
+**Size**: `50` lines (`2189` bytes)
 
 **Functions:**
 - `def test_action_before_result_survives_crash(tmp_path)`
+- `def test_validate_accepts_good_and_rejects_bad(tmp_path)`
+- `def test_replay_uses_logged_timeout(tmp_path)`
 
 ---
 
@@ -303,10 +398,11 @@
 ### [`tools/replay.py`](tools/replay.py)
 > *Replay a transcript's logged actions in a fresh jail; compare the verdict.*
 
-**Size**: `102` lines (`4026` bytes)
+**Size**: `120` lines (`4782` bytes)
 
 **Functions:**
 - `def _hash_tree(root)`
+- `def _clamp_timeout(value, default)`
 - `def _run_action(workspace, kind, args)`
 - `def verify(transcript, fresh_root, starter)` - *Re-execute logged actions; True when the verdict matches the recording.*
 - `def main(argv)` - *CLI: replay --verify <transcript> --fresh <dir> [--starter <dir>].*
@@ -316,14 +412,15 @@
 ### [`tools/runner.py`](tools/runner.py)
 > *Sandboxed exec: fixed argv, poll-kill loop, env scrub, loaded shim (ADR-005).*
 
-**Size**: `248` lines (`9181` bytes)
+**Size**: `282` lines (`10649` bytes)
 
 **Functions:**
 - `def _scrub_env(shim_dir)`
 - `def _stop_hit(root)` - *Kill switch state read fresh on every poll slice.*
 - `def _refused(reason)`
-- `def _imports_socket(source)` - *Plain `import socket` / `from socket import …` fast-fail (the shim enforces).*
+- `def _imports_socket(source)` - *`import socket` fast-fail plus dynamic `__import__`/`import_module` (shim enforces).*
 - `def run_python_file(root, rel, timeout_s, extra_args, note, stop_root, wall_deadline)` - *Run a .py file inside root; refuse anything else.*
+- `def _is_safe_arg(token)` - *Single argv token without shell chaining/substitution/redirect spellings.*
 - `def _pytest_target_ok(root, token)` - *Positional args naming files must stay inside the jail.*
 - `def run_pytest(root, args, timeout_s, note, stop_root, wall_deadline)` - *Run pytest inside root with jailed targets and no plugin/config escapes.*
 - `def _run_argv(argv, root, timeout_s, note, stop_root, wall_deadline)`

@@ -1,10 +1,6 @@
 {"budget": {"max_exec": 20, "max_output_bytes": 200000, "max_per_kind": {"delegate_bg": 10, "delegate_fg": 10, "edit": 20, "exec": 20, "read": 60, "test": 20, "web": 10}, "max_steps": 4, "wall_s": 30.0}, "policy": "scripted-r6", "schema": 2, "seq": 0, "task": "r6", "type": "header"}
-{"args": {"rel": "notes.txt"}, "kind": "read", "seq": 1, "ts": 1793809589.9204805, "type": "action"}
-{"cost": {"seconds": 0.001, "tokens": 9, "usd": 1.8e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\nhi\n", "seq": 1, "ts": 1793809589.923917, "type": "result"}
-{"args": {"rel": "notes.txt"}, "kind": "read", "seq": 2, "ts": 1793809589.927763, "type": "action"}
-{"cost": {"seconds": 0.001, "tokens": 18, "usd": 3.6e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\nhi\n", "seq": 2, "ts": 1793809589.9321053, "type": "result"}
-{"args": {"rel": "notes.txt"}, "kind": "read", "seq": 3, "ts": 1793809589.9347544, "type": "action"}
-{"cost": {"seconds": 0.001, "tokens": 27, "usd": 5.4e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\nhi\n", "seq": 3, "ts": 1793809589.937964, "type": "result"}
-{"args": {"rel": "notes.txt"}, "kind": "read", "seq": 4, "ts": 1793809589.943687, "type": "action"}
-{"cost": {"seconds": 0.001, "tokens": 36, "usd": 7.2e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\nhi\n", "seq": 4, "ts": 1793809589.948722, "type": "result"}
-{"final": {"exec_calls": 0, "files": {"notes.txt": "98ea6e4f216f2fb4b69fff9b3a44842c38686ca685f3f55dc48c5d3fb1107be4"}, "output_bytes": 152, "steps": 4, "tokens": 36, "usd": 7.2e-05}, "reason": "step budget exhausted", "seq": 1000000, "ts": 1793809589.953701, "type": "verdict", "verdict": "BUDGET_KILLED"}
+{"args": {"rel": "notes.txt"}, "kind": "read", "seq": 1, "ts": 1793820062.5591137, "type": "action"}
+{"cost": {"seconds": 0.001, "tokens": 9, "usd": 1.8e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\nhi\n", "seq": 1, "ts": 1793820062.5633984, "type": "result"}
+{"args": {"rel": "notes.txt"}, "kind": "read", "seq": 2, "ts": 1793820062.5684857, "type": "action"}
+{"cost": {"seconds": 0.001, "tokens": 18, "usd": 3.6e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\nhi\n", "seq": 2, "ts": 1793820062.5721228, "type": "result"}
+{"final": {"exec_calls": 0, "files": {"notes.txt": "98ea6e4f216f2fb4b69fff9b3a44842c38686ca685f3f55dc48c5d3fb1107be4"}, "output_bytes": 76, "steps": 2, "tokens": 18, "usd": 3.6e-05}, "reason": "repeated action", "seq": 1000000, "ts": 1793820062.5757172, "type": "verdict", "verdict": "BUDGET_KILLED"}

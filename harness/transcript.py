@@ -124,3 +124,36 @@ def read_records(path: Path) -> List[Dict[str, Any]]:
             if text:
                 out.append(json.loads(text))
     return out
+
+
+def validate_records(records: List[Dict[str, Any]]) -> tuple:
+    """Strict check for a complete log: header first, verdict last, seqs ordered."""
+    if not records:
+        return False, "empty transcript"
+    if records[0].get("type") != "header" or records[0].get("seq") != 0:
+        return False, "missing header seq 0"
+    if records[-1].get("type") != "verdict":
+        return False, "missing final verdict"
+    allowed = {"header", "action", "result", "verdict"}
+    for rec in records:
+        if rec.get("type") not in allowed:
+            return False, "unknown type " + str(rec.get("type"))[:40]
+    actions = [r for r in records if r.get("type") == "action"]
+    results = [r for r in records if r.get("type") == "result"]
+    last_seq = 0
+    seen_actions = set()
+    for act in actions:
+        seq = act.get("seq")
+        if not isinstance(seq, int) or seq <= last_seq:
+            return False, "action seq out of order"
+        last_seq = seq
+        seen_actions.add(seq)
+    seen_results = set()
+    for res in results:
+        seq = res.get("seq")
+        if seq not in seen_actions:
+            return False, "result without action seq " + str(seq)
+        if seq in seen_results:
+            return False, "duplicate result seq " + str(seq)
+        seen_results.add(seq)
+    return True, "valid actions=" + str(len(actions)) + " results=" + str(len(results))

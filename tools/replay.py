@@ -27,15 +27,27 @@ def _hash_tree(root: Path) -> str:
     return digest.hexdigest()
 
 
+def _clamp_timeout(value, default: int) -> int:
+    try:
+        asked = int(value)
+    except (TypeError, ValueError):
+        return default
+    if asked <= 0:
+        return default
+    return max(1, min(asked, 120))
+
+
 def _run_action(workspace: Path, kind: str, args: Dict) -> Tuple[bool, str]:
     if kind == "read":
         return _io.tool_read(workspace, str(args.get("rel", "")))
     if kind == "edit":
         return _io.tool_edit(workspace, str(args.get("rel", "")), str(args.get("data", "")))
     if kind == "exec":
-        return _runner.run_python_file(workspace, str(args.get("rel", "")), timeout_s=30)
+        timeout = _clamp_timeout(args.get("timeout_s", 30), 30)
+        return _runner.run_python_file(workspace, str(args.get("rel", "")), timeout_s=timeout)
     if kind == "test":
-        return _runner.run_pytest(workspace, ["-q", "-p", "no:cacheprovider"], timeout_s=60)
+        timeout = _clamp_timeout(args.get("timeout_s", 60), 60)
+        return _runner.run_pytest(workspace, ["-q", "-p", "no:cacheprovider"], timeout_s=timeout)
     if kind in ("delegate_fg", "delegate_bg"):
         return True, "chunk:" + str(args.get("text", ""))
     if kind == "web":
@@ -76,7 +88,13 @@ def verify(transcript: Path, fresh_root: Path, starter: Path | None = None) -> T
         from harness.transcript import workspace_files
         current = workspace_files(work)
         if current != recorded["files"]:
-            return False, detail + " file-hash mismatch"
+            want = recorded["files"]
+            missing = sorted([k for k in want if k not in current])[:5]
+            extra = sorted([k for k in current if k not in want])[:5]
+            changed = sorted([k for k in want if k in current and want[k] != current[k]])[:5]
+            detail += (" file-hash mismatch missing=" + str(missing)
+                       + " extra=" + str(extra) + " changed=" + str(changed))
+            return False, detail
         detail += " files=" + str(len(current))
     return True, detail
 

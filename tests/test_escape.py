@@ -54,11 +54,19 @@ def test_symlink_escape_refused(tmp_path: Path) -> None:
 
 def test_ads_name_refused(tmp_path: Path) -> None:
     root = _scratch(tmp_path)
+    refused = False
     try:
         resolve_inside(root, "evil:stream.txt")
     except ValueError:
-        return
-    raise AssertionError("ADS name was not refused")
+        refused = True
+    assert refused, "ADS name was not refused"
+    for bad in ["a\x00b.py", "a:b/c.txt", "a/b:c.txt"]:
+        refused = False
+        try:
+            resolve_inside(root, bad)
+        except ValueError:
+            refused = True
+        assert refused, "bad name was not refused: " + repr(bad)
 
 
 def test_shell_and_binary_refused(tmp_path: Path) -> None:
@@ -114,6 +122,35 @@ def test_dynamic_socket_use_denied(tmp_path: Path) -> None:
     ok, out = run_python_file(root, "dyn.py", timeout_s=15)
     assert not ok
     assert "socket" in out.lower() or "denied" in out.lower()
+
+
+def test_dynamic_socket_fastfail_refused(tmp_path: Path) -> None:
+    root = _scratch(tmp_path)
+    for name, src in [
+        ("dyn2.py", "_s = __import__('socket')\n"),
+        ("dyn3.py", "import importlib\n_m = importlib.import_module('socket')\n"),
+    ]:
+        payload = root / name
+        with open(str(payload), "w", encoding="utf-8") as handle:
+            handle.write(src)
+        ok, out = run_python_file(root, name, timeout_s=10)
+        assert not ok
+        assert out.lower().startswith("refused: socket")
+
+
+def test_argv_chaining_refused(tmp_path: Path) -> None:
+    from tools.runner import run_pytest
+    root = _scratch(tmp_path)
+    payload = root / "ok_arg.py"
+    with open(str(payload), "w", encoding="utf-8") as handle:
+        handle.write("print('hi')\n")
+    for bad in ["a;rm -rf /", "x&&y", "x||y", "$(curl)", "${HOME}", "a|b", "x`y`", "a>b"]:
+        ok, out = run_python_file(root, "ok_arg.py", timeout_s=5, extra_args=[bad])
+        assert not ok, bad
+        assert "refus" in out.lower(), bad
+    ok, out = run_pytest(root, ["-q", "-p", "no:cacheprovider", "x;rm"], timeout_s=5)
+    assert not ok
+    assert "refus" in out.lower()
 
 
 def test_pytest_outside_target_refused(tmp_path: Path) -> None:

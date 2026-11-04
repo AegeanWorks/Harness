@@ -44,12 +44,15 @@ def _root_resolved(root: Path) -> Path:
 
 def resolve_inside(root: Path, user_path: str) -> Path:
     """The absolute path for user_path, or ValueError when it escapes root."""
+    if "\x00" in user_path:
+        raise ValueError("nul byte refused")
     base = _root_resolved(root)
     candidate = Path(user_path)
     if candidate.is_absolute():
         raise ValueError("absolute path refused")
-    if ":" in candidate.name:
-        raise ValueError("stream name refused")
+    for part in candidate.parts:
+        if ":" in part:
+            raise ValueError("stream name refused")
     full = (base / candidate).resolve()
     try:
         full.relative_to(base)

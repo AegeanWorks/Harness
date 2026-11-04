@@ -73,7 +73,7 @@ def _refused(reason: str) -> Tuple[bool, str]:
 
 
 def _imports_socket(source: str) -> bool:
-    """Plain `import socket` / `from socket import …` fast-fail (the shim enforces)."""
+    """`import socket` fast-fail plus dynamic `__import__`/`import_module` (shim enforces)."""
     import ast as _ast
 
     try:
@@ -88,6 +88,25 @@ def _imports_socket(source: str) -> bool:
         elif isinstance(node, _ast.ImportFrom):
             if (node.module or "").split(".")[0] == "socket":
                 return True
+        elif isinstance(node, _ast.Call):
+            func = node.func
+            is_dynamic = False
+            if isinstance(func, _ast.Name) and func.id == "__import__":
+                is_dynamic = True
+            elif isinstance(func, _ast.Attribute) and func.attr == "import_module":
+                is_dynamic = True
+            if is_dynamic:
+                parts: list = []
+                for arg in node.args:
+                    for sub in _ast.walk(arg):
+                        if isinstance(sub, _ast.Constant) and isinstance(sub.value, str):
+                            parts.append(sub.value)
+                joined = "".join(parts).lower()
+                if "socket" in joined:
+                    return True
+                # `__import__('sock' + 'et')` splits the literal; `sock`+`et` still means socket.
+                if "sock" in joined and "et" in joined:
+                    return True
     return False
 
 
@@ -116,6 +135,8 @@ def run_python_file(root: Path, rel: str, timeout_s: int = 30,
     for item in extra_args or []:
         if item.startswith("-"):
             return _refused("flag args not allowed")
+        if not _is_safe_arg(str(item)):
+            return _refused("shell chaining not allowed")
         argv.append(item)
     if note is not None:
         note["argv"] = list(argv)
@@ -126,6 +147,17 @@ def run_python_file(root: Path, rel: str, timeout_s: int = 30,
 _PYTEST_PINNED_PLUGINS = frozenset({"no:cacheprovider"})
 _PYTEST_REFUSED_PREFIXES = ("--rootdir", "--config-file", "--override-ini",
                             "--basetemp", "--plugin", "--setup-plan")
+
+
+def _is_safe_arg(token: str) -> bool:
+    """Single argv token without shell chaining/substitution/redirect spellings."""
+    if "\x00" in token or "\n" in token or "\r" in token:
+        return False
+    low = token
+    for bad in (";", "&&", "||", "|", "`", "$", ">", "<", "$(", "${"):
+        if bad in low:
+            return False
+    return True
 
 
 def _pytest_target_ok(root: Path, token: str) -> bool:
@@ -169,6 +201,8 @@ def run_pytest(root: Path, args: List[str] | None = None,
             return _refused("pytest config escape not allowed")
         if item.startswith("-o"):
             return _refused("pytest config escape not allowed")
+        if not _is_safe_arg(item):
+            return _refused("shell chaining not allowed")
         if not item.startswith("-") and not _pytest_target_ok(root, item):
             return _refused("pytest target escapes the jail")
         argv.append(item)
