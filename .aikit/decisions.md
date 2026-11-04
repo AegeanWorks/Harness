@@ -96,6 +96,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: POST `/stop` writes `.tmp_runs/ui.STOP` and the run page shows a red STOPPED banner with Clear (POST `/clear`); POST `/replay?file=` verifies that transcript in-process and renders PASS/FAIL inline, 400 on bad names; inline favicon (`data:,`) kills the 404; green/red status text on run rows and transcript verdicts; smoke covers all four POST paths.
 - **Consequences**: Every visible control now does something real with no new dependencies; screenshots re-captured (S2/S3 after-shots changed, S1/S4/S5 identical).
 
+### ADR-009: Board visual revamp (dark glass)
+- **Date**: 2026-11-04
+- **Status**: Accepted (answers "is that aesthetic?" with a no, then a revamp; G-002/G-003)
+- **Context**: The working board read as admin-panel tables: flat cards, system look, no brand, uppercase-URL and cut-off-row nits found in screenshots.
+- **Decision**: Sticky glass header with ◆ harness brand + provider pill; eyebrow + hero titles; stat-card row on /run (verdict/steps/tokens/tools); gradient progress bar; pill verdicts (PASS/BUDGET_KILLED), mono tool/file names, row hover; provider cards on / and /settings; tighter table density so all 11 transcript rows fit 800px; scoped `.stat>span` so URLs keep case. Same five routes, same POST contracts, no new deps.
+- **Consequences**: S1–S5 after-shots re-captured (before-shots stay as the old-design record); 40/40 pytest, 5/5 gates green.
+
 <!-- Entry format:
 ### ADR-NNN: <decision in one line>
 - **Date**: YYYY-MM-DD

@@ -10,7 +10,7 @@
 - **Total Classes**: `3`
 - **Total Top-Level Functions**: `137`
 - **Total Class Methods**: `16`
-- **Total Source Lines**: `2896`
+- **Total Source Lines**: `2962`
 
 ---
 
@@ -517,7 +517,7 @@
 ### [`ui_server.py`](ui_server.py)
 > *Board UI: stdlib http.server, five routes, fixture-masked shots.*
 
-**Size**: `421` lines (`18206` bytes)
+**Size**: `487` lines (`23074` bytes)
 
 **Classes:**
 - `class Handler`
@@ -532,7 +532,7 @@
 - `def _providers()`
 - `def _key_dot(env_name)`
 - `def _nav()`
-- `def _page(title, body)`
+- `def _page(title, body, eyebrow)`
 - `def _stop_banner()`
 - `def _setup(query)`
 - `def _run(query)`

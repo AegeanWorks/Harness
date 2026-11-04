@@ -11,3 +11,4 @@ without modifying or quarantining that file; older versions migrate when a migra
 ## Rules
 - **G-001** (person): Every UI change captures before and after screenshots under assets/screenshots/ and analyzes both against the contract proofs before ui finish.
 - **G-002** (user): Board UI stays simple, aesthetic, easy to use, and functional: one task box, visible tools, working buttons.
+- **G-003** (user): Every UI change ships with before and after screenshots proving it.
