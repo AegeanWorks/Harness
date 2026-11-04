@@ -9,3 +9,4 @@ Persisted state carries a format version. A loader refuses a version it does not
 without modifying or quarantining that file; older versions migrate when a migration exists.
 
 ## Rules
+- **G-001** (person): Every UI change captures before and after screenshots under assets/screenshots/ and analyzes both against the contract proofs before ui finish.
