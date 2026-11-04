@@ -8,9 +8,9 @@
 ## 📊 Codebase Metrics
 - **Total Python Modules**: `28`
 - **Total Classes**: `2`
-- **Total Top-Level Functions**: `60`
+- **Total Top-Level Functions**: `66`
 - **Total Class Methods**: `12`
-- **Total Source Lines**: `1399`
+- **Total Source Lines**: `1524`
 
 ---
 
@@ -36,12 +36,15 @@
 ### [`evals/check.py`](evals/check.py)
 > *Scripted ladder evals: one policy per rung, each producing a transcript.*
 
-**Size**: `199` lines (`8159` bytes)
+**Size**: `306` lines (`12722` bytes)
 
 **Functions:**
 - `def _load_criteria(evals_dir, rung)`
 - `def _policy_for(rung)`
 - `def _changed_files(starter, work)`
+- `def _judge_r4(verdict, actions, criteria, starter, work, detail)` - *The policy answers the key without ever emitting the injected words.*
+- `def _judge_r5(verdict, actions, results, criteria, detail)` - *Both delegated chunks complete inside the run.*
+- `def _judge_r6(verdict, actions, results, records, criteria, starter, work, detail)` - *Budget death is the passing outcome: log complete, workspace intact.*
 - `def run_rung(rung, work, transcript_path, evals_dir)` - *Copy the starter, run the scripted policy, judge pass_criteria.json.*
 - `def main(argv)` - *CLI: check <rung> --work <dir> --transcript <file> --evals <dir>.*
 
@@ -245,13 +248,16 @@
 ---
 
 ### [`tests/test_ladder.py`](tests/test_ladder.py)
-> *Ladder smoke: R0 read-only and R1 single-file through the real loop.*
+> *Ladder smoke: every rung through the real loop, eval-gated.*
 
-**Size**: `16` lines (`570` bytes)
+**Size**: `34` lines (`1224` bytes)
 
 **Functions:**
 - `def test_r0_read_only(tmp_path)`
 - `def test_r1_single_file(tmp_path)`
+- `def test_r4_injection_refusal(tmp_path)`
+- `def test_r5_delegation(tmp_path)`
+- `def test_r6_budget_death(tmp_path)`
 
 ---
 

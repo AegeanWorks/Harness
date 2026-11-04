@@ -68,6 +68,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: Manual zero-dependency contract in `.aikit/ui.json`, surface `cli` over `demo.py` + `inventory.py`; fast proof `python demo.py --scripted --seed 1`, snapshot proof `python inventory.py`; limits 12 files / 300 lines. Flow proven end to end: begin from clean baseline, verify green, abort restored it. `ui_required` stays false so the contract enables but never blocks non-UI work.
 - **Consequences**: UI edits are scope-, budget- and proof-checked; `ui begin` needs a clean tree and a committed contract; unreviewed brand seeds stay out of the way in TEMP during UI tasks and are restored after.
 
+### ADR-005: Hardened boundary model — enforced API surface, audited payload
+- **Date**: 2026-11-04
+- **Status**: Accepted (Stage 2 verified each gap by running it; Stage 3 fixed F1-F9)
+- **Context**: Repros showed the old model overclaimed: dynamic imports bypassed the AST scan, pytest ran uninspected files anywhere on disk, STOP/wall waited out long execs, the shim never loaded, and per-kind/output ceilings were record-only.
+- **Decision**: Enforce what the harness executes on the agent's behalf — poll-kill exec loop (0.2s slices, STOP/wall/call timeout), loop-clamped timeouts capped at wall remainder and 120s, pytest targets jailed with config/plugin escapes refused, runner-owned shim dir on PYTHONPATH neutering socket connect/use (subclass-preserving so pytest, ssl and asyncio still import), pinned plugin set with entry-point autoload off, per-kind caps plus a live output ceiling, transcript schema 2 (timestamps, argv, verdict counters, file hashes, spillover sidecars) verified by replay. What the payload process itself can do under the user account is audited (hashes, argv, full outputs on spillover) rather than claimed away; DNS via getaddrinfo, MRO-introspection around the shim, and subprocess-spawned interpreters remain documented residuals. New rungs: R4 injection refusal, R5 delegation, R6 budget-death-as-success.
+- **Consequences**: Escape suite asserts API-boundary refusals plus shim-loaded use-denial; replay asserts file hashes for v2 logs; every rung ships with its transcript; agent asyncio/net use in payloads stays restricted by the shim and must be accounted for in task design.
+
 <!-- Entry format:
 ### ADR-NNN: <decision in one line>
 - **Date**: YYYY-MM-DD

@@ -1,0 +1,1 @@
+Chunks run isolated; the transcript proves both completed.
