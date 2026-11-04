@@ -5,41 +5,12 @@
     "last_phase": "in_progress",
     "active_phase": 4,
     "status": "in_progress",
-    "updated_at": 1793826595.7175295,
+    "updated_at": 1793828841.1183343,
     "owner": "kilo:goal",
     "started_by": "kilo:goal",
     "continuations": []
   },
   "checkpoints": [
-    {
-      "task_id": "harness-v1",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/4] Stage 1 plan: sandboxed coding harness shape, ladder R0-R3, budgets, kill switch, transcript replay, verify gates",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793806531.6538973,
-      "timestamp_str": "2026-11-04 18:35:31",
-      "agent": "kilo:goal",
-      "impact_assessment": {
-        "why": "Need agents that edit, run, observe, retry sandboxed to green with logged replayable runs",
-        "benefits": "Falsifiable ladder plus escape and replay gates prove containment and autonomy before any long run",
-        "risks": "contract: transcript replay and verdict schema drift; dependency: stdlib-only plus pytest oracle; concurrency: single-run jail, no parallel agents yet; state: scratch workspace plus JSONL log must survive kill",
-        "mitigation": "Freeze Action/Observation/verdict schema in ADR-001; allow-list exec plus jail plus escape test; budget and STOP checked before each step; action-before-exec fsync plus replay verify"
-      },
-      "plan_digest": "c7ce8c8f29975cd07bc4f813e22c56775f0da351f3e9475cd50cda01a896f225"
-    },
-    {
-      "task_id": "harness-v1",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[2/4] Stage 2 verified plan: threat-model fixes for jail, exec allow-list, mid-run kill, replay semantics (ADR-002)",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793806609.7041912,
-      "timestamp_str": "2026-11-04 18:36:49",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-v1",
       "phase": "phase 3",
@@ -247,6 +218,28 @@
       "status": "in_progress",
       "timestamp": 1793826595.7175295,
       "timestamp_str": "2026-11-05 00:09:55",
+      "agent": "kilo:goal"
+    },
+    {
+      "task_id": "harness-board-v1",
+      "phase": "in_progress",
+      "phase_num": 4,
+      "description": "[4/4] Stage 4 check: 37/37 pytest, escape 13/13 + 6/6 manual refusals, swap wait-then-PASS, S1-S5 re-captured byte-identical; F1 guidelines FAIL map-stale sent back; checklists: F1 open",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793827107.5664496,
+      "timestamp_str": "2026-11-05 00:18:27",
+      "agent": "kilo:goal"
+    },
+    {
+      "task_id": "harness-board-v1",
+      "phase": "in_progress",
+      "phase_num": 4,
+      "description": "[5/6] F1 fixed: scratch-free map refresh, 5/5 gates green; G-002 UI guidelines recorded; checklists: passed",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793828841.1183343,
+      "timestamp_str": "2026-11-05 00:47:21",
       "agent": "kilo:goal"
     }
   ]

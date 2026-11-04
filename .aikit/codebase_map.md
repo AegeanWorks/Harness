@@ -6,35 +6,15 @@
 ---
 
 ## 📊 Codebase Metrics
-- **Total Python Modules**: `45`
+- **Total Python Modules**: `43`
 - **Total Classes**: `3`
-- **Total Top-Level Functions**: `130`
+- **Total Top-Level Functions**: `128`
 - **Total Class Methods**: `14`
-- **Total Source Lines**: `2719`
+- **Total Source Lines**: `2707`
 
 ---
 
 ## 📦 Modules & Exported Symbols
-
-### [`.tmp_replay/app.py`](.tmp_replay/app.py)
-> *R3 starter: off-by-one total.*
-
-**Size**: `6` lines (`104` bytes)
-
-**Functions:**
-- `def total(xs)` - *Return the sum of xs.*
-
----
-
-### [`.tmp_replay/test_app.py`](.tmp_replay/test_app.py)
-> *Oracle for R3: green only when the off-by-one is fixed.*
-
-**Size**: `6` lines (`137` bytes)
-
-**Functions:**
-- `def test_total()`
-
----
 
 ### [`demo.py`](demo.py)
 > *Headless scripted drive: prints WORLD-DELTA lines, no input, exits 0.*
