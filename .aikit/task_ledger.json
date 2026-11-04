@@ -1,44 +1,22 @@
 {
   "version": 1,
   "active_task": {
-    "task_id": "harness-ui-revamp-v1",
+    "task_id": "harness-ui-states-v1",
     "last_phase": "in_progress",
-    "active_phase": 3,
+    "active_phase": 2,
     "status": "in_progress",
-    "updated_at": 1793830223.3055322,
+    "updated_at": 1793830655.2341957,
     "owner": "kilo:goal",
     "started_by": "kilo:goal",
-    "continuations": []
+    "continuations": [],
+    "impact_assessment": {
+      "why": "G-003: unproven UI states need screenshot proof",
+      "benefits": "Kill switch and replay verify visibly proven",
+      "risks": "contract: none, shots only; dependency: none; concurrency: none; state: none",
+      "mitigation": "Secrets scan on shots, explicit staging"
+    }
   },
   "checkpoints": [
-    {
-      "task_id": "harness-v1",
-      "phase": "superseded",
-      "phase_num": 4,
-      "description": "Superseded by 'harness-ui-v1' without --complete or --reset",
-      "status": "superseded",
-      "timestamp": 1793807668.9040241,
-      "timestamp_str": "2026-11-04 18:54:28",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-ui-v1",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/2] UI contract for the CLI surface: demo/inventory proofs AI can run while coding",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793807668.9040241,
-      "timestamp_str": "2026-11-04 18:54:28",
-      "agent": "kilo:goal",
-      "impact_assessment": {
-        "why": "AI coding the harness needs a bounded, proof-checked UI surface",
-        "benefits": "Fast and snapshot proofs verify the CLI on every UI change",
-        "risks": "contract: ui.json schema and proof commands; dependency: stdlib only; concurrency: none; state: ui-task file must not linger open",
-        "mitigation": "Manual zero-dependency contract; begin, verify, then abort to restore clean baseline"
-      },
-      "plan_digest": "6d38a3cc21acfe686ca96f4103a0d931b2c5665148d8ad5142478d681156762f"
-    },
     {
       "task_id": "harness-ui-v1",
       "phase": "phase 4",
@@ -247,6 +225,34 @@
       "timestamp": 1793830223.3055322,
       "timestamp_str": "2026-11-05 01:10:23",
       "agent": "kilo:goal"
+    },
+    {
+      "task_id": "harness-ui-revamp-v1",
+      "phase": "completed",
+      "phase_num": 5,
+      "description": "Task 'harness-ui-revamp-v1' completed successfully.",
+      "status": "completed",
+      "timestamp": 1793830290.3252316,
+      "timestamp_str": "2026-11-05 01:11:30",
+      "agent": "kilo:goal"
+    },
+    {
+      "task_id": "harness-ui-states-v1",
+      "phase": "in_progress",
+      "phase_num": 2,
+      "description": "[1/2] Proof shots for STOPPED banner and inline replay result; no product code change",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1793830655.2341957,
+      "timestamp_str": "2026-11-05 01:17:35",
+      "agent": "kilo:goal",
+      "impact_assessment": {
+        "why": "G-003: unproven UI states need screenshot proof",
+        "benefits": "Kill switch and replay verify visibly proven",
+        "risks": "contract: none, shots only; dependency: none; concurrency: none; state: none",
+        "mitigation": "Secrets scan on shots, explicit staging"
+      },
+      "plan_digest": "2fde432e4069b060fd29a2d1a50927d4934207042e6db21ee9bda0e81aac43ce"
     }
   ]
 }
