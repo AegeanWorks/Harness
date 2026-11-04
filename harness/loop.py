@@ -49,18 +49,32 @@ def _execute(workspace: Path, action: Action, budget: Budget,
             stop_root=workspace, wall_deadline=budget.started_at + budget.wall_s)
     if kind == "web":
         return _web.web_fetch(str(args.get("url", "")))
+    if kind == "wait":
+        return True, "waited " + str(args.get("reason", "provider"))[:200]
     if kind == "delegate_fg":
         text = str(args.get("text", ""))
+        if len(text) > 4096:
+            return False, "refused: delegate text too long"
         out = _delegate.run_foreground(lambda: "chunk:" + text)
         return True, str(out)
     if kind == "delegate_bg":
         text = str(args.get("text", ""))
+        if len(text) > 4096:
+            return False, "refused: delegate text too long"
         future = _delegate.run_background(lambda: "chunk:" + text)
-        try:
-            out = future.result(timeout=30)
-        except (TimeoutError, OSError, RuntimeError, ValueError) as exc:
-            return False, "background chunk failed: " + str(exc)[:200]
-        return True, str(out)
+        waited = 0.0
+        while waited < 30.0:
+            if is_stop_requested(workspace):
+                return False, "stopped by kill switch"
+            try:
+                out = future.result(timeout=0.2)
+                return True, str(out)
+            except TimeoutError:
+                waited += 0.2
+                continue
+            except (OSError, RuntimeError, ValueError) as exc:
+                return False, "background chunk failed: " + str(exc)[:200]
+        return False, "background chunk failed: timed out"
     if kind == "finish":
         return True, str(args.get("verdict", "PASS"))
     return False, "refused: unknown action kind " + kind

@@ -47,7 +47,12 @@ def _run_action(workspace: Path, kind: str, args: Dict) -> Tuple[bool, str]:
         return _runner.run_python_file(workspace, str(args.get("rel", "")), timeout_s=timeout)
     if kind == "test":
         timeout = _clamp_timeout(args.get("timeout_s", 60), 60)
-        return _runner.run_pytest(workspace, ["-q", "-p", "no:cacheprovider"], timeout_s=timeout)
+        items = args.get("args", ["-q", "-p", "no:cacheprovider"])
+        if not isinstance(items, list) or not items:
+            items = ["-q", "-p", "no:cacheprovider"]
+        return _runner.run_pytest(workspace, [str(x) for x in items], timeout_s=timeout)
+    if kind == "wait":
+        return True, "waited " + str(args.get("reason", "provider"))[:200]
     if kind in ("delegate_fg", "delegate_bg"):
         return True, "chunk:" + str(args.get("text", ""))
     if kind == "web":

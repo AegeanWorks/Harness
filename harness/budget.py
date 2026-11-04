@@ -24,7 +24,7 @@ class Budget:
     max_exec: int = 20
     max_per_kind: Dict[str, int] = field(default_factory=lambda: {
         "read": 60, "edit": 20, "exec": 20, "test": 20,
-        "web": 10, "delegate_fg": 10, "delegate_bg": 10})
+        "web": 10, "delegate_fg": 10, "delegate_bg": 10, "wait": 20})
     steps: int = 0
     exec_calls: int = 0
     output_bytes: int = 0

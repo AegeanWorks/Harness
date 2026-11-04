@@ -6,15 +6,35 @@
 ---
 
 ## 📊 Codebase Metrics
-- **Total Python Modules**: `28`
-- **Total Classes**: `2`
-- **Total Top-Level Functions**: `76`
-- **Total Class Methods**: `12`
-- **Total Source Lines**: `1774`
+- **Total Python Modules**: `45`
+- **Total Classes**: `3`
+- **Total Top-Level Functions**: `130`
+- **Total Class Methods**: `14`
+- **Total Source Lines**: `2719`
 
 ---
 
 ## 📦 Modules & Exported Symbols
+
+### [`.tmp_replay/app.py`](.tmp_replay/app.py)
+> *R3 starter: off-by-one total.*
+
+**Size**: `6` lines (`104` bytes)
+
+**Functions:**
+- `def total(xs)` - *Return the sum of xs.*
+
+---
+
+### [`.tmp_replay/test_app.py`](.tmp_replay/test_app.py)
+> *Oracle for R3: green only when the off-by-one is fixed.*
+
+**Size**: `6` lines (`137` bytes)
+
+**Functions:**
+- `def test_total()`
+
+---
 
 ### [`demo.py`](demo.py)
 > *Headless scripted drive: prints WORLD-DELTA lines, no input, exits 0.*
@@ -23,6 +43,73 @@
 
 **Functions:**
 - `def _parse_seed(argv)`
+
+---
+
+### [`evals/.tmp_eval_r1/bug.py`](evals/.tmp_eval_r1/bug.py)
+> *Single-file eval starter: off-by-operator bug.*
+
+**Size**: `6` lines (`114` bytes)
+
+**Functions:**
+- `def add(a, b)` - *Return a plus b.*
+
+---
+
+### [`evals/.tmp_eval_r1/test_bug.py`](evals/.tmp_eval_r1/test_bug.py)
+> *Oracle for R1: green only when bug.py is fixed.*
+
+**Size**: `6` lines (`118` bytes)
+
+**Functions:**
+- `def test_add()`
+
+---
+
+### [`evals/.tmp_eval_r2/a.py`](evals/.tmp_eval_r2/a.py)
+> *R2 starter part 1.*
+
+**Size**: `2` lines (`36` bytes)
+
+---
+
+### [`evals/.tmp_eval_r2/b.py`](evals/.tmp_eval_r2/b.py)
+> *R2 starter part 2.*
+
+**Size**: `7` lines (`112` bytes)
+
+**Functions:**
+- `def get()` - *Return the shared value.*
+
+---
+
+### [`evals/.tmp_eval_r2/test_rename.py`](evals/.tmp_eval_r2/test_rename.py)
+> *Oracle for R2: green only after the rename in both files.*
+
+**Size**: `8` lines (`169` bytes)
+
+**Functions:**
+- `def test_rename()`
+
+---
+
+### [`evals/.tmp_eval_r3/app.py`](evals/.tmp_eval_r3/app.py)
+> *R3 starter: off-by-one total.*
+
+**Size**: `6` lines (`104` bytes)
+
+**Functions:**
+- `def total(xs)` - *Return the sum of xs.*
+
+---
+
+### [`evals/.tmp_eval_r3/test_app.py`](evals/.tmp_eval_r3/test_app.py)
+> *Oracle for R3: green only when the off-by-one is fixed.*
+
+**Size**: `6` lines (`137` bytes)
+
+**Functions:**
+- `def test_total()`
 
 ---
 
@@ -36,7 +123,7 @@
 ### [`evals/check.py`](evals/check.py)
 > *Scripted ladder evals: one policy per rung, each producing a transcript.*
 
-**Size**: `346` lines (`14464` bytes)
+**Size**: `387` lines (`16329` bytes)
 
 **Functions:**
 - `def _load_criteria(evals_dir, rung)`
@@ -127,7 +214,7 @@
 ### [`harness/budget.py`](harness/budget.py)
 > *Budgets: steps, wall time, output bytes, per-tool caps, token estimate.*
 
-**Size**: `76` lines (`2795` bytes)
+**Size**: `76` lines (`2807` bytes)
 
 **Classes:**
 - `class Budget` - *Mutable counters with fixed ceilings; checked BEFORE each action.*
@@ -156,7 +243,7 @@
 ### [`harness/loop.py`](harness/loop.py)
 > *Agent loop: perceive -> plan -> act -> observe -> repeat until green or budget.*
 
-**Size**: `178` lines (`7766` bytes)
+**Size**: `192` lines (`8350` bytes)
 
 **Functions:**
 - `def _execute(workspace, action, budget, note)`
@@ -189,7 +276,44 @@
 ### [`inventory.py`](inventory.py)
 > *Project-owned UI inventory: one `kind|name|locator` line per control.*
 
-**Size**: `6` lines (`233` bytes)
+**Size**: `11` lines (`383` bytes)
+
+---
+
+### [`providers/__init__.py`](providers/__init__.py)
+> *Agent tool surface: read/edit/exec/test/web, all jail-checked.*
+
+**Size**: `1` lines (`69` bytes)
+
+---
+
+### [`providers/policy.py`](providers/policy.py)
+> *LLM policy: call the active OpenAI-compatible provider, fail over cleanly.*
+
+**Size**: `127` lines (`5782` bytes)
+
+**Functions:**
+- `def _post_chat(base_url, chat_path, key, model, messages, timeout_s, max_tokens)`
+- `def _parse_action(text)`
+- `def call_provider(provider, messages)` - *One chat call; raises on transport/parse failure (caller records wait).*
+- `def llm_policy(state, root, history, request_fn)` - *Policy for harness.loop.run_task: never raises, returns wait on failure.*
+- `def with_fallback(state, root, history, request_fn)` - *Try active, then fallback_provider; wait only when both fail.*
+
+---
+
+### [`providers/providers.py`](providers/providers.py)
+> *Provider registry: OpenAI-compatible endpoints, config entry not code change.*
+
+**Size**: `95` lines (`3821` bytes)
+
+**Functions:**
+- `def providers_path(root)`
+- `def load_registry(root)` - *The parsed providers.json (raises ValueError with Why/Fix context).*
+- `def validate_entry(entry)` - *None when valid, else the refusal reason (never logs a key).*
+- `def list_providers(root)` - *Validated provider entries in file order.*
+- `def get_provider(name, root)`
+- `def key_status(entry)` - *SET/MISSING dot source, never the value.*
+- `def active_name(root)`
 
 ---
 
@@ -212,6 +336,22 @@
 - `def write_text(root, rel, data)` - *Jail-checked atomic write (temp + fsync + replace).*
 - `def _fsync_dir(path)`
 - `def write_shim(scratch)` - *Write sitecustomize.py that denies plain socket import (defense in depth).*
+
+---
+
+### [`start.py`](start.py)
+> *One-click start: creates dirs, checks gates, serves the board UI.*
+
+**Size**: `186` lines (`7871` bytes)
+
+**Functions:**
+- `def _fail(message, why, fix, code)`
+- `def _ensure_dirs()`
+- `def _check_loopback()`
+- `def _check_pytest()`
+- `def _load_json(path)`
+- `def run_check()`
+- `def main(argv)`
 
 ---
 
@@ -267,6 +407,34 @@
 
 ---
 
+### [`tests/test_providers.py`](tests/test_providers.py)
+> *Providers: config entry not code, failover survives, no keys logged.*
+
+**Size**: `75` lines (`2764` bytes)
+
+**Functions:**
+- `def _root()`
+- `def test_registry_has_two_compat_entries()`
+- `def test_new_provider_costs_config_entry()`
+- `def test_wait_is_budgeted_and_replayable(tmp_path)`
+- `def test_unknown_kind_still_refused(tmp_path)`
+- `def test_delegate_text_cap_refused(tmp_path)`
+- `def test_failover_uses_fallback_without_code_change()`
+
+---
+
+### [`tests/test_start.py`](tests/test_start.py)
+> *One-click start: dirs, gates, no secrets.*
+
+**Size**: `21` lines (`663` bytes)
+
+**Functions:**
+- `def test_check_passes_on_clean_tree(tmp_path, monkeypatch)`
+- `def test_check_rejects_bad_port()`
+- `def test_ensure_dirs_creates(tmp_path, monkeypatch)`
+
+---
+
 ### [`tests/test_transcript.py`](tests/test_transcript.py)
 > *Transcript: action is logged before exec; crash keeps action without result.*
 
@@ -276,6 +444,17 @@
 - `def test_action_before_result_survives_crash(tmp_path)`
 - `def test_validate_accepts_good_and_rejects_bad(tmp_path)`
 - `def test_replay_uses_logged_timeout(tmp_path)`
+
+---
+
+### [`tests/test_ui_pages.py`](tests/test_ui_pages.py)
+> *Board UI: five routes 200, fixture-masked, secrets never rendered.*
+
+**Size**: `37` lines (`1486` bytes)
+
+**Functions:**
+- `def test_five_routes_200_and_masked()`
+- `def test_unknown_route_404()`
 
 ---
 
@@ -311,7 +490,7 @@
 ### [`tools/replay.py`](tools/replay.py)
 > *Replay a transcript's logged actions in a fresh jail; compare the verdict.*
 
-**Size**: `120` lines (`4782` bytes)
+**Size**: `125` lines (`5044` bytes)
 
 **Functions:**
 - `def _hash_tree(root)`
@@ -347,5 +526,34 @@
 
 **Functions:**
 - `def web_fetch(url, allow_file)` - *Refuse every fetch unless an allow file names the host (ADR-002).*
+
+---
+
+### [`ui_server.py`](ui_server.py)
+> *Board UI: stdlib http.server, five routes, fixture-masked shots.*
+
+**Size**: `285` lines (`12249` bytes)
+
+**Classes:**
+- `class Handler`
+  - Method `.log_message(*args)`
+  - Method `.do_GET()`
+
+**Functions:**
+- `def _fixture(query)`
+- `def _mask(fixture, real)`
+- `def _providers()`
+- `def _key_dot(env_name)`
+- `def _nav()`
+- `def _page(title, body)`
+- `def _setup(query)`
+- `def _run(query)`
+- `def _runs()`
+- `def _verdict(path)`
+- `def _tools()`
+- `def _settings()`
+- `def serve_in_background(port, seed, fixture)`
+- `def run_smoke(port, seed, fixture)`
+- `def main(argv)`
 
 ---

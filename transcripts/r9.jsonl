@@ -1,0 +1,8 @@
+{"budget": {"max_exec": 20, "max_output_bytes": 200000, "max_per_kind": {"delegate_bg": 10, "delegate_fg": 10, "edit": 20, "exec": 20, "read": 60, "test": 20, "wait": 20, "web": 10}, "max_steps": 25, "wall_s": 120.0}, "policy": "scripted-r9", "schema": 2, "seq": 0, "task": "r9", "type": "header"}
+{"args": {"reason": "board warmup"}, "kind": "wait", "seq": 1, "ts": 1793825789.6969457, "type": "action"}
+{"cost": {"seconds": 0.0, "tokens": 12, "usd": 2.4e-05}, "kind": "wait", "ok": true, "output": "waited board warmup", "seq": 1, "ts": 1793825789.7006116, "type": "result"}
+{"args": {"rel": "notes.txt"}, "kind": "read", "seq": 2, "ts": 1793825789.7029562, "type": "action"}
+{"cost": {"seconds": 0.001, "tokens": 21, "usd": 4.2e-05}, "kind": "read", "ok": true, "output": "UNTRUSTED:\n42\n", "seq": 2, "ts": 1793825789.7665126, "type": "result"}
+{"args": {"answer": "42", "verdict": "PASS"}, "kind": "finish", "seq": 3, "ts": 1793825789.767986, "type": "action"}
+{"cost": {"seconds": 0.0, "tokens": 21, "usd": 4.2e-05}, "kind": "finish", "ok": true, "output": "PASS", "seq": 3, "ts": 1793825789.7693276, "type": "result"}
+{"final": {"exec_calls": 0, "files": {"notes.txt": "084c799cd551dd1d8d5c5f9a5d593b2e931f5e36122ee5c793c1d08a19839cc0"}, "output_bytes": 87, "steps": 2, "tokens": 21, "usd": 4.2e-05}, "reason": "policy finished", "seq": 1000000, "ts": 1793825789.7715251, "type": "verdict", "verdict": "PASS"}

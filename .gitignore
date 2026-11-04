@@ -7,3 +7,8 @@
 __pycache__/
 *.py[cod]
 node_modules/
+# Board local-only: provider keys live in env, never in the repo
+config.local.json
+.tmp_runs/
+shots/*.out.json
+evals/.tmp_eval_*/

@@ -6,6 +6,12 @@
         "demo.py",
         "inventory.py"
       ]
+    },
+    "board": {
+      "paths": [
+        "start.py",
+        "ui_server.py"
+      ]
     }
   },
   "protected": [

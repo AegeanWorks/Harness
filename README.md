@@ -7,6 +7,18 @@ A sandboxed agent harness that turns coding tasks into green test suites with fu
 ## ⚡ 30-Second Cold-Start Quick Reference
 
 - **Runtime Prerequisites**: Python 3.10+ only, no third-party packages.
+- **One-click start** (from `projects/harness`):
+  ```bash
+  python start.py --check     # gates: python, loopback, pytest, providers
+  python start.py             # serves the board UI, auto-opens the browser
+  ```
+  Double-click `start.cmd` on Windows. First run shows Setup (`/`):
+  provider picker, key SET/MISSING dots (env only, never values),
+  task box, Run. Restart is one click.
+- **Providers** (config entry, not code change): `providers.json` holds two
+  OpenAI-compatible entries (`openai-compat` + `local-compat`). A new one
+  costs one JSON object; keys live in env (`OPENAI_API_KEY`, …). Swap
+  mid-task via `/settings`; the run survives through `wait` + fallback.
 - **Canonical Regression Shield Gate**:
   ```bash
   python -m pytest tests -q -p no:cacheprovider
@@ -36,6 +48,15 @@ harness/
 ├── README.md
 ├── demo.py                   <- AI-compat scripted drive: WORLD-DELTA lines (ADR-315)
 ├── inventory.py              <- AI-compat inventory: kind|name|locator lines (ADR-315)
+├── start.py                    <- one-click: --check, serve board UI (ADR-007)
+├── start.cmd                   <- Windows one-click wrapper (ADR-007)
+├── ui_server.py                <- board UI: /, /run, /runs, /tools, /settings (ADR-007)
+├── providers.json              <- two OpenAI-compat entries, no secrets (ADR-007)
+├── config.example.json         <- local-only template; real config.local.json ignored
+├── providers/                  <- registry + LLM policy with fallback (ADR-007)
+│   ├── __init__.py
+│   ├── providers.py
+│   └── policy.py
 ├── harness/                  <- agent loop, budget, transcript, kill switch
 │   ├── __init__.py
 │   ├── loop.py
@@ -54,7 +75,7 @@ harness/
 │   └── replay.py
 ├── evals/                    <- r0 read-only, r1 fix, r2 rename, r3 debug,
 │   │                           r4 injection refusal, r5 delegation, r6 budget death,
-│   │                           r7 hallucinated-tool refusal
+│   │                           r7 hallucinated-tool refusal, r8 failover, r9 warmup
 │   ├── __init__.py
 │   ├── check.py
 │   ├── r0/
@@ -64,7 +85,9 @@ harness/
 │   ├── r4/
 │   ├── r5/
 │   ├── r6/
-│   └── r7/
+│   ├── r7/
+│   ├── r8/
+│   └── r9/
 ├── transcripts/              <- JSONL run logs, replayable from the log alone
 │   ├── example.jsonl
 │   ├── r0.jsonl
@@ -74,12 +97,18 @@ harness/
 │   ├── r4.jsonl
 │   ├── r5.jsonl
 │   ├── r6.jsonl
-│   └── r7.jsonl
+│   ├── r7.jsonl
+│   ├── r8.jsonl
+│   └── r9.jsonl
 ├── tests/                    <- escape, transcript, budget-kill, ladder smoke
 │   ├── test_escape.py
 │   ├── test_transcript.py
 │   ├── test_budget_kill.py
-│   └── test_ladder.py
+│   ├── test_ladder.py
+│   ├── test_start.py
+│   ├── test_providers.py
+│   └── test_ui_pages.py
+├── shots/                    <- board screenshots S1-S5 before/after (ADR-007)
 └── .aikit/                   <- this project's memory: record, ledger, decisions
 ```
 
@@ -92,9 +121,12 @@ harness/
 
 ## UI surface (bounded and proof-checked)
 
-- Contract: `.aikit/ui.json`, surface `cli` (`demo.py`, `inventory.py`).
+- Contract: `.aikit/ui.json`, surfaces `cli` (`demo.py`, `inventory.py`)
+  and `board` (`start.py`, `ui_server.py`).
 - Fast proof: `python demo.py --scripted --seed 1`; snapshot proof: `python inventory.py`.
-- While coding: `python aikit.py ui begin harness --surface cli`, edit only the surface, `python aikit.py ui verify harness`, then `finish` (needs review) or `abort`.
+- Board smoke: `python ui_server.py --smoke --port 8765 --seed 1 --fixture r3`
+  (all five routes 200, fixture-masked). Shots live in `shots/`.
+- While coding: `python aikit.py ui begin harness --surface board`, edit only the surface, `python aikit.py ui verify harness`, then `finish` (needs review) or `abort`.
 
 ## 📜 License
 
