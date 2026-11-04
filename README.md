@@ -80,6 +80,12 @@ harness/
 - `tests/test_escape.py` fails the build if any escape succeeds.
 - Every run writes `transcripts/*.jsonl`; replay it with `python -m tools.replay --verify transcripts/example.jsonl --fresh .tmp_replay --starter evals/r3/starter`.
 
+## UI surface (bounded and proof-checked)
+
+- Contract: `.aikit/ui.json`, surface `cli` (`demo.py`, `inventory.py`).
+- Fast proof: `python demo.py --scripted --seed 1`; snapshot proof: `python inventory.py`.
+- While coding: `python aikit.py ui begin harness --surface cli`, edit only the surface, `python aikit.py ui verify harness`, then `finish` (needs review) or `abort`.
+
 ## 📜 License
 
 Free for personal use under the Aegean License 1.1 (AL-1.1); see [LICENSE](LICENSE). Any commercial use needs the Aegean Commercial License 1.0 (ACL-1.0); see [COMMERCIAL.md](COMMERCIAL.md).
