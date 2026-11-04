@@ -61,6 +61,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: `-P`-only exec argv (`-I` hid pytest's user-site install); AST socket-import refusal in runner plus sitecustomize shim verified via PYTHONPATH; finish action logged before verdict so R0 answer is auditable; replay handles finish; R0 judge allows read+finish only.
 - **Consequences**: 13/13 pytest green; `check harness` 5/5; `evals.check all` R0-R3 PASS; replay verdict match; no new deps; no secrets in repo or logs.
 
+### ADR-004: CLI surface under a verifiable UI contract
+- **Date**: 2026-11-04
+- **Status**: Accepted
+- **Context**: AI coding the harness needs a UI it can use and verify: bounded edits, runnable proofs, no human eyeballing. The headless compat surface (inventory.py, demo.py --scripted) already existed and the compat gate passed, but nothing bounded UI edits or proved them.
+- **Decision**: Manual zero-dependency contract in `.aikit/ui.json`, surface `cli` over `demo.py` + `inventory.py`; fast proof `python demo.py --scripted --seed 1`, snapshot proof `python inventory.py`; limits 12 files / 300 lines. Flow proven end to end: begin from clean baseline, verify green, abort restored it. `ui_required` stays false so the contract enables but never blocks non-UI work.
+- **Consequences**: UI edits are scope-, budget- and proof-checked; `ui begin` needs a clean tree and a committed contract; unreviewed brand seeds stay out of the way in TEMP during UI tasks and are restored after.
+
 <!-- Entry format:
 ### ADR-NNN: <decision in one line>
 - **Date**: YYYY-MM-DD
