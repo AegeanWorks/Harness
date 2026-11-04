@@ -6,10 +6,14 @@ A sandboxed agent harness that turns coding tasks into green test suites with fu
 
 ## ⚡ 30-Second Cold-Start Quick Reference
 
-- **Runtime Prerequisites**: <FILL: each runtime this project needs and its minimum version>
+- **Runtime Prerequisites**: Python 3.10+ only, no third-party packages.
 - **Canonical Regression Shield Gate**:
   ```bash
   python -m pytest tests -q -p no:cacheprovider
+  ```
+- **Agent smoke** (run from `projects/harness`):
+  ```bash
+  python -m evals.check all
   ```
 
 ### 🛠️ AIKit Commands (run from the AIKit folder)
@@ -24,16 +28,53 @@ A sandboxed agent harness that turns coding tasks into green test suites with fu
 
 ```text
 harness/
-├── .gitignore                <- transient AIKit state excluded
-├── LICENSE                   <- Aegean License 1.1 (AL-1.1): free personal use
-├── COMMERCIAL.md             <- Commercial licensing terms
-├── LICENSES/                 <- REUSE license texts
-├── REUSE.toml                <- Machine-readable SPDX metadata
+├── .gitignore
+├── COMMERCIAL.md
+├── LICENSE
+├── LICENSES/
+├── REUSE.toml
 ├── README.md
-├── inventory.py              <- AI-compat inventory: kind|name|locator lines (ADR-315)
 ├── demo.py                   <- AI-compat scripted drive: WORLD-DELTA lines (ADR-315)
+├── inventory.py              <- AI-compat inventory: kind|name|locator lines (ADR-315)
+├── harness/                  <- agent loop, budget, transcript, kill switch
+│   ├── __init__.py
+│   ├── loop.py
+│   ├── budget.py
+│   ├── transcript.py
+│   └── kill.py
+├── sandbox/                  <- filesystem jail + network shim
+│   ├── __init__.py
+│   └── jail.py
+├── tools/                    <- read/edit/exec/test/web/delegate/replay
+│   ├── __init__.py
+│   ├── io.py
+│   ├── runner.py
+│   ├── web.py
+│   ├── delegate.py
+│   └── replay.py
+├── evals/                    <- r0 read-only, r1 single-file, r2 multi-file, r3 debug
+│   ├── __init__.py
+│   ├── check.py
+│   ├── r0/
+│   ├── r1/
+│   ├── r2/
+│   └── r3/
+├── transcripts/              <- JSONL run logs, replayable from the log alone
+│   └── example.jsonl
+├── tests/                    <- escape, transcript, budget-kill, ladder smoke
+│   ├── test_escape.py
+│   ├── test_transcript.py
+│   ├── test_budget_kill.py
+│   └── test_ladder.py
 └── .aikit/                   <- this project's memory: record, ledger, decisions
 ```
+
+## Gates
+
+- `python -m pytest tests -q -p no:cacheprovider` stays green.
+- `python aikit.py check harness` (from the AIKit folder) stays green.
+- `tests/test_escape.py` fails the build if any escape succeeds.
+- Every run writes `transcripts/*.jsonl`; replay it with `python -m tools.replay --verify transcripts/example.jsonl --fresh .tmp_replay --starter evals/r3/starter`.
 
 ## 📜 License
 

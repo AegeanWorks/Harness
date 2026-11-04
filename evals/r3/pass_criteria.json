@@ -1,0 +1,1 @@
+{"must_be_green": true, "allowed_files": ["app.py"], "require_fail_then_pass": true, "command": "python -m pytest -q -p no:cacheprovider"}

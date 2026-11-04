@@ -12,5 +12,12 @@
   "gates": {},
   "ui_required": false,
   "mechanics_required": false,
-  "created": "2026-11-04"
+  "created": "2026-11-04",
+  "has_ui": false,
+  "ui_kind": "cli",
+  "ui_evidence": [
+    "tools/runner.py"
+  ],
+  "ui_checked_at": "2026-11-04",
+  "ui_source": "detected"
 }

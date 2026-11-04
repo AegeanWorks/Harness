@@ -1,0 +1,12 @@
+{"budget": {"max_exec": 20, "max_steps": 25, "wall_s": 120.0}, "policy": "scripted-r3", "seq": 0, "task": "r3", "type": "header"}
+{"args": {}, "kind": "test", "seq": 1, "type": "action"}
+{"cost": {"seconds": 1.126, "tokens": 135, "usd": 0.00027}, "ok": false, "output": "F                                                                        [100%]\n================================== FAILURES ===================================\n_________________________________ test_total __________________________________\n\n    def test_total():\n>       assert total([1, 2, 3]) == 6\nE       assert 7 == 6\nE        +  where 7 = total([1, 2, 3])\n\ntest_app.py:6: AssertionError\n=========================== short test summary info ===========================\nFAILED test_app.py::test_total - assert 7 == 6\n1 failed in 0.25s\n", "seq": 1, "type": "result"}
+{"args": {"rel": "app.py"}, "kind": "read", "seq": 2, "type": "action"}
+{"cost": {"seconds": 0.0, "tokens": 170, "usd": 0.00034}, "ok": true, "output": "UNTRUSTED:\n\"\"\"R3 starter: off-by-one total.\"\"\"\n\n\ndef total(xs):\n    \"\"\"Return the sum of xs.\"\"\"\n    return sum(xs) + 1\n", "seq": 2, "type": "result"}
+{"args": {"data": "\"\"\"R3 starter: off-by-one total.\"\"\"\n\n\ndef total(xs):\n    \"\"\"Return the sum of xs.\"\"\"\n    return sum(xs)\n", "rel": "app.py"}, "kind": "edit", "seq": 3, "type": "action"}
+{"cost": {"seconds": 0.003, "tokens": 212, "usd": 0.000424}, "ok": true, "output": "wrote 104 bytes to app.py", "seq": 3, "type": "result"}
+{"args": {}, "kind": "test", "seq": 4, "type": "action"}
+{"cost": {"seconds": 0.974, "tokens": 238, "usd": 0.000476}, "ok": true, "output": ".                                                                        [100%]\n1 passed in 0.18s\n", "seq": 4, "type": "result"}
+{"args": {"verdict": "PASS"}, "kind": "finish", "seq": 5, "type": "action"}
+{"cost": {"seconds": 0.0, "tokens": 238, "usd": 0.000476}, "ok": true, "output": "PASS", "seq": 5, "type": "result"}
+{"reason": "policy finished", "seq": 1000000, "type": "verdict", "verdict": "PASS"}
