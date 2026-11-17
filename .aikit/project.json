@@ -7,10 +7,18 @@
     "aikit-integrated",
     "source-available",
     "aegean-license",
-    "commercial-license"
+    "commercial-license",
+    "python",
+    "software",
+    "user-interface",
+    "ai",
+    "ai-agents",
+    "agentic-ai",
+    "testing",
+    "quality-assurance"
   ],
   "gates": {},
-  "ui_required": false,
+  "ui_required": true,
   "mechanics_required": false,
   "created": "2026-11-04",
   "has_ui": true,
@@ -18,6 +26,8 @@
   "ui_evidence": [
     "tools/runner.py"
   ],
-  "ui_checked_at": "2026-11-04",
-  "ui_source": "manual"
+  "ui_checked_at": "2026-11-17",
+  "ui_source": "manual",
+  "topics_source": "manual",
+  "topics_reviewed_at": "2026-11-17"
 }

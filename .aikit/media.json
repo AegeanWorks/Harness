@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "name": "harness",
+  "repo": "Harness",
+  "has_ui": true,
+  "ui_kind": "cli",
+  "palette": [
+    "#0b0712",
+    "#2b1230",
+    "#a466f5",
+    "#f58ebb"
+  ],
+  "motif": "notes",
+  "layout": "editorial",
+  "assets": {
+    "logo": {
+      "path": "assets/logo.svg",
+      "status": "pending_review",
+      "commit": "",
+      "generated_at": "2026-11-17T23:50:05",
+      "review": null
+    },
+    "social_preview": {
+      "path": "assets/social-preview.svg",
+      "status": "pending_review",
+      "commit": "",
+      "generated_at": "2026-11-17T23:50:05",
+      "review": null
+    }
+  },
+  "screenshots": []
+}

@@ -12,3 +12,5 @@ config.local.json
 .tmp_runs/
 shots/*.out.json
 evals/.tmp_eval_*/
+# AIKit transient state
+.aikit/reforge.reviews/

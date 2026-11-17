@@ -1,60 +1,22 @@
 {
   "version": 1,
   "active_task": {
-    "task_id": "harness-ui-states-v1",
+    "task_id": "harness-aikit-conformance",
     "last_phase": "phase 4",
-    "active_phase": 5,
-    "status": "completed",
-    "updated_at": 1794948424.081291,
+    "active_phase": 4,
+    "status": "in_progress",
+    "updated_at": 1794949518.9823945,
     "owner": "kilo:1",
-    "started_by": "kilo:goal",
-    "continuations": [
-      {
-        "agent": "kilo:1",
-        "from": "kilo:goal",
-        "at": 1794948207.9662035
-      }
-    ],
+    "started_by": "kilo:1",
+    "continuations": [],
     "workspaces": [
       {
         "name": "harness",
         "path": "projects/harness"
       }
-    ],
-    "completed_at": 1794948511.2255766,
-    "completed_head": "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
-    "completed_tree": "841917559f36e872f17eb2e7d792f7e125e05a62"
+    ]
   },
   "checkpoints": [
-    {
-      "task_id": "harness-harden-v1",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/4] Audit: ladder R0-R3 green, escape 8/8, replay match, run gaps filed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793808760.782929,
-      "timestamp_str": "2026-11-04 19:12:40",
-      "agent": "kilo:goal",
-      "impact_assessment": {
-        "why": "Harness runs but its hardness is unproven: ceilings, mid-exec kill and transcript provenance need verification",
-        "benefits": "Ordered gap list with runtime evidence; fixes land sandbox-first without breaking green rungs",
-        "risks": "contract: transcript format versioning if fields added; dependency: stdlib only, Windows Popen semantics; concurrency: kill polling must stay single-threaded and simple; state: probe temps kept outside repo, tree restored clean",
-        "mitigation": "Probes ran on TEMP scratch only; transcripts restored; no repo writes in audit; fixes ordered sandbox, observability, rungs"
-      },
-      "plan_digest": "f53d044caf1dd27ade48779461541c9ad800cb847cc7d085a1d41e64f707ed9e"
-    },
-    {
-      "task_id": "harness-harden-v1",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[2/4] Plan verified: 5 gaps reproduced on scratch, ordered fix list sandbox, observability, rungs",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793808913.2361767,
-      "timestamp_str": "2026-11-04 19:15:13",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-harden-v1",
       "phase": "phase 3",
@@ -302,6 +264,48 @@
         ],
         "forced": false
       }
+    },
+    {
+      "task_id": "harness-aikit-conformance",
+      "phase": "phase 2",
+      "phase_num": 2,
+      "description": "[1/3] Record the repaired onboarding metadata. `aikit.py fix` regenerated the stale map, seeded brand media candidates (assets/logo.svg, assets/social-preview.svg, .aikit/media.json, all pending review), seeded .gitattributes, and turned the UI gate on (ui_required true) because the project declares two surfaces in .aikit/ui.json. Record the curated topic list from the topics brief (local only, no GitHub apply), then commit this metadata on a tree whose five gates pass.\n\n[2/3] Record UI surface evidence for cli and board. With the UI gate on, check warns that neither declared surface matches a finished UI task, so `check --strict` cannot prove delivery. For each surface run the contract's own `ui begin`, then `ui finish --no-change --reviewed --reviewer kilo:1 --reason ...`, naming what was actually inspected: for cli the scripted demo and inventory proofs, for board the S1-S7 screenshots and the five-route UI suite. This records the current digest as evidence instead of leaving the surfaces unguarded.\n\n[3/3] Verify delivery readiness and close. Run the five gates and `check --strict harness` on the committed tree, confirm the ledger has no in-flight task, and close this task with the evidence.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794949168.4221306,
+      "timestamp_str": "2026-11-17 23:59:28",
+      "agent": "kilo:1",
+      "impact_assessment": {
+        "why": "The harness project was delivered with AIKit onboarding unfinished: its map indexed deleted scratch eval modules (the one failing gate), the ledger sat in progress for 310 hours, brand media and topics were never initialized, and the UI gate stayed off although two surfaces are declared and no surface evidence exists.",
+        "benefits": "A cold start reports no disruption, all five gates pass, check --strict can prove delivery readiness, and both UI surfaces are guarded by recorded evidence.",
+        "risks": "contract: project.json gains ui_required true and a 13-topic list; .aikit/ui_history.json records two no-change surface reviews; dependency: none; concurrency: the ledger is single-writer and UI tasks take their own lock; state: media assets stay pending_review and no GitHub topics are applied",
+        "mitigation": "Use the sanctioned fix command and the contract own begin/finish path; no-change finishes state exactly what was reviewed; re-run all five gates before every commit; record the reviewer; push nothing"
+      },
+      "plan_digest": "1967382a957e54c452fad37744bffde8308ae7fbbbbb7a5fc3de54a2ee45f1de",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
+    },
+    {
+      "task_id": "harness-aikit-conformance",
+      "phase": "phase 4",
+      "phase_num": 4,
+      "description": "[1/3] Recorded the repaired onboarding metadata. `aikit.py fix harness` seeded assets/logo.svg and assets/social-preview.svg plus .aikit/media.json (both assets pending_review), seeded .gitattributes, and set ui_required true for the two declared surfaces; the map was already regenerated under the previous task. The topics brief's 13-tag list is recorded locally (no GitHub apply). 5/5 gates pass with --allow-dirty; the remaining delivery warnings are the two surfaces' missing evidence, which milestone 2 records. checklists: passed.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794949518.9823945,
+      "timestamp_str": "2026-11-18 00:05:18",
+      "agent": "kilo:1",
+      "checklists": "passed",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
     }
   ]
 }
