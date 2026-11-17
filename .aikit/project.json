@@ -24,9 +24,10 @@
   "has_ui": true,
   "ui_kind": "cli",
   "ui_evidence": [
-    "tools/runner.py"
+    "start.py",
+    "tests/test_start.py"
   ],
-  "ui_checked_at": "2026-11-17",
+  "ui_checked_at": "2026-11-18",
   "ui_source": "manual",
   "topics_source": "manual",
   "topics_reviewed_at": "2026-11-17"
