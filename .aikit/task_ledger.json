@@ -3,8 +3,8 @@
   "active_task": {
     "task_id": "harness-ui-states-v1",
     "last_phase": "phase 4",
-    "active_phase": 4,
-    "status": "in_progress",
+    "active_phase": 5,
+    "status": "completed",
     "updated_at": 1794948424.081291,
     "owner": "kilo:1",
     "started_by": "kilo:goal",
@@ -20,19 +20,12 @@
         "name": "harness",
         "path": "projects/harness"
       }
-    ]
+    ],
+    "completed_at": 1794948511.2255766,
+    "completed_head": "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+    "completed_tree": "841917559f36e872f17eb2e7d792f7e125e05a62"
   },
   "checkpoints": [
-    {
-      "task_id": "harness-ui-v1",
-      "phase": "superseded",
-      "phase_num": 4,
-      "description": "Superseded by 'harness-harden-v1' without --complete or --reset",
-      "status": "superseded",
-      "timestamp": 1793808760.782929,
-      "timestamp_str": "2026-11-04 19:12:40",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-harden-v1",
       "phase": "phase 2",
@@ -292,6 +285,23 @@
           "path": "projects/harness"
         }
       ]
+    },
+    {
+      "task_id": "harness-ui-states-v1",
+      "phase": "completed",
+      "phase_num": 5,
+      "description": "Task 'harness-ui-states-v1' completed successfully.",
+      "status": "completed",
+      "timestamp": 1794948511.2939484,
+      "timestamp_str": "2026-11-17 23:48:31",
+      "agent": "kilo:1",
+      "head": "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+      "delivery": {
+        "roots": [
+          "."
+        ],
+        "forced": false
+      }
     }
   ]
 }
