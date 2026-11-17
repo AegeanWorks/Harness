@@ -2,43 +2,27 @@
   "version": 1,
   "active_task": {
     "task_id": "harness-ui-states-v1",
-    "last_phase": "in_progress",
-    "active_phase": 2,
+    "last_phase": "phase 4",
+    "active_phase": 4,
     "status": "in_progress",
-    "updated_at": 1793830655.2341957,
-    "owner": "kilo:goal",
+    "updated_at": 1794948424.081291,
+    "owner": "kilo:1",
     "started_by": "kilo:goal",
-    "continuations": [],
-    "impact_assessment": {
-      "why": "G-003: unproven UI states need screenshot proof",
-      "benefits": "Kill switch and replay verify visibly proven",
-      "risks": "contract: none, shots only; dependency: none; concurrency: none; state: none",
-      "mitigation": "Secrets scan on shots, explicit staging"
-    }
+    "continuations": [
+      {
+        "agent": "kilo:1",
+        "from": "kilo:goal",
+        "at": 1794948207.9662035
+      }
+    ],
+    "workspaces": [
+      {
+        "name": "harness",
+        "path": "projects/harness"
+      }
+    ]
   },
   "checkpoints": [
-    {
-      "task_id": "harness-ui-v1",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[2/2] UI contract committed, begin/verify/abort proven, 5/5 gates; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793807761.027086,
-      "timestamp_str": "2026-11-04 18:56:01",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-ui-v1",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "G-001 recorded: every UI change screenshotted before/after and analyzed before finish; 5/5 gates; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793808257.5608242,
-      "timestamp_str": "2026-11-04 19:04:17",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-ui-v1",
       "phase": "superseded",
@@ -253,6 +237,61 @@
         "mitigation": "Secrets scan on shots, explicit staging"
       },
       "plan_digest": "2fde432e4069b060fd29a2d1a50927d4934207042e6db21ee9bda0e81aac43ce"
+    },
+    {
+      "task_id": "harness-ui-states-v1",
+      "phase": "phase 2",
+      "phase_num": 2,
+      "description": "[1/1] Close the abandoned ui-states task as verification-only. Its milestone [1/2] delivered the STOPPED banner and inline replay proof shots (shots/s6-stop-banner.png and shots/s7-replay-result.png, commit b975254); the second milestone was never recorded and the task sat in progress for 310 hours, which is why the project reports a disruption at every cold start. Confirm both shots exist at HEAD, confirm tests/test_ui_pages.py still covers POST /stop + /clear and POST /replay including the path refusal, then run the Phase 4 gates and close the task. No new product code.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794948207.9662035,
+      "timestamp_str": "2026-11-17 23:43:27",
+      "agent": "kilo:1",
+      "plan_digest": "05cd5b0547d553c3e08693bdb7ee87de75e3289d6fac279f3a6d9bb80dc7b933",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ],
+      "continued_from": "kilo:goal"
+    },
+    {
+      "task_id": "harness-ui-states-v1",
+      "phase": "phase 4",
+      "phase_num": 4,
+      "description": "[1/1] Verified: both proof shots exist at HEAD and are 1280x800 PNGs committed in b975254 (shots/s6-stop-banner.png, shots/s7-replay-result.png); tests/test_ui_pages.py covers POST /stop + /clear (the banner appears and clears) and POST /replay (PASS replayed for r3.jsonl, ../evil refused with 400). 40/40 pytest pass and 5/5 gates pass. The guidelines gate failed at HEAD because the committed map still indexed the removed evals/.tmp_eval_* scratch modules; regenerating it removed 8 phantom modules and brought it back in sync. checklists: passed.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794948424.081291,
+      "timestamp_str": "2026-11-17 23:47:04",
+      "agent": "kilo:1",
+      "measurements": [
+        {
+          "metric": "pytest tests passing",
+          "unit": "tests",
+          "candidate": 40.0,
+          "command": "python -m pytest tests -q -p no:cacheprovider",
+          "baseline": 40.0,
+          "qualified": "no"
+        },
+        {
+          "metric": "AIKit gates passing",
+          "unit": "gates",
+          "candidate": 5.0,
+          "command": "python aikit.py check harness",
+          "baseline": 4.0,
+          "qualified": "no"
+        }
+      ],
+      "checklists": "passed",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
     }
   ]
 }

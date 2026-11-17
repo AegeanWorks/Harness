@@ -1,16 +1,20 @@
 # Codebase Map & Symbol Catalog 🗺️
 
 > **AUTO-GENERATED & VERIFIED BY `scripts/update_knowledge_base.py`**
-> This document provides an automated, up-to-date registry of all modules, classes, and exported functions across this repository.
+> This document catalogues Python modules, classes, and exported functions. See Map Coverage for any stack it does not index.
 
 ---
 
 ## 📊 Codebase Metrics
-- **Total Python Modules**: `43`
+- **Total Python Modules**: `36`
 - **Total Classes**: `3`
-- **Total Top-Level Functions**: `137`
+- **Total Top-Level Functions**: `131`
 - **Total Class Methods**: `16`
-- **Total Source Lines**: `2962`
+- **Total Source Lines**: `2921`
+
+## 🧭 Map Coverage
+- **Indexed**: python (`36` module(s))
+- **Not indexed by this map**: none (no non-Python source files were found)
 
 ---
 
@@ -23,73 +27,6 @@
 
 **Functions:**
 - `def _parse_seed(argv)`
-
----
-
-### [`evals/.tmp_eval_r1/bug.py`](evals/.tmp_eval_r1/bug.py)
-> *Single-file eval starter: off-by-operator bug.*
-
-**Size**: `6` lines (`114` bytes)
-
-**Functions:**
-- `def add(a, b)` - *Return a plus b.*
-
----
-
-### [`evals/.tmp_eval_r1/test_bug.py`](evals/.tmp_eval_r1/test_bug.py)
-> *Oracle for R1: green only when bug.py is fixed.*
-
-**Size**: `6` lines (`118` bytes)
-
-**Functions:**
-- `def test_add()`
-
----
-
-### [`evals/.tmp_eval_r2/a.py`](evals/.tmp_eval_r2/a.py)
-> *R2 starter part 1.*
-
-**Size**: `2` lines (`36` bytes)
-
----
-
-### [`evals/.tmp_eval_r2/b.py`](evals/.tmp_eval_r2/b.py)
-> *R2 starter part 2.*
-
-**Size**: `7` lines (`112` bytes)
-
-**Functions:**
-- `def get()` - *Return the shared value.*
-
----
-
-### [`evals/.tmp_eval_r2/test_rename.py`](evals/.tmp_eval_r2/test_rename.py)
-> *Oracle for R2: green only after the rename in both files.*
-
-**Size**: `8` lines (`169` bytes)
-
-**Functions:**
-- `def test_rename()`
-
----
-
-### [`evals/.tmp_eval_r3/app.py`](evals/.tmp_eval_r3/app.py)
-> *R3 starter: off-by-one total.*
-
-**Size**: `6` lines (`104` bytes)
-
-**Functions:**
-- `def total(xs)` - *Return the sum of xs.*
-
----
-
-### [`evals/.tmp_eval_r3/test_app.py`](evals/.tmp_eval_r3/test_app.py)
-> *Oracle for R3: green only when the off-by-one is fixed.*
-
-**Size**: `6` lines (`137` bytes)
-
-**Functions:**
-- `def test_total()`
 
 ---
 
