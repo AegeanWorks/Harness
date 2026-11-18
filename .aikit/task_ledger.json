@@ -1,11 +1,11 @@
 {
   "version": 1,
   "active_task": {
-    "task_id": "harness-aikit-conformance",
+    "task_id": "harness-lifecycle-adr",
     "last_phase": "phase 4",
     "active_phase": 5,
     "status": "completed",
-    "updated_at": 1794977982.5050988,
+    "updated_at": 1794978716.9616537,
     "owner": "kilo:1",
     "started_by": "kilo:1",
     "continuations": [],
@@ -15,43 +15,11 @@
         "path": "projects/harness"
       }
     ],
-    "completed_at": 1794977996.9514487,
-    "completed_head": "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
-    "completed_tree": "df82cf476dae0af25e79af3be24a3c1ce216b110"
+    "completed_at": 1794978717.9412014,
+    "completed_head": "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
+    "completed_tree": "49d1649a3e337686cd1670fe3c9f75d80bf1e726"
   },
   "checkpoints": [
-    {
-      "task_id": "harness-harden-v1",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[4/4] Check: 19/19 suite, 5/5 gates, escape 11/11, replay v1+v2 match, rungs r0-r6 PASS with costs, wall runaway BUDGET_KILLED at 3.2s state intact; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793809847.5678043,
-      "timestamp_str": "2026-11-04 19:30:47",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-harden-v1",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'harness-harden-v1' completed successfully.",
-      "status": "completed",
-      "timestamp": 1793825346.9902425,
-      "timestamp_str": "2026-11-04 23:49:06",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-board-v1",
-      "phase": "in_progress",
-      "phase_num": 3,
-      "description": "[2/4] Stage 3 implementation started: approved order one-click, providers, tools, UI",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793825365.4354584,
-      "timestamp_str": "2026-11-04 23:49:25",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-board-v1",
       "phase": "in_progress",
@@ -334,6 +302,65 @@
       "timestamp_str": "2026-11-18 07:59:57",
       "agent": "kilo:1",
       "head": "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+      "delivery": {
+        "roots": [
+          "."
+        ],
+        "forced": false
+      }
+    },
+    {
+      "task_id": "harness-lifecycle-adr",
+      "phase": "phase 2",
+      "phase_num": 2,
+      "description": "[1/1] Record the lifecycle adoption decision as ADR-010. The conformance work had already been committed when the decision register was updated, so strict check rightly reports one non-bookkeeping commit after the completed task. ADR-010 documents why the project moved to AIKit's full lifecycle (stale ui-states task, map indexing deleted eval scratch modules, uninitialised media and topics, the disabled UI gate over two declared surfaces, surface evidence recorded through the contract path) and names the consequences. Docs only; five gates were green before the commit and are re-run after.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794978638.90945,
+      "timestamp_str": "2026-11-18 08:10:38",
+      "agent": "kilo:1",
+      "impact_assessment": {
+        "why": "The decision that turned AIKit lifecycle enforcement on for this project belongs in the register, and the strict gate requires the commit that adds it to belong to an open task.",
+        "benefits": "The register explains the governance change and the strict gate describes the final committed tree again.",
+        "risks": "contract: none, one ADR entry; dependency: none; concurrency: none; state: docs only",
+        "mitigation": "Run all five gates before and after the commit; the entry follows the register format and keeps IDs consecutive"
+      },
+      "plan_digest": "40932b341007f4624c65a750fe92cbeed8cb991fc80735da2fc1666a35135482",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
+    },
+    {
+      "task_id": "harness-lifecycle-adr",
+      "phase": "phase 4",
+      "phase_num": 4,
+      "description": "[1/1] Verified: ADR-010 is committed at f6d0b2a with the register's entry format and consecutive IDs, and 5/5 gates pass on the tree that carries it. The strict refusal was exactly the missing task ownership of that docs commit; the ledger now owns it. checklists: passed.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794978716.9616537,
+      "timestamp_str": "2026-11-18 08:11:56",
+      "agent": "kilo:1",
+      "checklists": "passed",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
+    },
+    {
+      "task_id": "harness-lifecycle-adr",
+      "phase": "completed",
+      "phase_num": 5,
+      "description": "Task 'harness-lifecycle-adr' completed successfully.",
+      "status": "completed",
+      "timestamp": 1794978718.0545292,
+      "timestamp_str": "2026-11-18 08:11:58",
+      "agent": "kilo:1",
+      "head": "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
       "delivery": {
         "roots": [
           "."
