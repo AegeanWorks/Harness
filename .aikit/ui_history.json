@@ -40,5 +40,26 @@
     "final_snapshot_entries": 8,
     "surface_digest": "7e44c114b96ee5eac90fc5d1a6adc927b9ffbef3f89e62491de9a3e081a8f5eb",
     "baseline_digest": "a5ca8b2d695dc13d2b08104e80139a45fecfa3bc56497158f13d06afa2e56fb1"
+  },
+  {
+    "schema": 1,
+    "surface": "board",
+    "mode": "visual",
+    "visual_change": true,
+    "changed_paths": [],
+    "no_visual_reason": "",
+    "no_change_reason": "Reviewed the board surface at 95b5607 without changing it: the only movement since the last board record is the reforge CSS repair in de75c38, which adds the missing .tag.warn rule. Served the board on 127.0.0.1:8791 with fixture r3 and read the live HTML: /run carries the rule and the UNTRUSTED pill, /runs carries the BUDGET_KILLED pill, and all five routes answered 200, so the pills now render tinted as ADR-009 promised. Structure, inventory and proofs are unchanged.",
+    "baseline_commit": "95b56075dcf1e4a9052af607fa53920f208c9494",
+    "contract_hash": "cdf0467ff79d13019e385853a249842a266d8c0d786d83018505f8e8ce2035bd",
+    "started_at": 1794986829.100662,
+    "finished_at": 1794987012.5185804,
+    "strikes": 0,
+    "reviewer": "kilo:1",
+    "allowed_removals": [],
+    "allowed_tests": [],
+    "final_snapshot_digest": "f1ecebe9932e1c054bf43656b63bc2f529c4e1c6fdc4d5ba8fc50be2256d53c3",
+    "final_snapshot_entries": 8,
+    "surface_digest": "d3e23e5be6802cd0d7eb0fd4841d9fa0aec1d40cceffc683a7944e29f67be7b5",
+    "baseline_digest": "a234fec9e50fdefa209fb9f8bdf7052b1fc249873afe189d8509aa7149bfdabc"
   }
 ]
