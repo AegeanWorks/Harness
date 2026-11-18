@@ -4,6 +4,8 @@
 
 A sandboxed agent harness that turns coding tasks into green test suites with full transcripts and budgets.
 
+> **Archived**: Work complete: the AIKit lifecycle was adopted, the reforge run repaired four defects, and the remaining harness ideas were assessed against atelier. (archived 2026-11-18). This project is read-only; its GitHub repository is archived.
+
 ## ⚡ 30-Second Cold-Start Quick Reference
 
 - **Runtime Prerequisites**: Python 3.10+ only, no third-party packages.

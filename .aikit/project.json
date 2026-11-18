@@ -30,5 +30,11 @@
   "ui_checked_at": "2026-11-18",
   "ui_source": "manual",
   "topics_source": "manual",
-  "topics_reviewed_at": "2026-11-17"
+  "topics_reviewed_at": "2026-11-17",
+  "archived": true,
+  "archived_at": "2026-11-18",
+  "archive_reason": "Work complete: the AIKit lifecycle was adopted, the reforge run repaired four defects, and the remaining harness ideas were assessed against atelier.",
+  "archive_repo": "AegeanWorks/Harness",
+  "archive_description": "[ARCHIVED] A sandboxed agent harness that turns coding tasks into green test suites with full transcripts and budgets.",
+  "archive_origin": "projects/harness"
 }
