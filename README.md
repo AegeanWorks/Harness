@@ -40,12 +40,14 @@ A sandboxed agent harness that turns coding tasks into green test suites with fu
 
 ```text
 harness/
+├── .gitattributes            <- LF policy (AIKit ADR-436, ADR-454)
 ├── .gitignore
 ├── COMMERCIAL.md
 ├── LICENSE
 ├── LICENSES/
 ├── REUSE.toml
 ├── README.md
+├── assets/                   <- brand media candidates: logo + social preview (pending review)
 ├── demo.py                   <- AI-compat scripted drive: WORLD-DELTA lines (ADR-315)
 ├── inventory.py              <- AI-compat inventory: kind|name|locator lines (ADR-315)
 ├── start.py                    <- one-click: --check, serve board UI (ADR-007)
