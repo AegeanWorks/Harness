@@ -1,7 +1,7 @@
 {
   "schema": 2,
   "next_run_id": 2,
-  "active_run": "run-1",
+  "active_run": null,
   "last_run": "run-1",
   "runs": [
     {
@@ -9,8 +9,8 @@
       "start": 3,
       "step": 3,
       "stop": null,
-      "stage": 10,
-      "window": 30,
+      "stage": 11,
+      "window": 32,
       "audited_commits": [
         "a206bb70f00b453a1942da0263e35ff99a988083",
         "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
@@ -41,16 +41,19 @@
         "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
         "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
         "a4cc95e992c3533f1a76d403f664663a809cd356",
-        "0dcdf8fa16db672f726151918631c9b7c1919dd9"
+        "0dcdf8fa16db672f726151918631c9b7c1919dd9",
+        "9f497e70045b953f77805119b4868ef8259363f0",
+        "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
       ],
-      "status": "active",
+      "status": "completed",
       "created": "2026-11-18T08:24:52",
-      "updated": "2026-11-18T10:14:28",
+      "updated": "2026-11-18T10:22:15",
       "last_audit": {
         "run": "run-1",
-        "stage": 10,
-        "window": 30,
+        "stage": 11,
+        "window": 32,
         "commits": [
+          "9f497e70045b953f77805119b4868ef8259363f0",
           "0dcfa16b3847852b9bf8005ad4a5adc73d05e41d",
           "27fee41a2aca68fc6d109cc47acc955dd9adc8c9",
           "de75c38ddc8b072139d71b14c25f209b64343e17",
@@ -80,12 +83,12 @@
           "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
           "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
           "a4cc95e992c3533f1a76d403f664663a809cd356",
-          "0dcdf8fa16db672f726151918631c9b7c1919dd9"
+          "0dcdf8fa16db672f726151918631c9b7c1919dd9",
+          "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
         ],
         "new_commits": [
-          "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
-          "a4cc95e992c3533f1a76d403f664663a809cd356",
-          "0dcdf8fa16db672f726151918631c9b7c1919dd9"
+          "9f497e70045b953f77805119b4868ef8259363f0",
+          "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
         ],
         "prior_commits": [
           "a206bb70f00b453a1942da0263e35ff99a988083",
@@ -114,194 +117,63 @@
           "07e9e0e3fb7115f1e1fb20629909f51ee4d0f202",
           "0dcfa16b3847852b9bf8005ad4a5adc73d05e41d",
           "96af179c36458e6b4c21804d82ace32aaf27824c",
-          "4696eb6472a56a9da5bb9c29b8994a64a9aa457e"
+          "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
+          "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
+          "a4cc95e992c3533f1a76d403f664663a809cd356",
+          "0dcdf8fa16db672f726151918631c9b7c1919dd9"
         ],
-        "findings": [
-          {
-            "code": "review",
-            "category": "review",
-            "severity": "low",
-            "path": "evals/check.py",
-            "line": 127,
-            "message": "_changed_files skips any file with a .py suffix that the starter did not contain, so an agent that drops an extra module into the workspace still passes R0's must_be_clean and R2's exact allow-set; the transcript carve-out is the only skip the tmp transcript naming needs.",
-            "evidence": "if path.suffix == \".py\" or rel.startswith(\"transcript\"):",
-            "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-            "hunk": "0dcdf8fa16db:evals/check.py#1",
-            "symbol": "",
-            "introduced": true,
-            "reproducible": false,
-            "fixable": true,
-            "interaction": "",
-            "repaired": true,
-            "source": "review",
-            "patch_old": "            if path.suffix == \".py\" or rel.startswith(\"transcript\"):\r\n",
-            "patch_new": "            if rel.startswith(\"transcript\"):\r\n"
-          },
-          {
-            "code": "review-allow-list-parameter-is-inert",
-            "category": "improvement",
-            "severity": "low",
-            "path": "tools/web.py",
-            "line": 12,
-            "message": "web_fetch says an allow file naming the host enables a fetch, but the branch returns a refusal even when the allow file exists and never reads its contents, so the parameter promises a capability the stub cannot provide.",
-            "evidence": "if allow_file is not None and allow_file.is_file():",
-            "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-            "hunk": "0dcdf8fa16db:tools/web.py#1",
-            "symbol": "",
-            "introduced": true,
-            "reproducible": false,
-            "fixable": false,
-            "interaction": "",
-            "repaired": false,
-            "source": "review",
-            "patch_old": "",
-            "patch_new": ""
-          }
-        ],
-        "repairs": [
-          {
-            "code": "review",
-            "path": "evals/check.py",
-            "line": 127,
-            "summary": "applied review suggestion: _changed_files skips any file with a .py suffix that the starter did not contain",
-            "test_name": "",
-            "applied": true
-          }
-        ],
-        "counts": {
-          "review": 1,
-          "improvement": 1
-        },
-        "reviewed": 44,
+        "findings": [],
+        "repairs": [],
+        "counts": {},
+        "reviewed": 18,
         "review": {
           "status": "reviewed",
           "rejected": [],
           "files": [
+            ".aikit/bench-baseline.json",
+            ".aikit/bench-delta.json",
             ".aikit/codebase_map.md",
+            ".aikit/compat.json",
             ".aikit/decisions.md",
+            ".aikit/evidence.json",
+            ".aikit/guidelines.md",
+            ".aikit/layout-map.json",
             ".aikit/project.json",
+            ".gitignore",
+            "COMMERCIAL.md",
+            "LICENSE",
+            "LICENSES/LicenseRef-AL-1.1.txt",
             "README.md",
-            "evals/__init__.py",
+            "REUSE.toml",
+            "demo.py",
             "evals/check.py",
-            "evals/r0/pass_criteria.json",
-            "evals/r0/starter/notes.txt",
-            "evals/r0/task.md",
-            "evals/r1/pass_criteria.json",
-            "evals/r1/starter/bug.py",
-            "evals/r1/starter/test_bug.py",
-            "evals/r1/task.md",
-            "evals/r2/pass_criteria.json",
-            "evals/r2/starter/a.py",
-            "evals/r2/starter/b.py",
-            "evals/r2/starter/test_rename.py",
-            "evals/r2/task.md",
-            "evals/r3/pass_criteria.json",
-            "evals/r3/starter/app.py",
-            "evals/r3/starter/test_app.py",
-            "evals/r3/task.md",
-            "harness/__init__.py",
-            "harness/budget.py",
-            "harness/kill.py",
-            "harness/loop.py",
-            "harness/transcript.py",
-            "sandbox/__init__.py",
-            "sandbox/jail.py",
-            "tests/test_budget_kill.py",
-            "tests/test_escape.py",
-            "tests/test_ladder.py",
-            "tests/test_transcript.py",
-            "tools/__init__.py",
-            "tools/delegate.py",
-            "tools/io.py",
-            "tools/replay.py",
-            "tools/runner.py",
-            "tools/web.py",
-            "transcripts/example.jsonl",
-            "transcripts/r0.jsonl",
-            "transcripts/r1.jsonl",
-            "transcripts/r2.jsonl",
-            "transcripts/r3.jsonl"
+            "inventory.py"
           ],
-          "packet": ".aikit/reforge.reviews/stage-run-1-10-fddb7b8a3a8d.md",
+          "packet": ".aikit/reforge.reviews/stage-run-1-11-9f497e70045b.md",
           "redacted": 0,
           "coverage": {
-            "reported": 48,
-            "total": 48,
+            "reported": 18,
+            "total": 18,
             "carried": [],
             "missing": [],
             "unknown": [],
             "invalid": []
           },
-          "findings": [
-            {
-              "code": "review",
-              "category": "review",
-              "severity": "low",
-              "path": "evals/check.py",
-              "line": 127,
-              "message": "_changed_files skips any file with a .py suffix that the starter did not contain, so an agent that drops an extra module into the workspace still passes R0's must_be_clean and R2's exact allow-set; the transcript carve-out is the only skip the tmp transcript naming needs.",
-              "evidence": "if path.suffix == \".py\" or rel.startswith(\"transcript\"):",
-              "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-              "hunk": "0dcdf8fa16db:evals/check.py#1",
-              "symbol": "",
-              "introduced": true,
-              "reproducible": false,
-              "fixable": true,
-              "interaction": "",
-              "repaired": false,
-              "source": "review",
-              "patch_old": "            if path.suffix == \".py\" or rel.startswith(\"transcript\"):\r\n",
-              "patch_new": "            if rel.startswith(\"transcript\"):\r\n"
-            },
-            {
-              "code": "review-allow-list-parameter-is-inert",
-              "category": "improvement",
-              "severity": "low",
-              "path": "tools/web.py",
-              "line": 12,
-              "message": "web_fetch says an allow file naming the host enables a fetch, but the branch returns a refusal even when the allow file exists and never reads its contents, so the parameter promises a capability the stub cannot provide.",
-              "evidence": "if allow_file is not None and allow_file.is_file():",
-              "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-              "hunk": "0dcdf8fa16db:tools/web.py#1",
-              "symbol": "",
-              "introduced": true,
-              "reproducible": false,
-              "fixable": false,
-              "interaction": "",
-              "repaired": false,
-              "source": "review",
-              "patch_old": "",
-              "patch_new": ""
-            }
-          ],
+          "findings": [],
           "attestations": []
         },
         "skipped": [],
-        "tests": {
-          "command": "python -m pytest tests -q -p no:cacheprovider",
-          "code": 0,
-          "passed": true,
-          "output": "........................................                                 [100%]\n40 passed in 11.14s",
-          "tail": [
-            "........................................                                 [100%]",
-            "40 passed in 11.14s"
-          ]
-        },
-        "gates": {
-          "artifacts": [
-            ".aikit/codebase_map.md"
-          ]
-        },
+        "tests": {},
+        "gates": {},
         "delivery": {
           "commit": "",
           "short": "",
           "pushed": false,
           "push_error": null,
-          "empty": false,
-          "timestamp": "2026-11-18T10:14:28"
+          "empty": true,
+          "timestamp": "2026-11-18T10:18:23"
         },
-        "timestamp": "2026-11-18T10:00:47",
-        "dirty_targets": []
+        "timestamp": "2026-11-18T10:18:23"
       },
       "history": [
         {
@@ -1726,22 +1598,149 @@
             ]
           },
           "delivery": {
+            "commit": "9f497e70045b953f77805119b4868ef8259363f0",
+            "short": "9f497e7",
+            "pushed": false,
+            "push_error": null,
+            "empty": false,
+            "timestamp": "2026-11-18T10:17:31"
+          },
+          "timestamp": "2026-11-18T10:00:47",
+          "dirty_targets": []
+        },
+        {
+          "run": "run-1",
+          "stage": 11,
+          "window": 32,
+          "commits": [
+            "9f497e70045b953f77805119b4868ef8259363f0",
+            "0dcfa16b3847852b9bf8005ad4a5adc73d05e41d",
+            "27fee41a2aca68fc6d109cc47acc955dd9adc8c9",
+            "de75c38ddc8b072139d71b14c25f209b64343e17",
+            "a206bb70f00b453a1942da0263e35ff99a988083",
+            "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
+            "538158043b7e55a17d7d752a45b50c3e748ab862",
+            "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+            "16032a0da4f6bb6d2830ace4ad602f459b98991f",
+            "6265772dd490705cbbd1c517ee347ed12abba206",
+            "de47af27c77b2467510f603be2cfd2cfc0a6d390",
+            "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
+            "4216b56d7e9ee25dd353be04414062a225b0dd43",
+            "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+            "b97525441e10adf3976ccc54937af9076b9fcf20",
+            "627762630649e12cc8abfbecce840462cd243f07",
+            "973e2b2612c345d1c315c29d87343bd436b51b12",
+            "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c",
+            "f2a2ca8128503181b3f851d159bfdf35335d95da",
+            "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+            "5422ae86ba73c858f945f02f5e5ae162644d00c0",
+            "de926f8e049eba111daf0d9542445098e503ee80",
+            "2797e2493c0e8fd112711d468da67906a86ef777",
+            "5798b8eed0643cf75a6a5f2a221b7379f3516ec2",
+            "3735d10cfe8bd302229030d46736035e9c936aa2",
+            "07e9e0e3fb7115f1e1fb20629909f51ee4d0f202",
+            "96af179c36458e6b4c21804d82ace32aaf27824c",
+            "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
+            "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
+            "a4cc95e992c3533f1a76d403f664663a809cd356",
+            "0dcdf8fa16db672f726151918631c9b7c1919dd9",
+            "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
+          ],
+          "new_commits": [
+            "9f497e70045b953f77805119b4868ef8259363f0",
+            "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
+          ],
+          "prior_commits": [
+            "a206bb70f00b453a1942da0263e35ff99a988083",
+            "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
+            "538158043b7e55a17d7d752a45b50c3e748ab862",
+            "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+            "16032a0da4f6bb6d2830ace4ad602f459b98991f",
+            "6265772dd490705cbbd1c517ee347ed12abba206",
+            "de47af27c77b2467510f603be2cfd2cfc0a6d390",
+            "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
+            "4216b56d7e9ee25dd353be04414062a225b0dd43",
+            "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+            "b97525441e10adf3976ccc54937af9076b9fcf20",
+            "627762630649e12cc8abfbecce840462cd243f07",
+            "de75c38ddc8b072139d71b14c25f209b64343e17",
+            "973e2b2612c345d1c315c29d87343bd436b51b12",
+            "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c",
+            "f2a2ca8128503181b3f851d159bfdf35335d95da",
+            "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+            "5422ae86ba73c858f945f02f5e5ae162644d00c0",
+            "27fee41a2aca68fc6d109cc47acc955dd9adc8c9",
+            "de926f8e049eba111daf0d9542445098e503ee80",
+            "2797e2493c0e8fd112711d468da67906a86ef777",
+            "5798b8eed0643cf75a6a5f2a221b7379f3516ec2",
+            "3735d10cfe8bd302229030d46736035e9c936aa2",
+            "07e9e0e3fb7115f1e1fb20629909f51ee4d0f202",
+            "0dcfa16b3847852b9bf8005ad4a5adc73d05e41d",
+            "96af179c36458e6b4c21804d82ace32aaf27824c",
+            "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
+            "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
+            "a4cc95e992c3533f1a76d403f664663a809cd356",
+            "0dcdf8fa16db672f726151918631c9b7c1919dd9"
+          ],
+          "findings": [],
+          "repairs": [],
+          "counts": {},
+          "reviewed": 18,
+          "review": {
+            "status": "reviewed",
+            "rejected": [],
+            "files": [
+              ".aikit/bench-baseline.json",
+              ".aikit/bench-delta.json",
+              ".aikit/codebase_map.md",
+              ".aikit/compat.json",
+              ".aikit/decisions.md",
+              ".aikit/evidence.json",
+              ".aikit/guidelines.md",
+              ".aikit/layout-map.json",
+              ".aikit/project.json",
+              ".gitignore",
+              "COMMERCIAL.md",
+              "LICENSE",
+              "LICENSES/LicenseRef-AL-1.1.txt",
+              "README.md",
+              "REUSE.toml",
+              "demo.py",
+              "evals/check.py",
+              "inventory.py"
+            ],
+            "packet": ".aikit/reforge.reviews/stage-run-1-11-9f497e70045b.md",
+            "redacted": 0,
+            "coverage": {
+              "reported": 18,
+              "total": 18,
+              "carried": [],
+              "missing": [],
+              "unknown": [],
+              "invalid": []
+            },
+            "findings": [],
+            "attestations": []
+          },
+          "skipped": [],
+          "tests": {},
+          "gates": {},
+          "delivery": {
             "commit": "",
             "short": "",
             "pushed": false,
             "push_error": null,
-            "empty": false,
-            "timestamp": "2026-11-18T10:14:28"
+            "empty": true,
+            "timestamp": "2026-11-18T10:18:23"
           },
-          "timestamp": "2026-11-18T10:00:47",
-          "dirty_targets": []
+          "timestamp": "2026-11-18T10:18:23"
         }
       ],
-      "total_commits": 31
+      "total_commits": 32
     }
   ],
-  "stage": 10,
-  "window": 30,
+  "stage": 11,
+  "window": 32,
   "audited_commits": [
     "a206bb70f00b453a1942da0263e35ff99a988083",
     "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
@@ -1772,13 +1771,16 @@
     "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
     "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
     "a4cc95e992c3533f1a76d403f664663a809cd356",
-    "0dcdf8fa16db672f726151918631c9b7c1919dd9"
+    "0dcdf8fa16db672f726151918631c9b7c1919dd9",
+    "9f497e70045b953f77805119b4868ef8259363f0",
+    "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
   ],
   "last_audit": {
     "run": "run-1",
-    "stage": 10,
-    "window": 30,
+    "stage": 11,
+    "window": 32,
     "commits": [
+      "9f497e70045b953f77805119b4868ef8259363f0",
       "0dcfa16b3847852b9bf8005ad4a5adc73d05e41d",
       "27fee41a2aca68fc6d109cc47acc955dd9adc8c9",
       "de75c38ddc8b072139d71b14c25f209b64343e17",
@@ -1808,12 +1810,12 @@
       "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
       "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
       "a4cc95e992c3533f1a76d403f664663a809cd356",
-      "0dcdf8fa16db672f726151918631c9b7c1919dd9"
+      "0dcdf8fa16db672f726151918631c9b7c1919dd9",
+      "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
     ],
     "new_commits": [
-      "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
-      "a4cc95e992c3533f1a76d403f664663a809cd356",
-      "0dcdf8fa16db672f726151918631c9b7c1919dd9"
+      "9f497e70045b953f77805119b4868ef8259363f0",
+      "dc1e9b7309a98e87542dedc61b9bb6e2287a2a8d"
     ],
     "prior_commits": [
       "a206bb70f00b453a1942da0263e35ff99a988083",
@@ -1842,194 +1844,63 @@
       "07e9e0e3fb7115f1e1fb20629909f51ee4d0f202",
       "0dcfa16b3847852b9bf8005ad4a5adc73d05e41d",
       "96af179c36458e6b4c21804d82ace32aaf27824c",
-      "4696eb6472a56a9da5bb9c29b8994a64a9aa457e"
+      "4696eb6472a56a9da5bb9c29b8994a64a9aa457e",
+      "fddb7b8a3a8d26ce883ac789d63340553f49bc2a",
+      "a4cc95e992c3533f1a76d403f664663a809cd356",
+      "0dcdf8fa16db672f726151918631c9b7c1919dd9"
     ],
-    "findings": [
-      {
-        "code": "review",
-        "category": "review",
-        "severity": "low",
-        "path": "evals/check.py",
-        "line": 127,
-        "message": "_changed_files skips any file with a .py suffix that the starter did not contain, so an agent that drops an extra module into the workspace still passes R0's must_be_clean and R2's exact allow-set; the transcript carve-out is the only skip the tmp transcript naming needs.",
-        "evidence": "if path.suffix == \".py\" or rel.startswith(\"transcript\"):",
-        "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-        "hunk": "0dcdf8fa16db:evals/check.py#1",
-        "symbol": "",
-        "introduced": true,
-        "reproducible": false,
-        "fixable": true,
-        "interaction": "",
-        "repaired": true,
-        "source": "review",
-        "patch_old": "            if path.suffix == \".py\" or rel.startswith(\"transcript\"):\r\n",
-        "patch_new": "            if rel.startswith(\"transcript\"):\r\n"
-      },
-      {
-        "code": "review-allow-list-parameter-is-inert",
-        "category": "improvement",
-        "severity": "low",
-        "path": "tools/web.py",
-        "line": 12,
-        "message": "web_fetch says an allow file naming the host enables a fetch, but the branch returns a refusal even when the allow file exists and never reads its contents, so the parameter promises a capability the stub cannot provide.",
-        "evidence": "if allow_file is not None and allow_file.is_file():",
-        "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-        "hunk": "0dcdf8fa16db:tools/web.py#1",
-        "symbol": "",
-        "introduced": true,
-        "reproducible": false,
-        "fixable": false,
-        "interaction": "",
-        "repaired": false,
-        "source": "review",
-        "patch_old": "",
-        "patch_new": ""
-      }
-    ],
-    "repairs": [
-      {
-        "code": "review",
-        "path": "evals/check.py",
-        "line": 127,
-        "summary": "applied review suggestion: _changed_files skips any file with a .py suffix that the starter did not contain",
-        "test_name": "",
-        "applied": true
-      }
-    ],
-    "counts": {
-      "review": 1,
-      "improvement": 1
-    },
-    "reviewed": 44,
+    "findings": [],
+    "repairs": [],
+    "counts": {},
+    "reviewed": 18,
     "review": {
       "status": "reviewed",
       "rejected": [],
       "files": [
+        ".aikit/bench-baseline.json",
+        ".aikit/bench-delta.json",
         ".aikit/codebase_map.md",
+        ".aikit/compat.json",
         ".aikit/decisions.md",
+        ".aikit/evidence.json",
+        ".aikit/guidelines.md",
+        ".aikit/layout-map.json",
         ".aikit/project.json",
+        ".gitignore",
+        "COMMERCIAL.md",
+        "LICENSE",
+        "LICENSES/LicenseRef-AL-1.1.txt",
         "README.md",
-        "evals/__init__.py",
+        "REUSE.toml",
+        "demo.py",
         "evals/check.py",
-        "evals/r0/pass_criteria.json",
-        "evals/r0/starter/notes.txt",
-        "evals/r0/task.md",
-        "evals/r1/pass_criteria.json",
-        "evals/r1/starter/bug.py",
-        "evals/r1/starter/test_bug.py",
-        "evals/r1/task.md",
-        "evals/r2/pass_criteria.json",
-        "evals/r2/starter/a.py",
-        "evals/r2/starter/b.py",
-        "evals/r2/starter/test_rename.py",
-        "evals/r2/task.md",
-        "evals/r3/pass_criteria.json",
-        "evals/r3/starter/app.py",
-        "evals/r3/starter/test_app.py",
-        "evals/r3/task.md",
-        "harness/__init__.py",
-        "harness/budget.py",
-        "harness/kill.py",
-        "harness/loop.py",
-        "harness/transcript.py",
-        "sandbox/__init__.py",
-        "sandbox/jail.py",
-        "tests/test_budget_kill.py",
-        "tests/test_escape.py",
-        "tests/test_ladder.py",
-        "tests/test_transcript.py",
-        "tools/__init__.py",
-        "tools/delegate.py",
-        "tools/io.py",
-        "tools/replay.py",
-        "tools/runner.py",
-        "tools/web.py",
-        "transcripts/example.jsonl",
-        "transcripts/r0.jsonl",
-        "transcripts/r1.jsonl",
-        "transcripts/r2.jsonl",
-        "transcripts/r3.jsonl"
+        "inventory.py"
       ],
-      "packet": ".aikit/reforge.reviews/stage-run-1-10-fddb7b8a3a8d.md",
+      "packet": ".aikit/reforge.reviews/stage-run-1-11-9f497e70045b.md",
       "redacted": 0,
       "coverage": {
-        "reported": 48,
-        "total": 48,
+        "reported": 18,
+        "total": 18,
         "carried": [],
         "missing": [],
         "unknown": [],
         "invalid": []
       },
-      "findings": [
-        {
-          "code": "review",
-          "category": "review",
-          "severity": "low",
-          "path": "evals/check.py",
-          "line": 127,
-          "message": "_changed_files skips any file with a .py suffix that the starter did not contain, so an agent that drops an extra module into the workspace still passes R0's must_be_clean and R2's exact allow-set; the transcript carve-out is the only skip the tmp transcript naming needs.",
-          "evidence": "if path.suffix == \".py\" or rel.startswith(\"transcript\"):",
-          "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-          "hunk": "0dcdf8fa16db:evals/check.py#1",
-          "symbol": "",
-          "introduced": true,
-          "reproducible": false,
-          "fixable": true,
-          "interaction": "",
-          "repaired": false,
-          "source": "review",
-          "patch_old": "            if path.suffix == \".py\" or rel.startswith(\"transcript\"):\r\n",
-          "patch_new": "            if rel.startswith(\"transcript\"):\r\n"
-        },
-        {
-          "code": "review-allow-list-parameter-is-inert",
-          "category": "improvement",
-          "severity": "low",
-          "path": "tools/web.py",
-          "line": 12,
-          "message": "web_fetch says an allow file naming the host enables a fetch, but the branch returns a refusal even when the allow file exists and never reads its contents, so the parameter promises a capability the stub cannot provide.",
-          "evidence": "if allow_file is not None and allow_file.is_file():",
-          "commit": "0dcdf8fa16db672f726151918631c9b7c1919dd9",
-          "hunk": "0dcdf8fa16db:tools/web.py#1",
-          "symbol": "",
-          "introduced": true,
-          "reproducible": false,
-          "fixable": false,
-          "interaction": "",
-          "repaired": false,
-          "source": "review",
-          "patch_old": "",
-          "patch_new": ""
-        }
-      ],
+      "findings": [],
       "attestations": []
     },
     "skipped": [],
-    "tests": {
-      "command": "python -m pytest tests -q -p no:cacheprovider",
-      "code": 0,
-      "passed": true,
-      "output": "........................................                                 [100%]\n40 passed in 11.14s",
-      "tail": [
-        "........................................                                 [100%]",
-        "40 passed in 11.14s"
-      ]
-    },
-    "gates": {
-      "artifacts": [
-        ".aikit/codebase_map.md"
-      ]
-    },
+    "tests": {},
+    "gates": {},
     "delivery": {
       "commit": "",
       "short": "",
       "pushed": false,
       "push_error": null,
-      "empty": false,
-      "timestamp": "2026-11-18T10:14:28"
+      "empty": true,
+      "timestamp": "2026-11-18T10:18:23"
     },
-    "timestamp": "2026-11-18T10:00:47",
-    "dirty_targets": []
+    "timestamp": "2026-11-18T10:18:23"
   },
   "history": []
 }

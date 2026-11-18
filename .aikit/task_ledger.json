@@ -21,295 +21,6 @@
   },
   "checkpoints": [
     {
-      "task_id": "harness-board-v1",
-      "phase": "in_progress",
-      "phase_num": 4,
-      "description": "[3/4] Stage 3 implementation complete: one-click, providers, wait/delegate caps, board UI with S1-S5 shots; r0-r9 PASS, replay match, 37/37 pytest, 5/5 gates; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793826595.7175295,
-      "timestamp_str": "2026-11-05 00:09:55",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-board-v1",
-      "phase": "in_progress",
-      "phase_num": 4,
-      "description": "[4/4] Stage 4 check: 37/37 pytest, escape 13/13 + 6/6 manual refusals, swap wait-then-PASS, S1-S5 re-captured byte-identical; F1 guidelines FAIL map-stale sent back; checklists: F1 open",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793827107.5664496,
-      "timestamp_str": "2026-11-05 00:18:27",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-board-v1",
-      "phase": "in_progress",
-      "phase_num": 4,
-      "description": "[5/6] F1 fixed: scratch-free map refresh, 5/5 gates green; G-002 UI guidelines recorded; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793828841.1183343,
-      "timestamp_str": "2026-11-05 00:47:21",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-board-v1",
-      "phase": "in_progress",
-      "phase_num": 4,
-      "description": "[6/6] UI polish per G-002: working Stop/Clear/Replay buttons, status colors, favicon; 40/40 pytest, 5/5 gates, S2/S3 after-shots updated; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793829245.7436507,
-      "timestamp_str": "2026-11-05 00:54:05",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-ui-revamp-v1",
-      "phase": "in_progress",
-      "phase_num": 2,
-      "description": "[1/3] Revamp plan: glassy dark theme, sticky nav with status pill, hero headers, stat cards, pill verdicts, refined tables",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793829483.4758143,
-      "timestamp_str": "2026-11-05 00:58:03",
-      "agent": "kilo:goal",
-      "impact_assessment": {
-        "why": "User judged the board functional but not sleek; G-002 demands aesthetic",
-        "benefits": "Sleek proven UI without new deps, same routes and POST contracts",
-        "risks": "contract: inline CSS only, no route changes; dependency: stdlib only; concurrency: single server; state: same STOP/replay files",
-        "mitigation": "Keep all test-asserted strings, rerun 40 tests plus smoke, before/after screenshots per G-003"
-      },
-      "plan_digest": "26be81eaabac7861fd57ae7f87404c405b9909cb29cd378419dc7120311fa734"
-    },
-    {
-      "task_id": "harness-board-v1",
-      "phase": "superseded",
-      "phase_num": 4,
-      "description": "Superseded by 'harness-ui-revamp-v1' without --complete or --reset",
-      "status": "superseded",
-      "timestamp": 1793829483.4758143,
-      "timestamp_str": "2026-11-05 00:58:03",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-ui-revamp-v1",
-      "phase": "in_progress",
-      "phase_num": 3,
-      "description": "[2/3] Revamp done: dark glass theme, brand header, stat cards, pill verdicts; 40/40 pytest, 5/5 gates, S1-S5 after-shots re-captured; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793830223.3055322,
-      "timestamp_str": "2026-11-05 01:10:23",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-ui-revamp-v1",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'harness-ui-revamp-v1' completed successfully.",
-      "status": "completed",
-      "timestamp": 1793830290.3252316,
-      "timestamp_str": "2026-11-05 01:11:30",
-      "agent": "kilo:goal"
-    },
-    {
-      "task_id": "harness-ui-states-v1",
-      "phase": "in_progress",
-      "phase_num": 2,
-      "description": "[1/2] Proof shots for STOPPED banner and inline replay result; no product code change",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793830655.2341957,
-      "timestamp_str": "2026-11-05 01:17:35",
-      "agent": "kilo:goal",
-      "impact_assessment": {
-        "why": "G-003: unproven UI states need screenshot proof",
-        "benefits": "Kill switch and replay verify visibly proven",
-        "risks": "contract: none, shots only; dependency: none; concurrency: none; state: none",
-        "mitigation": "Secrets scan on shots, explicit staging"
-      },
-      "plan_digest": "2fde432e4069b060fd29a2d1a50927d4934207042e6db21ee9bda0e81aac43ce"
-    },
-    {
-      "task_id": "harness-ui-states-v1",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/1] Close the abandoned ui-states task as verification-only. Its milestone [1/2] delivered the STOPPED banner and inline replay proof shots (shots/s6-stop-banner.png and shots/s7-replay-result.png, commit b975254); the second milestone was never recorded and the task sat in progress for 310 hours, which is why the project reports a disruption at every cold start. Confirm both shots exist at HEAD, confirm tests/test_ui_pages.py still covers POST /stop + /clear and POST /replay including the path refusal, then run the Phase 4 gates and close the task. No new product code.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794948207.9662035,
-      "timestamp_str": "2026-11-17 23:43:27",
-      "agent": "kilo:1",
-      "plan_digest": "05cd5b0547d553c3e08693bdb7ee87de75e3289d6fac279f3a6d9bb80dc7b933",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ],
-      "continued_from": "kilo:goal"
-    },
-    {
-      "task_id": "harness-ui-states-v1",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[1/1] Verified: both proof shots exist at HEAD and are 1280x800 PNGs committed in b975254 (shots/s6-stop-banner.png, shots/s7-replay-result.png); tests/test_ui_pages.py covers POST /stop + /clear (the banner appears and clears) and POST /replay (PASS replayed for r3.jsonl, ../evil refused with 400). 40/40 pytest pass and 5/5 gates pass. The guidelines gate failed at HEAD because the committed map still indexed the removed evals/.tmp_eval_* scratch modules; regenerating it removed 8 phantom modules and brought it back in sync. checklists: passed.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794948424.081291,
-      "timestamp_str": "2026-11-17 23:47:04",
-      "agent": "kilo:1",
-      "measurements": [
-        {
-          "metric": "pytest tests passing",
-          "unit": "tests",
-          "candidate": 40.0,
-          "command": "python -m pytest tests -q -p no:cacheprovider",
-          "baseline": 40.0,
-          "qualified": "no"
-        },
-        {
-          "metric": "AIKit gates passing",
-          "unit": "gates",
-          "candidate": 5.0,
-          "command": "python aikit.py check harness",
-          "baseline": 4.0,
-          "qualified": "no"
-        }
-      ],
-      "checklists": "passed",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ]
-    },
-    {
-      "task_id": "harness-ui-states-v1",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'harness-ui-states-v1' completed successfully.",
-      "status": "completed",
-      "timestamp": 1794948511.2939484,
-      "timestamp_str": "2026-11-17 23:48:31",
-      "agent": "kilo:1",
-      "head": "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
-      "delivery": {
-        "roots": [
-          "."
-        ],
-        "forced": false
-      }
-    },
-    {
-      "task_id": "harness-aikit-conformance",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/3] Record the repaired onboarding metadata. `aikit.py fix` regenerated the stale map, seeded brand media candidates (assets/logo.svg, assets/social-preview.svg, .aikit/media.json, all pending review), seeded .gitattributes, and turned the UI gate on (ui_required true) because the project declares two surfaces in .aikit/ui.json. Record the curated topic list from the topics brief (local only, no GitHub apply), then commit this metadata on a tree whose five gates pass.\n\n[2/3] Record UI surface evidence for cli and board. With the UI gate on, check warns that neither declared surface matches a finished UI task, so `check --strict` cannot prove delivery. For each surface run the contract's own `ui begin`, then `ui finish --no-change --reviewed --reviewer kilo:1 --reason ...`, naming what was actually inspected: for cli the scripted demo and inventory proofs, for board the S1-S7 screenshots and the five-route UI suite. This records the current digest as evidence instead of leaving the surfaces unguarded.\n\n[3/3] Verify delivery readiness and close. Run the five gates and `check --strict harness` on the committed tree, confirm the ledger has no in-flight task, and close this task with the evidence.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794949168.4221306,
-      "timestamp_str": "2026-11-17 23:59:28",
-      "agent": "kilo:1",
-      "impact_assessment": {
-        "why": "The harness project was delivered with AIKit onboarding unfinished: its map indexed deleted scratch eval modules (the one failing gate), the ledger sat in progress for 310 hours, brand media and topics were never initialized, and the UI gate stayed off although two surfaces are declared and no surface evidence exists.",
-        "benefits": "A cold start reports no disruption, all five gates pass, check --strict can prove delivery readiness, and both UI surfaces are guarded by recorded evidence.",
-        "risks": "contract: project.json gains ui_required true and a 13-topic list; .aikit/ui_history.json records two no-change surface reviews; dependency: none; concurrency: the ledger is single-writer and UI tasks take their own lock; state: media assets stay pending_review and no GitHub topics are applied",
-        "mitigation": "Use the sanctioned fix command and the contract own begin/finish path; no-change finishes state exactly what was reviewed; re-run all five gates before every commit; record the reviewer; push nothing"
-      },
-      "plan_digest": "1967382a957e54c452fad37744bffde8308ae7fbbbbb7a5fc3de54a2ee45f1de",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ]
-    },
-    {
-      "task_id": "harness-aikit-conformance",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[1/3] Recorded the repaired onboarding metadata. `aikit.py fix harness` seeded assets/logo.svg and assets/social-preview.svg plus .aikit/media.json (both assets pending_review), seeded .gitattributes, and set ui_required true for the two declared surfaces; the map was already regenerated under the previous task. The topics brief's 13-tag list is recorded locally (no GitHub apply). 5/5 gates pass with --allow-dirty; the remaining delivery warnings are the two surfaces' missing evidence, which milestone 2 records. checklists: passed.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794949518.9823945,
-      "timestamp_str": "2026-11-18 00:05:18",
-      "agent": "kilo:1",
-      "checklists": "passed",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ]
-    },
-    {
-      "task_id": "harness-aikit-conformance",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[2/3] Recorded both surfaces through the contract's own path. cli and board were each opened from de47af2 and closed as reviewed no-change tasks by kilo:1, naming exactly what was checked: the scripted demo plus the 8-entry inventory for cli; the five-route UI suite (STOPPED banner toggling, replay PASS and ../evil refusal) and the committed S1-S7 1280x800 shots for board. .aikit/ui_history.json now carries both surface digests, so check --strict can prove the surfaces are covered. The guidelines gate caught the README tree omitting the newly tracked .gitattributes and assets/, which is fixed in the same commit. 5/5 gates pass. checklists: passed.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794977875.1538641,
-      "timestamp_str": "2026-11-18 07:57:55",
-      "agent": "kilo:1",
-      "checklists": "passed",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ]
-    },
-    {
-      "task_id": "harness-aikit-conformance",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[3/3] Delivery is verifiable. On the clean tree at 16032a0, `python aikit.py check --strict harness` passes all five gates (test 22.7s/40 passed, hygiene, guidelines, secrets, compat) with no delivery findings: the tree is committed, no UI task is open, both surfaces carry recorded digests, and the map is fresh. `resume` reports no interrupted task. The project now cold-starts under AIKit's full lifecycle instead of the unmanaged state it was uploaded in. checklists: passed.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794977982.5050988,
-      "timestamp_str": "2026-11-18 07:59:42",
-      "agent": "kilo:1",
-      "measurements": [
-        {
-          "unit": "gates",
-          "drift": "workload=identical tree and host",
-          "metric": "gates passing under check --strict",
-          "command": "python aikit.py check --strict harness",
-          "candidate": 5.0,
-          "baseline": 0.0,
-          "qualified": "no"
-        }
-      ],
-      "checklists": "passed",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ]
-    },
-    {
-      "task_id": "harness-aikit-conformance",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'harness-aikit-conformance' completed successfully.",
-      "status": "completed",
-      "timestamp": 1794977997.6921623,
-      "timestamp_str": "2026-11-18 07:59:57",
-      "agent": "kilo:1",
-      "head": "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
-      "delivery": {
-        "roots": [
-          "."
-        ],
-        "forced": false
-      }
-    },
-    {
       "task_id": "harness-lifecycle-adr",
       "phase": "phase 2",
       "phase_num": 2,
@@ -367,6 +78,240 @@
         ],
         "forced": false
       }
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 5",
+      "phase_num": 3,
+      "description": "Reforge stage 5: window 15, 3 commit(s), 6 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, empty \u2014 nothing to commit, 2 binary not analysed",
+      "files_affected": [
+        "shots/s2-run-after.png",
+        "shots/s3-runs-after.png"
+      ],
+      "status": "in_progress",
+      "timestamp": 1794981490.8707707,
+      "timestamp_str": "2026-11-18 08:58:10",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 5",
+      "phase_num": 3,
+      "description": "Reforge stage 5: stage 5 host review reviewed; run active; coverage 22/22",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794982058.124875,
+      "timestamp_str": "2026-11-18 09:07:38",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 6",
+      "phase_num": 3,
+      "description": "Reforge stage 6: window 18, 3 commit(s), 47 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, empty \u2014 nothing to commit, 10 binary not analysed",
+      "files_affected": [
+        "shots/s1-setup-after.png",
+        "shots/s1-setup-before.png",
+        "shots/s2-run-after.png",
+        "shots/s2-run-before.png",
+        "shots/s3-runs-after.png",
+        "shots/s3-runs-before.png",
+        "shots/s4-tools-after.png",
+        "shots/s4-tools-before.png",
+        "shots/s5-settings-after.png",
+        "shots/s5-settings-before.png"
+      ],
+      "status": "in_progress",
+      "timestamp": 1794982100.410248,
+      "timestamp_str": "2026-11-18 09:08:20",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 6",
+      "phase_num": 3,
+      "description": "Reforge stage 6: stage 6 host review reviewed; run active; coverage 109/109",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794983878.0292034,
+      "timestamp_str": "2026-11-18 09:37:58",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 6",
+      "phase_num": 3,
+      "description": "Reforge stage 6: window 18, 3 commit(s), 47 file(s) reviewed (reviewed), 0 finding(s), 2 repaired, commit 27fee41 verified-but-unpushed, 10 binary not analysed (improvement=1, review=1)",
+      "files_affected": [
+        "shots/s1-setup-after.png",
+        "shots/s1-setup-before.png",
+        "shots/s2-run-after.png",
+        "shots/s2-run-before.png",
+        "shots/s3-runs-after.png",
+        "shots/s3-runs-before.png",
+        "shots/s4-tools-after.png",
+        "shots/s4-tools-before.png",
+        "shots/s5-settings-after.png",
+        "shots/s5-settings-before.png"
+      ],
+      "status": "in_progress",
+      "timestamp": 1794983897.8068972,
+      "timestamp_str": "2026-11-18 09:38:17",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 7",
+      "phase_num": 3,
+      "description": "Reforge stage 7: window 21, 3 commit(s), 23 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, empty \u2014 nothing to commit",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794983922.4575808,
+      "timestamp_str": "2026-11-18 09:38:42",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 7",
+      "phase_num": 3,
+      "description": "Reforge stage 7: stage 7 host review reviewed; run active; coverage 34/34",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794984124.231384,
+      "timestamp_str": "2026-11-18 09:42:04",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 8",
+      "phase_num": 3,
+      "description": "Reforge stage 8: window 24, 3 commit(s), 10 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, empty \u2014 nothing to commit",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794984165.2361205,
+      "timestamp_str": "2026-11-18 09:42:45",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 8",
+      "phase_num": 3,
+      "description": "Reforge stage 8: stage 8 host review reviewed; run active; coverage 31/31",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794984818.721792,
+      "timestamp_str": "2026-11-18 09:53:38",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 8",
+      "phase_num": 3,
+      "description": "Reforge stage 8: window 24, 3 commit(s), 10 file(s) reviewed (reviewed), 2 finding(s), 1 repaired, commit 0dcfa16 verified-but-unpushed (improvement=2, review=1)",
+      "files_affected": [
+        "tools/runner.py",
+        "harness/transcript.py"
+      ],
+      "status": "in_progress",
+      "timestamp": 1794984974.9607587,
+      "timestamp_str": "2026-11-18 09:56:14",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 9",
+      "phase_num": 3,
+      "description": "Reforge stage 9: window 27, 3 commit(s), 5 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, empty \u2014 nothing to commit",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794985051.538666,
+      "timestamp_str": "2026-11-18 09:57:31",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 9",
+      "phase_num": 3,
+      "description": "Reforge stage 9: stage 9 host review reviewed; run active; coverage 8/8",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794985203.9629984,
+      "timestamp_str": "2026-11-18 10:00:03",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 10",
+      "phase_num": 3,
+      "description": "Reforge stage 10: window 30, 3 commit(s), 44 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, empty \u2014 nothing to commit",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794985247.6327207,
+      "timestamp_str": "2026-11-18 10:00:47",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 10",
+      "phase_num": 3,
+      "description": "Reforge stage 10: stage 10 host review reviewed; run active; coverage 48/48",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794986067.9624772,
+      "timestamp_str": "2026-11-18 10:14:27",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 10",
+      "phase_num": 3,
+      "description": "Reforge stage 10: window 30, 3 commit(s), 44 file(s) reviewed (reviewed), 1 finding(s), 1 repaired, commit 9f497e7 verified-but-unpushed (improvement=1, review=1)",
+      "files_affected": [
+        "tools/web.py"
+      ],
+      "status": "in_progress",
+      "timestamp": 1794986251.2177901,
+      "timestamp_str": "2026-11-18 10:17:31",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 11",
+      "phase_num": 3,
+      "description": "Reforge stage 11: window 32, 2 commit(s), 18 file(s) reviewed (unreviewed), 0 finding(s), 0 repaired, empty \u2014 nothing to commit",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794986303.5701938,
+      "timestamp_str": "2026-11-18 10:18:23",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "reforge:run-1",
+      "phase": "reforge stage 11",
+      "phase_num": 3,
+      "description": "Reforge stage 11: stage 11 host review reviewed; run completed; coverage 18/18",
+      "files_affected": [],
+      "status": "completed",
+      "timestamp": 1794986535.8275094,
+      "timestamp_str": "2026-11-18 10:22:15",
+      "agent": "unidentified",
+      "operator_task": "harness-lifecycle-adr"
     }
   ]
 }
