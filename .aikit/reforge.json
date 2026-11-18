@@ -9,8 +9,8 @@
       "start": 3,
       "step": 3,
       "stop": null,
-      "stage": 4,
-      "window": 12,
+      "stage": 6,
+      "window": 18,
       "audited_commits": [
         "a206bb70f00b453a1942da0263e35ff99a988083",
         "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
@@ -23,16 +23,23 @@
         "4216b56d7e9ee25dd353be04414062a225b0dd43",
         "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
         "b97525441e10adf3976ccc54937af9076b9fcf20",
-        "627762630649e12cc8abfbecce840462cd243f07"
+        "627762630649e12cc8abfbecce840462cd243f07",
+        "de75c38ddc8b072139d71b14c25f209b64343e17",
+        "973e2b2612c345d1c315c29d87343bd436b51b12",
+        "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c",
+        "f2a2ca8128503181b3f851d159bfdf35335d95da",
+        "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+        "5422ae86ba73c858f945f02f5e5ae162644d00c0"
       ],
       "status": "active",
       "created": "2026-11-18T08:24:52",
-      "updated": "2026-11-18T08:56:09",
+      "updated": "2026-11-18T09:37:58",
       "last_audit": {
         "run": "run-1",
-        "stage": 4,
-        "window": 12,
+        "stage": 6,
+        "window": 18,
         "commits": [
+          "de75c38ddc8b072139d71b14c25f209b64343e17",
           "a206bb70f00b453a1942da0263e35ff99a988083",
           "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
           "538158043b7e55a17d7d752a45b50c3e748ab862",
@@ -44,12 +51,17 @@
           "4216b56d7e9ee25dd353be04414062a225b0dd43",
           "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
           "b97525441e10adf3976ccc54937af9076b9fcf20",
-          "627762630649e12cc8abfbecce840462cd243f07"
+          "627762630649e12cc8abfbecce840462cd243f07",
+          "973e2b2612c345d1c315c29d87343bd436b51b12",
+          "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c",
+          "f2a2ca8128503181b3f851d159bfdf35335d95da",
+          "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+          "5422ae86ba73c858f945f02f5e5ae162644d00c0"
         ],
         "new_commits": [
-          "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
-          "b97525441e10adf3976ccc54937af9076b9fcf20",
-          "627762630649e12cc8abfbecce840462cd243f07"
+          "f2a2ca8128503181b3f851d159bfdf35335d95da",
+          "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+          "5422ae86ba73c858f945f02f5e5ae162644d00c0"
         ],
         "prior_commits": [
           "a206bb70f00b453a1942da0263e35ff99a988083",
@@ -60,19 +72,25 @@
           "6265772dd490705cbbd1c517ee347ed12abba206",
           "de47af27c77b2467510f603be2cfd2cfc0a6d390",
           "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
-          "4216b56d7e9ee25dd353be04414062a225b0dd43"
+          "4216b56d7e9ee25dd353be04414062a225b0dd43",
+          "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+          "b97525441e10adf3976ccc54937af9076b9fcf20",
+          "627762630649e12cc8abfbecce840462cd243f07",
+          "de75c38ddc8b072139d71b14c25f209b64343e17",
+          "973e2b2612c345d1c315c29d87343bd436b51b12",
+          "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c"
         ],
         "findings": [
           {
-            "code": "review-missing-warn-pill-style",
+            "code": "review",
             "category": "review",
-            "severity": "low",
-            "path": "ui_server.py",
-            "line": 218,
-            "message": "The BUDGET_KILLED verdict pill (line 218) and the UNTRUSTED marker (line 179) both use class 'tag warn', but the restyled stylesheet defines only .tag.ok, .tag.bad and .tag.info, so those two pills render without the coloured background and border every other status pill gets and ADR-009's 'pill verdicts' promise is not kept for budget kills.",
-            "evidence": "pill = \"<span class='tag warn'>BUDGET_KILLED</span>\"",
-            "commit": "627762630649e12cc8abfbecce840462cd243f07",
-            "hunk": "627762630649:ui_server.py#5",
+            "severity": "medium",
+            "path": "providers/providers.py",
+            "line": 42,
+            "message": "validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by string prefix, so http://127.0.0.1.attacker.example/v1 and http://localhost.attacker.example/v1 are accepted as loopback and a plaintext key-bearing chat call would go to a public host; start.py repeats the same prefix test in run_check.",
+            "evidence": "ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")",
+            "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+            "hunk": "f2a2ca812850:providers/providers.py#1",
             "symbol": "",
             "introduced": true,
             "reproducible": false,
@@ -80,38 +98,110 @@
             "interaction": "",
             "repaired": true,
             "source": "review",
-            "patch_old": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"",
-            "patch_new": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"\n       \".tag.warn{color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35)}\""
+            "patch_old": "    ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")\r\n    if not (base.startswith(\"https://\") or base == \"http://127.0.0.1\"\r\n            or base == \"http://localhost\" or ok_loop):\r\n        return \"base_url must be https:// or http://127.0.0.1\"",
+            "patch_new": "    from urllib.parse import urlparse\r\n    import ipaddress\r\n    host = (urlparse(base).hostname or \"\").lower()\r\n    try:\r\n        loopback = host == \"localhost\" or ipaddress.ip_address(host).is_loopback\r\n    except ValueError:\r\n        loopback = False\r\n    if not (base.startswith(\"https://\") or (base.startswith(\"http://\") and loopback)):\r\n        return \"base_url must be https:// or http://127.0.0.1\""
+          },
+          {
+            "code": "review-no-test-for-loopback-prefix-trick",
+            "category": "improvement",
+            "severity": "low",
+            "path": "tests/test_providers.py",
+            "line": 27,
+            "message": "The only refusal probe uses a plainly public host, so nothing would fail if the loopback check were loosened back to a prefix match; pin the near-miss host that made the guard unsound.",
+            "evidence": "bad[\"base_url\"] = \"http://evil.example.com/v1\"",
+            "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+            "hunk": "f2a2ca812850:tests/test_providers.py#1",
+            "symbol": "",
+            "introduced": true,
+            "reproducible": false,
+            "fixable": true,
+            "interaction": "",
+            "repaired": true,
+            "source": "review",
+            "patch_old": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None",
+            "patch_new": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None\r\n    tricky = dict(entry)\r\n    tricky[\"base_url\"] = \"http://127.0.0.1.attacker.example/v1\"\r\n    assert providers.validate_entry(tricky) is not None"
           }
         ],
         "repairs": [
           {
-            "code": "review-missing-warn-pill-style",
-            "path": "ui_server.py",
-            "line": 218,
-            "summary": "applied review suggestion: The BUDGET_KILLED verdict pill (line 218) and the UNTRUSTED marker (line 179) bo",
+            "code": "review",
+            "path": "providers/providers.py",
+            "line": 42,
+            "summary": "applied review suggestion: validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by str",
+            "test_name": "",
+            "applied": true
+          },
+          {
+            "code": "review-no-test-for-loopback-prefix-trick",
+            "path": "tests/test_providers.py",
+            "line": 27,
+            "summary": "applied review suggestion: The only refusal probe uses a plainly public host, so nothing would fail if the ",
             "test_name": "",
             "applied": true
           }
         ],
         "counts": {
-          "review": 1
+          "review": 1,
+          "improvement": 1
         },
-        "reviewed": 4,
+        "reviewed": 47,
         "review": {
           "status": "reviewed",
           "rejected": [],
           "files": [
             ".aikit/codebase_map.md",
             ".aikit/decisions.md",
-            ".aikit/guidelines.md",
+            ".aikit/ui.json",
+            ".gitignore",
+            "README.md",
+            "config.example.json",
+            "evals/check.py",
+            "evals/r7/pass_criteria.json",
+            "evals/r7/starter/notes.txt",
+            "evals/r7/task.md",
+            "evals/r8/pass_criteria.json",
+            "evals/r8/starter/notes.txt",
+            "evals/r8/task.md",
+            "evals/r9/pass_criteria.json",
+            "evals/r9/starter/notes.txt",
+            "evals/r9/task.md",
+            "harness/budget.py",
+            "harness/loop.py",
+            "harness/transcript.py",
+            "inventory.py",
+            "providers.json",
+            "providers/__init__.py",
+            "providers/policy.py",
+            "providers/providers.py",
+            "sandbox/jail.py",
+            "start.cmd",
+            "start.py",
+            "tests/test_budget_kill.py",
+            "tests/test_escape.py",
+            "tests/test_ladder.py",
+            "tests/test_providers.py",
+            "tests/test_start.py",
+            "tests/test_transcript.py",
+            "tests/test_ui_pages.py",
+            "tools/replay.py",
+            "tools/runner.py",
+            "transcripts/r0.jsonl",
+            "transcripts/r1.jsonl",
+            "transcripts/r2.jsonl",
+            "transcripts/r3.jsonl",
+            "transcripts/r4.jsonl",
+            "transcripts/r5.jsonl",
+            "transcripts/r6.jsonl",
+            "transcripts/r7.jsonl",
+            "transcripts/r8.jsonl",
+            "transcripts/r9.jsonl",
             "ui_server.py"
           ],
-          "packet": ".aikit/reforge.reviews/stage-run-1-4-32fdf73fa39c.md",
+          "packet": ".aikit/reforge.reviews/stage-run-1-6-f2a2ca812850.md",
           "redacted": 0,
           "coverage": {
-            "reported": 14,
-            "total": 14,
+            "reported": 109,
+            "total": 109,
             "carried": [],
             "missing": [],
             "unknown": [],
@@ -119,15 +209,15 @@
           },
           "findings": [
             {
-              "code": "review-missing-warn-pill-style",
+              "code": "review",
               "category": "review",
-              "severity": "low",
-              "path": "ui_server.py",
-              "line": 218,
-              "message": "The BUDGET_KILLED verdict pill (line 218) and the UNTRUSTED marker (line 179) both use class 'tag warn', but the restyled stylesheet defines only .tag.ok, .tag.bad and .tag.info, so those two pills render without the coloured background and border every other status pill gets and ADR-009's 'pill verdicts' promise is not kept for budget kills.",
-              "evidence": "pill = \"<span class='tag warn'>BUDGET_KILLED</span>\"",
-              "commit": "627762630649e12cc8abfbecce840462cd243f07",
-              "hunk": "627762630649:ui_server.py#5",
+              "severity": "medium",
+              "path": "providers/providers.py",
+              "line": 42,
+              "message": "validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by string prefix, so http://127.0.0.1.attacker.example/v1 and http://localhost.attacker.example/v1 are accepted as loopback and a plaintext key-bearing chat call would go to a public host; start.py repeats the same prefix test in run_check.",
+              "evidence": "ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")",
+              "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+              "hunk": "f2a2ca812850:providers/providers.py#1",
               "symbol": "",
               "introduced": true,
               "reproducible": false,
@@ -135,29 +225,52 @@
               "interaction": "",
               "repaired": false,
               "source": "review",
-              "patch_old": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"",
-              "patch_new": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"\n       \".tag.warn{color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35)}\""
+              "patch_old": "    ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")\r\n    if not (base.startswith(\"https://\") or base == \"http://127.0.0.1\"\r\n            or base == \"http://localhost\" or ok_loop):\r\n        return \"base_url must be https:// or http://127.0.0.1\"",
+              "patch_new": "    from urllib.parse import urlparse\r\n    import ipaddress\r\n    host = (urlparse(base).hostname or \"\").lower()\r\n    try:\r\n        loopback = host == \"localhost\" or ipaddress.ip_address(host).is_loopback\r\n    except ValueError:\r\n        loopback = False\r\n    if not (base.startswith(\"https://\") or (base.startswith(\"http://\") and loopback)):\r\n        return \"base_url must be https:// or http://127.0.0.1\""
+            },
+            {
+              "code": "review-no-test-for-loopback-prefix-trick",
+              "category": "improvement",
+              "severity": "low",
+              "path": "tests/test_providers.py",
+              "line": 27,
+              "message": "The only refusal probe uses a plainly public host, so nothing would fail if the loopback check were loosened back to a prefix match; pin the near-miss host that made the guard unsound.",
+              "evidence": "bad[\"base_url\"] = \"http://evil.example.com/v1\"",
+              "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+              "hunk": "f2a2ca812850:tests/test_providers.py#1",
+              "symbol": "",
+              "introduced": true,
+              "reproducible": false,
+              "fixable": true,
+              "interaction": "",
+              "repaired": false,
+              "source": "review",
+              "patch_old": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None",
+              "patch_new": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None\r\n    tricky = dict(entry)\r\n    tricky[\"base_url\"] = \"http://127.0.0.1.attacker.example/v1\"\r\n    assert providers.validate_entry(tricky) is not None"
             }
           ],
           "attestations": []
         },
         "skipped": [
           "shots/s1-setup-after.png",
+          "shots/s1-setup-before.png",
           "shots/s2-run-after.png",
+          "shots/s2-run-before.png",
           "shots/s3-runs-after.png",
+          "shots/s3-runs-before.png",
           "shots/s4-tools-after.png",
+          "shots/s4-tools-before.png",
           "shots/s5-settings-after.png",
-          "shots/s6-stop-banner.png",
-          "shots/s7-replay-result.png"
+          "shots/s5-settings-before.png"
         ],
         "tests": {
           "command": "python -m pytest tests -q -p no:cacheprovider",
           "code": 0,
           "passed": true,
-          "output": "........................................                                 [100%]\n40 passed in 23.45s",
+          "output": "........................................                                 [100%]\n40 passed in 13.13s",
           "tail": [
             "........................................                                 [100%]",
-            "40 passed in 23.45s"
+            "40 passed in 13.13s"
           ]
         },
         "gates": {
@@ -171,9 +284,9 @@
           "pushed": false,
           "push_error": null,
           "empty": false,
-          "timestamp": "2026-11-18T08:56:09"
+          "timestamp": "2026-11-18T09:37:58"
         },
-        "timestamp": "2026-11-18T08:38:48",
+        "timestamp": "2026-11-18T09:08:20",
         "dirty_targets": []
       },
       "history": [
@@ -494,22 +607,405 @@
             ]
           },
           "delivery": {
+            "commit": "de75c38ddc8b072139d71b14c25f209b64343e17",
+            "short": "de75c38",
+            "pushed": false,
+            "push_error": null,
+            "empty": false,
+            "timestamp": "2026-11-18T08:57:43"
+          },
+          "timestamp": "2026-11-18T08:38:48",
+          "dirty_targets": []
+        },
+        {
+          "run": "run-1",
+          "stage": 5,
+          "window": 15,
+          "commits": [
+            "de75c38ddc8b072139d71b14c25f209b64343e17",
+            "a206bb70f00b453a1942da0263e35ff99a988083",
+            "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
+            "538158043b7e55a17d7d752a45b50c3e748ab862",
+            "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+            "16032a0da4f6bb6d2830ace4ad602f459b98991f",
+            "6265772dd490705cbbd1c517ee347ed12abba206",
+            "de47af27c77b2467510f603be2cfd2cfc0a6d390",
+            "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
+            "4216b56d7e9ee25dd353be04414062a225b0dd43",
+            "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+            "b97525441e10adf3976ccc54937af9076b9fcf20",
+            "627762630649e12cc8abfbecce840462cd243f07",
+            "973e2b2612c345d1c315c29d87343bd436b51b12",
+            "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c"
+          ],
+          "new_commits": [
+            "de75c38ddc8b072139d71b14c25f209b64343e17",
+            "973e2b2612c345d1c315c29d87343bd436b51b12",
+            "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c"
+          ],
+          "prior_commits": [
+            "a206bb70f00b453a1942da0263e35ff99a988083",
+            "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
+            "538158043b7e55a17d7d752a45b50c3e748ab862",
+            "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+            "16032a0da4f6bb6d2830ace4ad602f459b98991f",
+            "6265772dd490705cbbd1c517ee347ed12abba206",
+            "de47af27c77b2467510f603be2cfd2cfc0a6d390",
+            "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
+            "4216b56d7e9ee25dd353be04414062a225b0dd43",
+            "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+            "b97525441e10adf3976ccc54937af9076b9fcf20",
+            "627762630649e12cc8abfbecce840462cd243f07"
+          ],
+          "findings": [
+            {
+              "code": "review-no-origin-check-on-post",
+              "category": "improvement",
+              "severity": "low",
+              "path": "ui_server.py",
+              "line": 370,
+              "message": "The new POST handler acts on stop, clear and replay for any request that reaches the loopback port, with no Origin check; a page open in the same browser could stop or clear a run by submitting a cross-origin form to http://127.0.0.1:<port>/stop. A cheap guard is to refuse a POST whose Origin header is present and is not the board's own http://127.0.0.1:<port>, which script clients (no Origin head",
+              "evidence": "def do_POST(self) -> None: # noqa: D102",
+              "commit": "973e2b2612c345d1c315c29d87343bd436b51b12",
+              "hunk": "973e2b2612c3:ui_server.py#7",
+              "symbol": "",
+              "introduced": true,
+              "reproducible": false,
+              "fixable": false,
+              "interaction": "",
+              "repaired": false,
+              "source": "review",
+              "patch_old": "",
+              "patch_new": ""
+            }
+          ],
+          "repairs": [],
+          "counts": {
+            "improvement": 1
+          },
+          "reviewed": 6,
+          "review": {
+            "status": "reviewed",
+            "rejected": [],
+            "files": [
+              ".aikit/codebase_map.md",
+              ".aikit/decisions.md",
+              ".aikit/guidelines.md",
+              "README.md",
+              "tests/test_ui_pages.py",
+              "ui_server.py"
+            ],
+            "packet": ".aikit/reforge.reviews/stage-run-1-5-de75c38ddc8b.md",
+            "redacted": 0,
+            "coverage": {
+              "reported": 22,
+              "total": 22,
+              "carried": [],
+              "missing": [],
+              "unknown": [],
+              "invalid": []
+            },
+            "findings": [
+              {
+                "code": "review-no-origin-check-on-post",
+                "category": "improvement",
+                "severity": "low",
+                "path": "ui_server.py",
+                "line": 370,
+                "message": "The new POST handler acts on stop, clear and replay for any request that reaches the loopback port, with no Origin check; a page open in the same browser could stop or clear a run by submitting a cross-origin form to http://127.0.0.1:<port>/stop. A cheap guard is to refuse a POST whose Origin header is present and is not the board's own http://127.0.0.1:<port>, which script clients (no Origin head",
+                "evidence": "def do_POST(self) -> None: # noqa: D102",
+                "commit": "973e2b2612c345d1c315c29d87343bd436b51b12",
+                "hunk": "973e2b2612c3:ui_server.py#7",
+                "symbol": "",
+                "introduced": true,
+                "reproducible": false,
+                "fixable": false,
+                "interaction": "",
+                "repaired": false,
+                "source": "review",
+                "patch_old": "",
+                "patch_new": ""
+              }
+            ],
+            "attestations": []
+          },
+          "skipped": [
+            "shots/s2-run-after.png",
+            "shots/s3-runs-after.png"
+          ],
+          "tests": {},
+          "gates": {},
+          "delivery": {
+            "commit": "",
+            "short": "",
+            "pushed": false,
+            "push_error": null,
+            "empty": true,
+            "timestamp": "2026-11-18T08:58:10"
+          },
+          "timestamp": "2026-11-18T08:58:10"
+        },
+        {
+          "run": "run-1",
+          "stage": 6,
+          "window": 18,
+          "commits": [
+            "de75c38ddc8b072139d71b14c25f209b64343e17",
+            "a206bb70f00b453a1942da0263e35ff99a988083",
+            "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
+            "538158043b7e55a17d7d752a45b50c3e748ab862",
+            "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+            "16032a0da4f6bb6d2830ace4ad602f459b98991f",
+            "6265772dd490705cbbd1c517ee347ed12abba206",
+            "de47af27c77b2467510f603be2cfd2cfc0a6d390",
+            "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
+            "4216b56d7e9ee25dd353be04414062a225b0dd43",
+            "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+            "b97525441e10adf3976ccc54937af9076b9fcf20",
+            "627762630649e12cc8abfbecce840462cd243f07",
+            "973e2b2612c345d1c315c29d87343bd436b51b12",
+            "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c",
+            "f2a2ca8128503181b3f851d159bfdf35335d95da",
+            "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+            "5422ae86ba73c858f945f02f5e5ae162644d00c0"
+          ],
+          "new_commits": [
+            "f2a2ca8128503181b3f851d159bfdf35335d95da",
+            "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+            "5422ae86ba73c858f945f02f5e5ae162644d00c0"
+          ],
+          "prior_commits": [
+            "a206bb70f00b453a1942da0263e35ff99a988083",
+            "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
+            "538158043b7e55a17d7d752a45b50c3e748ab862",
+            "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+            "16032a0da4f6bb6d2830ace4ad602f459b98991f",
+            "6265772dd490705cbbd1c517ee347ed12abba206",
+            "de47af27c77b2467510f603be2cfd2cfc0a6d390",
+            "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
+            "4216b56d7e9ee25dd353be04414062a225b0dd43",
+            "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+            "b97525441e10adf3976ccc54937af9076b9fcf20",
+            "627762630649e12cc8abfbecce840462cd243f07",
+            "de75c38ddc8b072139d71b14c25f209b64343e17",
+            "973e2b2612c345d1c315c29d87343bd436b51b12",
+            "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c"
+          ],
+          "findings": [
+            {
+              "code": "review",
+              "category": "review",
+              "severity": "medium",
+              "path": "providers/providers.py",
+              "line": 42,
+              "message": "validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by string prefix, so http://127.0.0.1.attacker.example/v1 and http://localhost.attacker.example/v1 are accepted as loopback and a plaintext key-bearing chat call would go to a public host; start.py repeats the same prefix test in run_check.",
+              "evidence": "ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")",
+              "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+              "hunk": "f2a2ca812850:providers/providers.py#1",
+              "symbol": "",
+              "introduced": true,
+              "reproducible": false,
+              "fixable": true,
+              "interaction": "",
+              "repaired": true,
+              "source": "review",
+              "patch_old": "    ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")\r\n    if not (base.startswith(\"https://\") or base == \"http://127.0.0.1\"\r\n            or base == \"http://localhost\" or ok_loop):\r\n        return \"base_url must be https:// or http://127.0.0.1\"",
+              "patch_new": "    from urllib.parse import urlparse\r\n    import ipaddress\r\n    host = (urlparse(base).hostname or \"\").lower()\r\n    try:\r\n        loopback = host == \"localhost\" or ipaddress.ip_address(host).is_loopback\r\n    except ValueError:\r\n        loopback = False\r\n    if not (base.startswith(\"https://\") or (base.startswith(\"http://\") and loopback)):\r\n        return \"base_url must be https:// or http://127.0.0.1\""
+            },
+            {
+              "code": "review-no-test-for-loopback-prefix-trick",
+              "category": "improvement",
+              "severity": "low",
+              "path": "tests/test_providers.py",
+              "line": 27,
+              "message": "The only refusal probe uses a plainly public host, so nothing would fail if the loopback check were loosened back to a prefix match; pin the near-miss host that made the guard unsound.",
+              "evidence": "bad[\"base_url\"] = \"http://evil.example.com/v1\"",
+              "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+              "hunk": "f2a2ca812850:tests/test_providers.py#1",
+              "symbol": "",
+              "introduced": true,
+              "reproducible": false,
+              "fixable": true,
+              "interaction": "",
+              "repaired": true,
+              "source": "review",
+              "patch_old": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None",
+              "patch_new": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None\r\n    tricky = dict(entry)\r\n    tricky[\"base_url\"] = \"http://127.0.0.1.attacker.example/v1\"\r\n    assert providers.validate_entry(tricky) is not None"
+            }
+          ],
+          "repairs": [
+            {
+              "code": "review",
+              "path": "providers/providers.py",
+              "line": 42,
+              "summary": "applied review suggestion: validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by str",
+              "test_name": "",
+              "applied": true
+            },
+            {
+              "code": "review-no-test-for-loopback-prefix-trick",
+              "path": "tests/test_providers.py",
+              "line": 27,
+              "summary": "applied review suggestion: The only refusal probe uses a plainly public host, so nothing would fail if the ",
+              "test_name": "",
+              "applied": true
+            }
+          ],
+          "counts": {
+            "review": 1,
+            "improvement": 1
+          },
+          "reviewed": 47,
+          "review": {
+            "status": "reviewed",
+            "rejected": [],
+            "files": [
+              ".aikit/codebase_map.md",
+              ".aikit/decisions.md",
+              ".aikit/ui.json",
+              ".gitignore",
+              "README.md",
+              "config.example.json",
+              "evals/check.py",
+              "evals/r7/pass_criteria.json",
+              "evals/r7/starter/notes.txt",
+              "evals/r7/task.md",
+              "evals/r8/pass_criteria.json",
+              "evals/r8/starter/notes.txt",
+              "evals/r8/task.md",
+              "evals/r9/pass_criteria.json",
+              "evals/r9/starter/notes.txt",
+              "evals/r9/task.md",
+              "harness/budget.py",
+              "harness/loop.py",
+              "harness/transcript.py",
+              "inventory.py",
+              "providers.json",
+              "providers/__init__.py",
+              "providers/policy.py",
+              "providers/providers.py",
+              "sandbox/jail.py",
+              "start.cmd",
+              "start.py",
+              "tests/test_budget_kill.py",
+              "tests/test_escape.py",
+              "tests/test_ladder.py",
+              "tests/test_providers.py",
+              "tests/test_start.py",
+              "tests/test_transcript.py",
+              "tests/test_ui_pages.py",
+              "tools/replay.py",
+              "tools/runner.py",
+              "transcripts/r0.jsonl",
+              "transcripts/r1.jsonl",
+              "transcripts/r2.jsonl",
+              "transcripts/r3.jsonl",
+              "transcripts/r4.jsonl",
+              "transcripts/r5.jsonl",
+              "transcripts/r6.jsonl",
+              "transcripts/r7.jsonl",
+              "transcripts/r8.jsonl",
+              "transcripts/r9.jsonl",
+              "ui_server.py"
+            ],
+            "packet": ".aikit/reforge.reviews/stage-run-1-6-f2a2ca812850.md",
+            "redacted": 0,
+            "coverage": {
+              "reported": 109,
+              "total": 109,
+              "carried": [],
+              "missing": [],
+              "unknown": [],
+              "invalid": []
+            },
+            "findings": [
+              {
+                "code": "review",
+                "category": "review",
+                "severity": "medium",
+                "path": "providers/providers.py",
+                "line": 42,
+                "message": "validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by string prefix, so http://127.0.0.1.attacker.example/v1 and http://localhost.attacker.example/v1 are accepted as loopback and a plaintext key-bearing chat call would go to a public host; start.py repeats the same prefix test in run_check.",
+                "evidence": "ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")",
+                "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+                "hunk": "f2a2ca812850:providers/providers.py#1",
+                "symbol": "",
+                "introduced": true,
+                "reproducible": false,
+                "fixable": true,
+                "interaction": "",
+                "repaired": false,
+                "source": "review",
+                "patch_old": "    ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")\r\n    if not (base.startswith(\"https://\") or base == \"http://127.0.0.1\"\r\n            or base == \"http://localhost\" or ok_loop):\r\n        return \"base_url must be https:// or http://127.0.0.1\"",
+                "patch_new": "    from urllib.parse import urlparse\r\n    import ipaddress\r\n    host = (urlparse(base).hostname or \"\").lower()\r\n    try:\r\n        loopback = host == \"localhost\" or ipaddress.ip_address(host).is_loopback\r\n    except ValueError:\r\n        loopback = False\r\n    if not (base.startswith(\"https://\") or (base.startswith(\"http://\") and loopback)):\r\n        return \"base_url must be https:// or http://127.0.0.1\""
+              },
+              {
+                "code": "review-no-test-for-loopback-prefix-trick",
+                "category": "improvement",
+                "severity": "low",
+                "path": "tests/test_providers.py",
+                "line": 27,
+                "message": "The only refusal probe uses a plainly public host, so nothing would fail if the loopback check were loosened back to a prefix match; pin the near-miss host that made the guard unsound.",
+                "evidence": "bad[\"base_url\"] = \"http://evil.example.com/v1\"",
+                "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+                "hunk": "f2a2ca812850:tests/test_providers.py#1",
+                "symbol": "",
+                "introduced": true,
+                "reproducible": false,
+                "fixable": true,
+                "interaction": "",
+                "repaired": false,
+                "source": "review",
+                "patch_old": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None",
+                "patch_new": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None\r\n    tricky = dict(entry)\r\n    tricky[\"base_url\"] = \"http://127.0.0.1.attacker.example/v1\"\r\n    assert providers.validate_entry(tricky) is not None"
+              }
+            ],
+            "attestations": []
+          },
+          "skipped": [
+            "shots/s1-setup-after.png",
+            "shots/s1-setup-before.png",
+            "shots/s2-run-after.png",
+            "shots/s2-run-before.png",
+            "shots/s3-runs-after.png",
+            "shots/s3-runs-before.png",
+            "shots/s4-tools-after.png",
+            "shots/s4-tools-before.png",
+            "shots/s5-settings-after.png",
+            "shots/s5-settings-before.png"
+          ],
+          "tests": {
+            "command": "python -m pytest tests -q -p no:cacheprovider",
+            "code": 0,
+            "passed": true,
+            "output": "........................................                                 [100%]\n40 passed in 13.13s",
+            "tail": [
+              "........................................                                 [100%]",
+              "40 passed in 13.13s"
+            ]
+          },
+          "gates": {
+            "artifacts": [
+              ".aikit/codebase_map.md"
+            ]
+          },
+          "delivery": {
             "commit": "",
             "short": "",
             "pushed": false,
             "push_error": null,
             "empty": false,
-            "timestamp": "2026-11-18T08:56:09"
+            "timestamp": "2026-11-18T09:37:58"
           },
-          "timestamp": "2026-11-18T08:38:48",
+          "timestamp": "2026-11-18T09:08:20",
           "dirty_targets": []
         }
       ],
-      "total_commits": 28
+      "total_commits": 29
     }
   ],
-  "stage": 4,
-  "window": 12,
+  "stage": 6,
+  "window": 18,
   "audited_commits": [
     "a206bb70f00b453a1942da0263e35ff99a988083",
     "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
@@ -522,13 +1018,20 @@
     "4216b56d7e9ee25dd353be04414062a225b0dd43",
     "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
     "b97525441e10adf3976ccc54937af9076b9fcf20",
-    "627762630649e12cc8abfbecce840462cd243f07"
+    "627762630649e12cc8abfbecce840462cd243f07",
+    "de75c38ddc8b072139d71b14c25f209b64343e17",
+    "973e2b2612c345d1c315c29d87343bd436b51b12",
+    "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c",
+    "f2a2ca8128503181b3f851d159bfdf35335d95da",
+    "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+    "5422ae86ba73c858f945f02f5e5ae162644d00c0"
   ],
   "last_audit": {
     "run": "run-1",
-    "stage": 4,
-    "window": 12,
+    "stage": 6,
+    "window": 18,
     "commits": [
+      "de75c38ddc8b072139d71b14c25f209b64343e17",
       "a206bb70f00b453a1942da0263e35ff99a988083",
       "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
       "538158043b7e55a17d7d752a45b50c3e748ab862",
@@ -540,12 +1043,17 @@
       "4216b56d7e9ee25dd353be04414062a225b0dd43",
       "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
       "b97525441e10adf3976ccc54937af9076b9fcf20",
-      "627762630649e12cc8abfbecce840462cd243f07"
+      "627762630649e12cc8abfbecce840462cd243f07",
+      "973e2b2612c345d1c315c29d87343bd436b51b12",
+      "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c",
+      "f2a2ca8128503181b3f851d159bfdf35335d95da",
+      "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+      "5422ae86ba73c858f945f02f5e5ae162644d00c0"
     ],
     "new_commits": [
-      "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
-      "b97525441e10adf3976ccc54937af9076b9fcf20",
-      "627762630649e12cc8abfbecce840462cd243f07"
+      "f2a2ca8128503181b3f851d159bfdf35335d95da",
+      "318cfe7dbf7f8a2cdc721823bc4ca85d8688f5bc",
+      "5422ae86ba73c858f945f02f5e5ae162644d00c0"
     ],
     "prior_commits": [
       "a206bb70f00b453a1942da0263e35ff99a988083",
@@ -556,19 +1064,25 @@
       "6265772dd490705cbbd1c517ee347ed12abba206",
       "de47af27c77b2467510f603be2cfd2cfc0a6d390",
       "056d294b0c2f8762ecd03fb34e5930ad5051d6e2",
-      "4216b56d7e9ee25dd353be04414062a225b0dd43"
+      "4216b56d7e9ee25dd353be04414062a225b0dd43",
+      "32fdf73fa39c36e713eba744cdf45c0b416fd8e6",
+      "b97525441e10adf3976ccc54937af9076b9fcf20",
+      "627762630649e12cc8abfbecce840462cd243f07",
+      "de75c38ddc8b072139d71b14c25f209b64343e17",
+      "973e2b2612c345d1c315c29d87343bd436b51b12",
+      "e593f1e1b32952a4affdc7f8d9b6ce8985da9b8c"
     ],
     "findings": [
       {
-        "code": "review-missing-warn-pill-style",
+        "code": "review",
         "category": "review",
-        "severity": "low",
-        "path": "ui_server.py",
-        "line": 218,
-        "message": "The BUDGET_KILLED verdict pill (line 218) and the UNTRUSTED marker (line 179) both use class 'tag warn', but the restyled stylesheet defines only .tag.ok, .tag.bad and .tag.info, so those two pills render without the coloured background and border every other status pill gets and ADR-009's 'pill verdicts' promise is not kept for budget kills.",
-        "evidence": "pill = \"<span class='tag warn'>BUDGET_KILLED</span>\"",
-        "commit": "627762630649e12cc8abfbecce840462cd243f07",
-        "hunk": "627762630649:ui_server.py#5",
+        "severity": "medium",
+        "path": "providers/providers.py",
+        "line": 42,
+        "message": "validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by string prefix, so http://127.0.0.1.attacker.example/v1 and http://localhost.attacker.example/v1 are accepted as loopback and a plaintext key-bearing chat call would go to a public host; start.py repeats the same prefix test in run_check.",
+        "evidence": "ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")",
+        "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+        "hunk": "f2a2ca812850:providers/providers.py#1",
         "symbol": "",
         "introduced": true,
         "reproducible": false,
@@ -576,38 +1090,110 @@
         "interaction": "",
         "repaired": true,
         "source": "review",
-        "patch_old": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"",
-        "patch_new": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"\n       \".tag.warn{color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35)}\""
+        "patch_old": "    ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")\r\n    if not (base.startswith(\"https://\") or base == \"http://127.0.0.1\"\r\n            or base == \"http://localhost\" or ok_loop):\r\n        return \"base_url must be https:// or http://127.0.0.1\"",
+        "patch_new": "    from urllib.parse import urlparse\r\n    import ipaddress\r\n    host = (urlparse(base).hostname or \"\").lower()\r\n    try:\r\n        loopback = host == \"localhost\" or ipaddress.ip_address(host).is_loopback\r\n    except ValueError:\r\n        loopback = False\r\n    if not (base.startswith(\"https://\") or (base.startswith(\"http://\") and loopback)):\r\n        return \"base_url must be https:// or http://127.0.0.1\""
+      },
+      {
+        "code": "review-no-test-for-loopback-prefix-trick",
+        "category": "improvement",
+        "severity": "low",
+        "path": "tests/test_providers.py",
+        "line": 27,
+        "message": "The only refusal probe uses a plainly public host, so nothing would fail if the loopback check were loosened back to a prefix match; pin the near-miss host that made the guard unsound.",
+        "evidence": "bad[\"base_url\"] = \"http://evil.example.com/v1\"",
+        "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+        "hunk": "f2a2ca812850:tests/test_providers.py#1",
+        "symbol": "",
+        "introduced": true,
+        "reproducible": false,
+        "fixable": true,
+        "interaction": "",
+        "repaired": true,
+        "source": "review",
+        "patch_old": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None",
+        "patch_new": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None\r\n    tricky = dict(entry)\r\n    tricky[\"base_url\"] = \"http://127.0.0.1.attacker.example/v1\"\r\n    assert providers.validate_entry(tricky) is not None"
       }
     ],
     "repairs": [
       {
-        "code": "review-missing-warn-pill-style",
-        "path": "ui_server.py",
-        "line": 218,
-        "summary": "applied review suggestion: The BUDGET_KILLED verdict pill (line 218) and the UNTRUSTED marker (line 179) bo",
+        "code": "review",
+        "path": "providers/providers.py",
+        "line": 42,
+        "summary": "applied review suggestion: validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by str",
+        "test_name": "",
+        "applied": true
+      },
+      {
+        "code": "review-no-test-for-loopback-prefix-trick",
+        "path": "tests/test_providers.py",
+        "line": 27,
+        "summary": "applied review suggestion: The only refusal probe uses a plainly public host, so nothing would fail if the ",
         "test_name": "",
         "applied": true
       }
     ],
     "counts": {
-      "review": 1
+      "review": 1,
+      "improvement": 1
     },
-    "reviewed": 4,
+    "reviewed": 47,
     "review": {
       "status": "reviewed",
       "rejected": [],
       "files": [
         ".aikit/codebase_map.md",
         ".aikit/decisions.md",
-        ".aikit/guidelines.md",
+        ".aikit/ui.json",
+        ".gitignore",
+        "README.md",
+        "config.example.json",
+        "evals/check.py",
+        "evals/r7/pass_criteria.json",
+        "evals/r7/starter/notes.txt",
+        "evals/r7/task.md",
+        "evals/r8/pass_criteria.json",
+        "evals/r8/starter/notes.txt",
+        "evals/r8/task.md",
+        "evals/r9/pass_criteria.json",
+        "evals/r9/starter/notes.txt",
+        "evals/r9/task.md",
+        "harness/budget.py",
+        "harness/loop.py",
+        "harness/transcript.py",
+        "inventory.py",
+        "providers.json",
+        "providers/__init__.py",
+        "providers/policy.py",
+        "providers/providers.py",
+        "sandbox/jail.py",
+        "start.cmd",
+        "start.py",
+        "tests/test_budget_kill.py",
+        "tests/test_escape.py",
+        "tests/test_ladder.py",
+        "tests/test_providers.py",
+        "tests/test_start.py",
+        "tests/test_transcript.py",
+        "tests/test_ui_pages.py",
+        "tools/replay.py",
+        "tools/runner.py",
+        "transcripts/r0.jsonl",
+        "transcripts/r1.jsonl",
+        "transcripts/r2.jsonl",
+        "transcripts/r3.jsonl",
+        "transcripts/r4.jsonl",
+        "transcripts/r5.jsonl",
+        "transcripts/r6.jsonl",
+        "transcripts/r7.jsonl",
+        "transcripts/r8.jsonl",
+        "transcripts/r9.jsonl",
         "ui_server.py"
       ],
-      "packet": ".aikit/reforge.reviews/stage-run-1-4-32fdf73fa39c.md",
+      "packet": ".aikit/reforge.reviews/stage-run-1-6-f2a2ca812850.md",
       "redacted": 0,
       "coverage": {
-        "reported": 14,
-        "total": 14,
+        "reported": 109,
+        "total": 109,
         "carried": [],
         "missing": [],
         "unknown": [],
@@ -615,15 +1201,15 @@
       },
       "findings": [
         {
-          "code": "review-missing-warn-pill-style",
+          "code": "review",
           "category": "review",
-          "severity": "low",
-          "path": "ui_server.py",
-          "line": 218,
-          "message": "The BUDGET_KILLED verdict pill (line 218) and the UNTRUSTED marker (line 179) both use class 'tag warn', but the restyled stylesheet defines only .tag.ok, .tag.bad and .tag.info, so those two pills render without the coloured background and border every other status pill gets and ADR-009's 'pill verdicts' promise is not kept for budget kills.",
-          "evidence": "pill = \"<span class='tag warn'>BUDGET_KILLED</span>\"",
-          "commit": "627762630649e12cc8abfbecce840462cd243f07",
-          "hunk": "627762630649:ui_server.py#5",
+          "severity": "medium",
+          "path": "providers/providers.py",
+          "line": 42,
+          "message": "validate_entry promises 'https:// or http://127.0.0.1' but tests loopback by string prefix, so http://127.0.0.1.attacker.example/v1 and http://localhost.attacker.example/v1 are accepted as loopback and a plaintext key-bearing chat call would go to a public host; start.py repeats the same prefix test in run_check.",
+          "evidence": "ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")",
+          "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+          "hunk": "f2a2ca812850:providers/providers.py#1",
           "symbol": "",
           "introduced": true,
           "reproducible": false,
@@ -631,29 +1217,52 @@
           "interaction": "",
           "repaired": false,
           "source": "review",
-          "patch_old": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"",
-          "patch_new": "       \".tag.info{color:#9fc1ff;background:rgba(124,140,255,.12);border:1px solid rgba(124,140,255,.35)}\"\n       \".tag.warn{color:#fbbf24;background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.35)}\""
+          "patch_old": "    ok_loop = base.startswith(\"http://127.0.0.1\") or base.startswith(\"http://localhost\")\r\n    if not (base.startswith(\"https://\") or base == \"http://127.0.0.1\"\r\n            or base == \"http://localhost\" or ok_loop):\r\n        return \"base_url must be https:// or http://127.0.0.1\"",
+          "patch_new": "    from urllib.parse import urlparse\r\n    import ipaddress\r\n    host = (urlparse(base).hostname or \"\").lower()\r\n    try:\r\n        loopback = host == \"localhost\" or ipaddress.ip_address(host).is_loopback\r\n    except ValueError:\r\n        loopback = False\r\n    if not (base.startswith(\"https://\") or (base.startswith(\"http://\") and loopback)):\r\n        return \"base_url must be https:// or http://127.0.0.1\""
+        },
+        {
+          "code": "review-no-test-for-loopback-prefix-trick",
+          "category": "improvement",
+          "severity": "low",
+          "path": "tests/test_providers.py",
+          "line": 27,
+          "message": "The only refusal probe uses a plainly public host, so nothing would fail if the loopback check were loosened back to a prefix match; pin the near-miss host that made the guard unsound.",
+          "evidence": "bad[\"base_url\"] = \"http://evil.example.com/v1\"",
+          "commit": "f2a2ca8128503181b3f851d159bfdf35335d95da",
+          "hunk": "f2a2ca812850:tests/test_providers.py#1",
+          "symbol": "",
+          "introduced": true,
+          "reproducible": false,
+          "fixable": true,
+          "interaction": "",
+          "repaired": false,
+          "source": "review",
+          "patch_old": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None",
+          "patch_new": "    bad[\"base_url\"] = \"http://evil.example.com/v1\"\r\n    assert providers.validate_entry(bad) is not None\r\n    tricky = dict(entry)\r\n    tricky[\"base_url\"] = \"http://127.0.0.1.attacker.example/v1\"\r\n    assert providers.validate_entry(tricky) is not None"
         }
       ],
       "attestations": []
     },
     "skipped": [
       "shots/s1-setup-after.png",
+      "shots/s1-setup-before.png",
       "shots/s2-run-after.png",
+      "shots/s2-run-before.png",
       "shots/s3-runs-after.png",
+      "shots/s3-runs-before.png",
       "shots/s4-tools-after.png",
+      "shots/s4-tools-before.png",
       "shots/s5-settings-after.png",
-      "shots/s6-stop-banner.png",
-      "shots/s7-replay-result.png"
+      "shots/s5-settings-before.png"
     ],
     "tests": {
       "command": "python -m pytest tests -q -p no:cacheprovider",
       "code": 0,
       "passed": true,
-      "output": "........................................                                 [100%]\n40 passed in 23.45s",
+      "output": "........................................                                 [100%]\n40 passed in 13.13s",
       "tail": [
         "........................................                                 [100%]",
-        "40 passed in 23.45s"
+        "40 passed in 13.13s"
       ]
     },
     "gates": {
@@ -667,9 +1276,9 @@
       "pushed": false,
       "push_error": null,
       "empty": false,
-      "timestamp": "2026-11-18T08:56:09"
+      "timestamp": "2026-11-18T09:37:58"
     },
-    "timestamp": "2026-11-18T08:38:48",
+    "timestamp": "2026-11-18T09:08:20",
     "dirty_targets": []
   },
   "history": []

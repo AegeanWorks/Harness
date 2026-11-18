@@ -39,9 +39,14 @@ def validate_entry(entry: Dict[str, Any]) -> str | None:
         if not str(entry.get(key, "")):
             return "provider entry missing " + key
     base = str(entry.get("base_url", ""))
-    ok_loop = base.startswith("http://127.0.0.1") or base.startswith("http://localhost")
-    if not (base.startswith("https://") or base == "http://127.0.0.1"
-            or base == "http://localhost" or ok_loop):
+    from urllib.parse import urlparse
+    import ipaddress
+    host = (urlparse(base).hostname or "").lower()
+    try:
+        loopback = host == "localhost" or ipaddress.ip_address(host).is_loopback
+    except ValueError:
+        loopback = False
+    if not (base.startswith("https://") or (base.startswith("http://") and loopback)):
         return "base_url must be https:// or http://127.0.0.1"
     if not str(entry.get("chat_path", "/chat/completions")).startswith("/"):
         return "chat_path must start with /"

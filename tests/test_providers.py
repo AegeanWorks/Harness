@@ -26,6 +26,9 @@ def test_new_provider_costs_config_entry() -> None:
     bad = dict(entry)
     bad["base_url"] = "http://evil.example.com/v1"
     assert providers.validate_entry(bad) is not None
+    tricky = dict(entry)
+    tricky["base_url"] = "http://127.0.0.1.attacker.example/v1"
+    assert providers.validate_entry(tricky) is not None
 
 
 def test_wait_is_budgeted_and_replayable(tmp_path: Path) -> None:

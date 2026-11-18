@@ -10,7 +10,7 @@
 - **Total Classes**: `3`
 - **Total Top-Level Functions**: `131`
 - **Total Class Methods**: `16`
-- **Total Source Lines**: `2922`
+- **Total Source Lines**: `2930`
 
 ## 🧭 Map Coverage
 - **Indexed**: python (`36` module(s))
@@ -221,7 +221,7 @@
 ### [`providers/providers.py`](providers/providers.py)
 > *Provider registry: OpenAI-compatible endpoints, config entry not code change.*
 
-**Size**: `95` lines (`3821` bytes)
+**Size**: `100` lines (`3942` bytes)
 
 **Functions:**
 - `def providers_path(root)`
@@ -327,7 +327,7 @@
 ### [`tests/test_providers.py`](tests/test_providers.py)
 > *Providers: config entry not code, failover survives, no keys logged.*
 
-**Size**: `75` lines (`2764` bytes)
+**Size**: `78` lines (`2909` bytes)
 
 **Functions:**
 - `def _root()`
