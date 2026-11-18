@@ -1,11 +1,11 @@
 {
   "version": 1,
   "active_task": {
-    "task_id": "harness-lifecycle-adr",
+    "task_id": "harness-reforge-run-1",
     "last_phase": "phase 4",
     "active_phase": 5,
     "status": "completed",
-    "updated_at": 1794978716.9616537,
+    "updated_at": 1794987244.9178162,
     "owner": "kilo:1",
     "started_by": "kilo:1",
     "continuations": [],
@@ -15,70 +15,11 @@
         "path": "projects/harness"
       }
     ],
-    "completed_at": 1794978717.9412014,
-    "completed_head": "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
-    "completed_tree": "49d1649a3e337686cd1670fe3c9f75d80bf1e726"
+    "completed_at": 1794987245.6020193,
+    "completed_head": "96aba7905bdeeb91a0d1c1e39d1c2196ca789305",
+    "completed_tree": "2eb9d398cea27f02732ba1ab2e4cdeb7f0180279"
   },
   "checkpoints": [
-    {
-      "task_id": "harness-lifecycle-adr",
-      "phase": "phase 2",
-      "phase_num": 2,
-      "description": "[1/1] Record the lifecycle adoption decision as ADR-010. The conformance work had already been committed when the decision register was updated, so strict check rightly reports one non-bookkeeping commit after the completed task. ADR-010 documents why the project moved to AIKit's full lifecycle (stale ui-states task, map indexing deleted eval scratch modules, uninitialised media and topics, the disabled UI gate over two declared surfaces, surface evidence recorded through the contract path) and names the consequences. Docs only; five gates were green before the commit and are re-run after.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794978638.90945,
-      "timestamp_str": "2026-11-18 08:10:38",
-      "agent": "kilo:1",
-      "impact_assessment": {
-        "why": "The decision that turned AIKit lifecycle enforcement on for this project belongs in the register, and the strict gate requires the commit that adds it to belong to an open task.",
-        "benefits": "The register explains the governance change and the strict gate describes the final committed tree again.",
-        "risks": "contract: none, one ADR entry; dependency: none; concurrency: none; state: docs only",
-        "mitigation": "Run all five gates before and after the commit; the entry follows the register format and keeps IDs consecutive"
-      },
-      "plan_digest": "40932b341007f4624c65a750fe92cbeed8cb991fc80735da2fc1666a35135482",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ]
-    },
-    {
-      "task_id": "harness-lifecycle-adr",
-      "phase": "phase 4",
-      "phase_num": 4,
-      "description": "[1/1] Verified: ADR-010 is committed at f6d0b2a with the register's entry format and consecutive IDs, and 5/5 gates pass on the tree that carries it. The strict refusal was exactly the missing task ownership of that docs commit; the ledger now owns it. checklists: passed.\n",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1794978716.9616537,
-      "timestamp_str": "2026-11-18 08:11:56",
-      "agent": "kilo:1",
-      "checklists": "passed",
-      "workspaces": [
-        {
-          "name": "harness",
-          "path": "projects/harness"
-        }
-      ]
-    },
-    {
-      "task_id": "harness-lifecycle-adr",
-      "phase": "completed",
-      "phase_num": 5,
-      "description": "Task 'harness-lifecycle-adr' completed successfully.",
-      "status": "completed",
-      "timestamp": 1794978718.0545292,
-      "timestamp_str": "2026-11-18 08:11:58",
-      "agent": "kilo:1",
-      "head": "f6d0b2a651315110dff6dfce6e1389f5b06dfc78",
-      "delivery": {
-        "roots": [
-          "."
-        ],
-        "forced": false
-      }
-    },
     {
       "task_id": "reforge:run-1",
       "phase": "reforge stage 5",
@@ -312,6 +253,65 @@
       "timestamp_str": "2026-11-18 10:22:15",
       "agent": "unidentified",
       "operator_task": "harness-lifecycle-adr"
+    },
+    {
+      "task_id": "harness-reforge-run-1",
+      "phase": "phase 2",
+      "phase_num": 2,
+      "description": "[1/1] Deliver the reforge run-1 repairs under the ledger. Run-1 audited all 32 commits of the project's history in 11 windows and attested every hunk; it found 6 issues, repaired 4 (the warn pill CSS, the loopback base_url guard plus its regression test, the poll-loop output drain, and the eval change judge's hidden .py files), and recorded 2 for hand work (duplicate SHIM_TEXT, unignored spill sidecars). The repairs are committed as de75c38, 27fee41, 0dcfa16 and 9f497e7 by reforge, the board surface evidence for the CSS change is recorded at d3e23e5be680, and this task owns that delivery so the strict ledger check passes. No new code.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794987185.0913858,
+      "timestamp_str": "2026-11-18 10:33:05",
+      "agent": "kilo:1",
+      "impact_assessment": {
+        "why": "The four reforge repairs are real code commits that the ledger never owned, so the strict delivery check refuses the otherwise clean tree.",
+        "benefits": "The repairs, their tests and the board evidence are owned by a completed ledger task and the strict check can describe the committed tree.",
+        "risks": "contract: none, ledger only; dependency: none; concurrency: none; state: one task record and checkpoint archive",
+        "mitigation": "No file outside .aikit changes; the repairs already passed pytest and the gates inside reforge; the strict check is the verifier"
+      },
+      "plan_digest": "60a057937412012f06d48328ae9f9a619e314d1b1a63091a3d5941c4d3b9372e",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
+    },
+    {
+      "task_id": "harness-reforge-run-1",
+      "phase": "phase 4",
+      "phase_num": 4,
+      "description": "[1/1] Verified: 4 repairs landed and each was proven when made: the warn CSS (de75c38) with the board digest re-recorded at d3e23e5be680, the loopback guard plus near-miss test (27fee41), the poll-loop drain (0dcfa16) proven by a 300 KB-output run that now succeeds and truncates, and the eval change judge (9f497e7) proven by _changed_files now listing an added extra.py. The full pytest suite passed under reforge before each commit and again on the shipped tree; check --strict on this tree now passes all five gates with no delivery findings. checklists: passed.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794987244.9178162,
+      "timestamp_str": "2026-11-18 10:34:04",
+      "agent": "kilo:1",
+      "checklists": "passed",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
+    },
+    {
+      "task_id": "harness-reforge-run-1",
+      "phase": "completed",
+      "phase_num": 5,
+      "description": "Task 'harness-reforge-run-1' completed successfully.",
+      "status": "completed",
+      "timestamp": 1794987245.6807494,
+      "timestamp_str": "2026-11-18 10:34:05",
+      "agent": "kilo:1",
+      "head": "96aba7905bdeeb91a0d1c1e39d1c2196ca789305",
+      "delivery": {
+        "roots": [
+          "."
+        ],
+        "forced": false
+      }
     }
   ]
 }
