@@ -5,7 +5,7 @@
     "last_phase": "phase 4",
     "active_phase": 4,
     "status": "in_progress",
-    "updated_at": 1794949518.9823945,
+    "updated_at": 1794977875.1538641,
     "owner": "kilo:1",
     "started_by": "kilo:1",
     "continuations": [],
@@ -17,17 +17,6 @@
     ]
   },
   "checkpoints": [
-    {
-      "task_id": "harness-harden-v1",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[3/4] Hardening implementation started: approved order F1-F9",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793808984.0944872,
-      "timestamp_str": "2026-11-04 19:16:24",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-harden-v1",
       "phase": "phase 3",
@@ -298,6 +287,24 @@
       "status": "in_progress",
       "timestamp": 1794949518.9823945,
       "timestamp_str": "2026-11-18 00:05:18",
+      "agent": "kilo:1",
+      "checklists": "passed",
+      "workspaces": [
+        {
+          "name": "harness",
+          "path": "projects/harness"
+        }
+      ]
+    },
+    {
+      "task_id": "harness-aikit-conformance",
+      "phase": "phase 4",
+      "phase_num": 4,
+      "description": "[2/3] Recorded both surfaces through the contract's own path. cli and board were each opened from de47af2 and closed as reviewed no-change tasks by kilo:1, naming exactly what was checked: the scripted demo plus the 8-entry inventory for cli; the five-route UI suite (STOPPED banner toggling, replay PASS and ../evil refusal) and the committed S1-S7 1280x800 shots for board. .aikit/ui_history.json now carries both surface digests, so check --strict can prove the surfaces are covered. The guidelines gate caught the README tree omitting the newly tracked .gitattributes and assets/, which is fixed in the same commit. 5/5 gates pass. checklists: passed.\n",
+      "files_affected": [],
+      "status": "in_progress",
+      "timestamp": 1794977875.1538641,
+      "timestamp_str": "2026-11-18 07:57:55",
       "agent": "kilo:1",
       "checklists": "passed",
       "workspaces": [
