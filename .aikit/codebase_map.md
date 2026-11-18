@@ -10,7 +10,7 @@
 - **Total Classes**: `3`
 - **Total Top-Level Functions**: `131`
 - **Total Class Methods**: `16`
-- **Total Source Lines**: `2930`
+- **Total Source Lines**: `2937`
 
 ## 🧭 Map Coverage
 - **Indexed**: python (`36` module(s))
@@ -426,7 +426,7 @@
 ### [`tools/runner.py`](tools/runner.py)
 > *Sandboxed exec: fixed argv, poll-kill loop, env scrub, loaded shim (ADR-005).*
 
-**Size**: `282` lines (`10649` bytes)
+**Size**: `289` lines (`10901` bytes)
 
 **Functions:**
 - `def _scrub_env(shim_dir)`

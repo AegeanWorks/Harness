@@ -236,6 +236,12 @@ def _run_argv(argv: List[str], root: Path, timeout_s: int,
             note["end"] = "ok"
         call_deadline = time.monotonic() + max(1, timeout_s)
         end = "ok"
+        import threading as _threading
+        chunks: List[str] = []
+        reader = _threading.Thread(
+            target=lambda: chunks.append(proc.stdout.read() if proc.stdout else ""),
+            daemon=True)
+        reader.start()
         while True:
             try:
                 proc.wait(timeout=POLL_S)
@@ -259,12 +265,12 @@ def _run_argv(argv: List[str], root: Path, timeout_s: int,
             # hygiene: allow [silent-except] process may already have exited; kill is best-effort
             except OSError:
                 pass
-            try:
-                out, _ = proc.communicate(timeout=10)
-            except subprocess.TimeoutExpired:
+            reader.join(timeout=10)
+            if reader.is_alive():
                 if note is not None:
                     note["end"] = end
                 return False, "timed out and kill hung"
+            out = "".join(chunks)
             if note is not None:
                 note["end"] = end
             tail = (out or "")[-2000:]
@@ -273,7 +279,8 @@ def _run_argv(argv: List[str], root: Path, timeout_s: int,
             if end == "wall":
                 return False, "wall clock exhausted\n" + tail
             return False, "timed out after " + str(timeout_s) + "s\n" + tail
-        out, _ = proc.communicate()
+        reader.join(timeout=10)
+        out = "".join(chunks)
         text = out or ""
         if len(text) > MAX_OUTPUT:
             text = text[:MAX_OUTPUT] + "\n[TRUNCATED]"
