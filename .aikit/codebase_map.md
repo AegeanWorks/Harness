@@ -10,7 +10,7 @@
 - **Total Classes**: `3`
 - **Total Top-Level Functions**: `131`
 - **Total Class Methods**: `16`
-- **Total Source Lines**: `2921`
+- **Total Source Lines**: `2922`
 
 ## 🧭 Map Coverage
 - **Indexed**: python (`36` module(s))
@@ -454,7 +454,7 @@
 ### [`ui_server.py`](ui_server.py)
 > *Board UI: stdlib http.server, five routes, fixture-masked shots.*
 
-**Size**: `487` lines (`23074` bytes)
+**Size**: `488` lines (`23178` bytes)
 
 **Classes:**
 - `class Handler`
