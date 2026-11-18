@@ -124,7 +124,7 @@ def _changed_files(starter: Path, work: Path) -> List[str]:
         rel = path.relative_to(work).as_posix()
         origin = starter / rel
         if not origin.is_file():
-            if path.suffix == ".py" or rel.startswith("transcript"):
+            if rel.startswith("transcript"):
                 continue
             changed.append(rel)
             continue

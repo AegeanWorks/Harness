@@ -40,7 +40,7 @@
 ### [`evals/check.py`](evals/check.py)
 > *Scripted ladder evals: one policy per rung, each producing a transcript.*
 
-**Size**: `387` lines (`16329` bytes)
+**Size**: `387` lines (`16305` bytes)
 
 **Functions:**
 - `def _load_criteria(evals_dir, rung)`
