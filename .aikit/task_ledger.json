@@ -3,8 +3,8 @@
   "active_task": {
     "task_id": "harness-aikit-conformance",
     "last_phase": "phase 4",
-    "active_phase": 4,
-    "status": "in_progress",
+    "active_phase": 5,
+    "status": "completed",
     "updated_at": 1794977982.5050988,
     "owner": "kilo:1",
     "started_by": "kilo:1",
@@ -14,20 +14,12 @@
         "name": "harness",
         "path": "projects/harness"
       }
-    ]
+    ],
+    "completed_at": 1794977996.9514487,
+    "completed_head": "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+    "completed_tree": "df82cf476dae0af25e79af3be24a3c1ce216b110"
   },
   "checkpoints": [
-    {
-      "task_id": "harness-harden-v1",
-      "phase": "phase 3",
-      "phase_num": 3,
-      "description": "[3/4] F8-F9 landed: R4/R5/R6 eval-gated with transcripts, ADR-005, README tree; 19/19 tests, 5/5 gates; checklists: passed",
-      "files_affected": [],
-      "status": "in_progress",
-      "timestamp": 1793809718.565362,
-      "timestamp_str": "2026-11-04 19:28:38",
-      "agent": "kilo:goal"
-    },
     {
       "task_id": "harness-harden-v1",
       "phase": "phase 4",
@@ -331,6 +323,23 @@
           "path": "projects/harness"
         }
       ]
+    },
+    {
+      "task_id": "harness-aikit-conformance",
+      "phase": "completed",
+      "phase_num": 5,
+      "description": "Task 'harness-aikit-conformance' completed successfully.",
+      "status": "completed",
+      "timestamp": 1794977997.6921623,
+      "timestamp_str": "2026-11-18 07:59:57",
+      "agent": "kilo:1",
+      "head": "0d2f5d66043bf8d03cd969200e2d3ce7d52469cf",
+      "delivery": {
+        "roots": [
+          "."
+        ],
+        "forced": false
+      }
     }
   ]
 }
