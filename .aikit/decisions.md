@@ -103,6 +103,13 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: Sticky glass header with ◆ harness brand + provider pill; eyebrow + hero titles; stat-card row on /run (verdict/steps/tokens/tools); gradient progress bar; pill verdicts (PASS/BUDGET_KILLED), mono tool/file names, row hover; provider cards on / and /settings; tighter table density so all 11 transcript rows fit 800px; scoped `.stat>span` so URLs keep case. Same five routes, same POST contracts, no new deps.
 - **Consequences**: S1–S5 after-shots re-captured (before-shots stay as the old-design record); 40/40 pytest, 5/5 gates green.
 
+### ADR-010: Adopt AIKit's full project lifecycle (UI gate, surface evidence, brand media)
+- **Date**: 2026-11-18
+- **Status**: Accepted
+- **Context**: The project was uploaded without AIKit's onboarding finishing: its committed codebase map still indexed deleted `evals/.tmp_eval_*` scratch modules (the one failing `aikit check` gate), a UI-states task had sat `in_progress` for 310 hours (a false disruption at every cold start), brand media and topics were never initialized, `ui_required` stayed false although `.aikit/ui.json` declares the `cli` and `board` surfaces, and the README tree omitted two tracked paths once `.gitattributes` and `assets/` were seeded.
+- **Decision**: Close the stale task as verification-only after confirming its delivered shots and UI tests at HEAD; let `aikit fix` seed `.gitattributes`, `assets/logo.svg`, `assets/social-preview.svg` (pending review) and `.aikit/media.json`, and turn `ui_required` on; record a curated 13-tag topic list locally; record each declared surface as a reviewed no-change task through the contract's own `ui begin`/`ui finish` path (cli from the scripted demo and inventory proofs, board from the five-route UI suite and the committed S1-S7 shots); fix the README tree in the same commit as the paths it lists.
+- **Consequences**: `check --strict` now passes all five gates on a clean tree and cold starts report no disruption; the two surface digests in `.aikit/ui_history.json` must be re-recorded by the normal `ui begin`/`ui finish` flow after any future change to those files; the media candidates remain `pending_review` until a person approves them; the eight conformance commits are local only until a push is explicitly requested.
+
 <!-- Entry format:
 ### ADR-NNN: <decision in one line>
 - **Date**: YYYY-MM-DD
@@ -111,3 +118,4 @@ contract, a dependency, a data format or the architecture; IDs are consecutive a
 - **Decision**: <what was decided>
 - **Consequences**: <what follows, including what it costs>
 -->
+
